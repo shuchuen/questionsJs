@@ -13,6 +13,8 @@ describe('Service unit testing', function() {
 describe('controllers unit test', function(){
   beforeEach(module('myApp.services'));
   var scope;
+  
+  
   it('MyCtrl1 controller test1', inject(function($rootScope, $controller) {
     scope = $rootScope.$new();
     var ctrl = $controller('MyCtrl1', {
@@ -20,6 +22,8 @@ describe('controllers unit test', function(){
     });
     expect(scope.test1).toBe('EFG');
   }));
+  
+  
   it('MyCtrl2 controller test2', inject(function($rootScope, $controller) {
     scope = $rootScope.$new();
     var ctrl = $controller('MyCtrl2', {
@@ -34,7 +38,17 @@ describe('controllers unit test', function(){
       $scope : scope
     });
     var results = scope.getFirstAndRestSentence("Hello? This is Sung");
-    expect(results[0]).toEqual('Hello?');
+    var results = scope.getFirstAndRestSentence(""); 
+	var results = scope.getFirstAndRestSentence("! Hello.co. This is Sung"); 
+    var results = scope.getFirstAndRestSentence(". Hello.co? This is Sung");
+	
+    var results = scope.getFirstAndRestSentence("Hello.co? This is Sung");
+    var results = scope.getFirstAndRestSentence("Hello.co This is Sung");
+    var results = scope.getFirstAndRestSentence("Hello.co \nThis is Sung");
+    var results = scope.getFirstAndRestSentence("Hello?? This is Sung");
+    var results = scope.getFirstAndRestSentence("H?.H");		
+
+	expect(results[0]).toEqual('Hello?');
   }));
 
 });
