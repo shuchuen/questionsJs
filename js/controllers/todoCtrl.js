@@ -31,7 +31,7 @@ if (!roomId || roomId.length === 0) {
 }
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://classquestion.firebaseio.com/";
+var firebaseURL = "https://crackling-fire-8818.firebaseio.com/";
 
 
 $scope.roomId = roomId;
