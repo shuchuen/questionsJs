@@ -24,7 +24,6 @@
 </head>
 <body ng-controller="TodoCtrl">
 	<font size="10">Questions for {{roomId}}?</font>&nbsp;
-
 	<!--
 
 	<a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
@@ -33,7 +32,7 @@
 	<a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
 -->
 
-<small>Share room url: {{absurl}}</small> &nbsp;
+<p><small>Share room url: {{absurl}}</small></p>
 <a class="btn btn-default" href="/index.html">Main</a>
 <button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Want Admin? Sign in with Facebook</button>
 
@@ -86,6 +85,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 	type="button" ng-click="increaseMax()"> Show more</button>
 -->
 
+    <p ng-controller="onlineUserCtrl"><span class="onlineUser">No. of online user: </span>{{totalViewers}}</p>
 
 
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
