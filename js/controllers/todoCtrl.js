@@ -15,15 +15,15 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	var scrollCountDelta = 10;
 	$scope.maxQuestion = scrollCountDelta;
 
-	/*
-	$(window).scroll(function(){
-	if($(window).scrollTop() > 0) {
-	$("#btn_top").show();
-} else {
-$("#btn_top").hide();
-}
-});
-*/
+	
+//	$(window).scroll(function(){
+//	if($(window).scrollTop() > 0) {
+//	$("#btn_top").show();
+//} else {
+//$("#btn_top").hide();
+//}
+//});
+
 var splits = $location.path().trim().split("/");
 var roomId = angular.lowercase(splits[1]);
 if (!roomId || roomId.length === 0) {
@@ -80,7 +80,7 @@ $scope.getFirstAndRestSentence = function($string) {
 	var head = $string;
 	var desc = "";
 
-	var separators = [". ", "? ", "! ", '\n'];
+	var separators = [". ", "? ", "! ", '\n', ' #'];
 
 	var firstIndex = -1;
 	for (var i in separators) {
@@ -108,7 +108,7 @@ $scope.addTodo = function () {
 	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
-
+    
 	$scope.todos.$add({
 		wholeMsg: newTodo,
 		head: head,
@@ -117,7 +117,7 @@ $scope.addTodo = function () {
 		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
 		completed: false,
 		timestamp: new Date().getTime(),
-		tags: "...",
+		tags: newTodo.match(/#\w+/g),
 		echo: 0,
 		order: 0
 	});
@@ -210,6 +210,10 @@ $scope.increaseMax = function () {
 
 $scope.toTop =function toTop() {
 	$window.scrollTo(0,0);
+};
+    
+$scope.refresh =function refreshPage() {
+	$scope.todos = $firebaseArray(query);
 };
 
 // Not sure what is this code. Todel

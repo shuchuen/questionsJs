@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="css/main.css">
 
 </head>
 <body ng-controller="TodoCtrl">
@@ -41,7 +41,10 @@
 {{$authData.facebook.displayName}}
 <button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>
 
+<!--Refresh button-->
+    <button class="btn btn-success pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span><span>Refresh</span></button>
 
+<br/>
 
 <div class="input-group">
 	<!--
@@ -76,14 +79,16 @@ ng-model="input.wholeMsg" autofocus></textarea>
 		</span>
 	</div>
 
-	<!--
+	
 
-	<div id="toTop" class="btn btn-info"><span class="fa fa-arrow-up">Back to Top</span></div>
+	<div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>
 
-	<button ng-hide="totalCount<=maxQuestion"
+<!--
+	<button ng-hide="totalCount>=maxQuestion"
 	class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
 	type="button" ng-click="increaseMax()"> Show more</button>
 -->
+
 
     <p ng-controller="onlineUserCtrl"><span class="onlineUser">No. of online user: </span>{{totalViewers}}</p>
 
