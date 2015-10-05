@@ -31,7 +31,7 @@ if (!roomId || roomId.length === 0) {
 }
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://crackling-fire-8818.firebaseio.com/";
+var firebaseURL = "https://codeforfood.firebaseio.com/rooms/";
 
 
 $scope.roomId = roomId;
@@ -117,7 +117,7 @@ $scope.addTodo = function () {
 		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
 		completed: false,
 		timestamp: new Date().getTime(),
-		tags: newTodo.match(/#\w+/g),
+		tags: newTodo.match(/<a\b[^>]*>|\B(#[^\W_][\w-]*)/g),
 		echo: 0,
 		order: 0
 	});
@@ -260,10 +260,10 @@ angular.element($window).bind("scroll", function() {
         roomId = "all";
       }
         
-    var fireBaseUrl = 'https://crackling-fire-8818.firebaseio.com/';
+    var fireBaseUrl = 'https://codeforfood.firebaseio.com/';
         
       // Create our references
-      var listRef = new Firebase(fireBaseUrl+roomId+'/presence');
+      var listRef = new Firebase(fireBaseUrl+'rooms/'+roomId+'/presence');
       var userRef = listRef.push(); // This creates a unique reference for each user
       var presenceRef = new Firebase(fireBaseUrl+'.info/connected');
 
