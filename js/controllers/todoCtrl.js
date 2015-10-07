@@ -31,7 +31,7 @@ if (!roomId || roomId.length === 0) {
 }
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://codeforfood.firebaseio.com/rooms/";
+var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
 
 
 $scope.roomId = roomId;
@@ -260,7 +260,7 @@ angular.element($window).bind("scroll", function() {
         roomId = "all";
       }
         
-    var fireBaseUrl = 'https://codeforfood.firebaseio.com/';
+    var fireBaseUrl = 'https://instaquest.firebaseio.com/';
         
       // Create our references
       var listRef = new Firebase(fireBaseUrl+'rooms/'+roomId+'/presence');
@@ -279,7 +279,6 @@ angular.element($window).bind("scroll", function() {
       // Get the user count and notify the application
       listRef.on('value', function(snap) {
         onlineUsers = snap.numChildren();
-        $rootScope.$broadcast('onOnlineUser');
       });
 
       var getOnlineUserCount = function() {

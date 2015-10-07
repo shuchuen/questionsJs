@@ -22,6 +22,7 @@
 		<div class="site-wrapper-inner">
 			<div class="cover-container">
 				<div class="masthead clearfix">
+<!--
 					<div class="inner">
 						<h3 class="masthead-brand">Question Room</h3>
 						<nav>
@@ -32,12 +33,18 @@
 							</ul>
 						</nav>
 					</div>
+-->
 				</div>
 
 				<div class="inner cover">
+<!--
 					<h1 class="cover-heading">Ask More Questions</h1>
 					<p class="lead">This totally anonymous and real-time updating question moderated system permits students to ask more questions in a typical class setting.
 						Simply join a question room using a simple name (such as comp3111).</p>
+-->
+                    <img class="iqicon" src="img/logo.png"></img>
+                    
+<!--
 						<p class="lead" class="col-md-2 col-md-offset-5">
 							<form name="form" ng-submit="join()" class="navbar-form navbar-left" role="search">
 								<input type="text" name = "input" class="form-control large"
@@ -53,7 +60,24 @@
 								>Join</a>
 							</form>
 						</p>
+-->         <p class="lead" class="col-md-2 col-md-offset-5">
+                <form name="form" ng-submit="join()" role="search" class="lead joinForm">
+                    <input type="text" name = "input" class="input-iqJoin input-lg col-xs-10"
+								ng-model="example.text"
+								ng-pattern="example.word" required
+								ng-trim="false"
+								autofocus
+								aria-describedby="sizing-addon1"
+								placeholder="Room name" />
+                    <button class="btn input-lg col-xs-2 btn-iqJoin"
+								ng-disabled="form.input.$error.required || form.input.$error.pattern"
+								ng-click="join()"
+                            >Join</button>
+                    
+                </form>
+            </p>    
 
+<!--
 						<div class="alert alert-warning" role="alert" ng-show="form.input.$error.required">
 							Room name is required!</div>
 							<div class="alert alert-warning" role="alert" ng-show="form.input.$error.pattern">
@@ -61,12 +85,15 @@
 							</div>
 
 						</div>
+-->
 
+<!--
 						<div class="mastfoot">
 							<div class="inner">
 								<p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
 							</div>
 						</div>
+-->
 
 					</div>
 
