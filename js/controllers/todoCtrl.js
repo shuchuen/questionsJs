@@ -279,6 +279,7 @@ angular.element($window).bind("scroll", function() {
       // Get the user count and notify the application
       listRef.on('value', function(snap) {
         onlineUsers = snap.numChildren();
+        $rootScope.$broadcast('onOnlineUser');
       });
 
       var getOnlineUserCount = function() {
