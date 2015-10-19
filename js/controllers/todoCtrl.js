@@ -45,7 +45,7 @@ $scope.todos = $firebaseArray(query);
 
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
-
+                
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
 	var total = 0;

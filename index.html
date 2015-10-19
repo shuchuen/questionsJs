@@ -7,15 +7,35 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="icon" href="../../favicon.ico">
+	<link rel="icon" href="img/logo.png">
 
-	<title>Question Room</title>
+	<title>InstaQuest</title>
 
+    <!-- Google fonts -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:600' rel='stylesheet' type='text/css'>
+    
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-	<!-- Custom styles for this template -->
+    
+    <!-- Web Font  -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    
+    <!-- animate.css -->
+    <link rel="stylesheet" href="css/animate/animate.css" />
+    <link rel="stylesheet" href="css/animate/set.css" />
+    
+    <!-- gallery -->
+    <link rel="stylesheet" href="css/gallery/blueimp-gallery.min.css">
+    
+    <!-- Custom styles for this template -->
 	<link href="css/cover.css" rel="stylesheet">
+
+    
 </head>
 <body ng-controller="controller">
 	<div class="site-wrapper">
@@ -95,21 +115,76 @@
 						</div>
 -->
 
+<!-- grid layout -->
+            <!--
+                        <div id="works"  class=" clearfix grid"> 
+                            <figure class="effect-oscar  wowload fadeInUp" ng-repeat="testing in testings">
+                                <img ng-src="img/grid/{{testing}}.jpg" alt="img01"/>
+                                <figcaption>
+                                    <h2>Cappuchino</h2>
+                                    <p>Lily likes to play with crayons and pencils<br>
+                                    <a ng-href="img/grid/{{testing}}.jpg" title="1" data-gallery>View more</a></p>            
+                                </figcaption>
+                            </figure>
+                            
+                        </div>
+-->
+            
 					</div>
 
 				</div>
-
+                        <div id="works"  class=" clearfix grid"> 
+                            <figure class="effect-oscar  wowload fadeInUp" ng-repeat="testing in testings">
+                                <img ng-src="img/grid/{{testing.number}}.jpg" alt="img01"/>
+                                <figcaption>
+                                    <h2>{{testing.name}}</h2>
+                                    <p>Lily likes to play with crayons and pencils<br>
+                                    <a ng-href="img/grid/{{testing.number}}.jpg" title="1" data-gallery>View more</a></p>            
+                                </figcaption>
+                            </figure>
+                            
+                        </div>
 			</div>
+    
 
+    
+<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <!-- The container for the modal slides -->
+    <div class="slides"></div>
+    <!-- Controls for the borderless lightbox -->
+    <h3 class="title">Title</h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <!-- The modal dialog, which will be used to wrap the lightbox content -->    
+</div>
+    
 			<!-- Bootstrap core JavaScript
 			================================================== -->
 			<!-- Placed at the end of the document so the pages load faster -->
+            <!-- jquery -->
 			<script src="js/lib/jquery.min.js"></script>
+            
+            <!-- jquery mobile -->
+            <script src="js/mobile/touchSwipe.min.js"></script>
+            <script src="js/respond/respond.js"></script>
+    
+            <!-- 1.4.2 -->
+			<script src="js/lib/angular.min.js"></script>
+    
+            <!-- boostrap -->
 			<script src="js/lib/bootstrap.min.js"></script>
 
-			<!-- 1.4.2 -->
-			<script src="js/lib/angular.min.js"></script>
+            <!-- wow script -->
+            <script src="js/wow/wow.min.js"></script>
+    
+            <!-- gallery -->
+            <script src="js/gallery/jquery.blueimp-gallery.min.js"></script>
 
+            <!-- custom script -->
+            <script src="js/script.js"></script>
+    
 			<script>
 			angular.module('app', [])
 			.controller('controller', ['$scope', '$location', '$window', function($scope, $location, $window) {
@@ -121,7 +196,30 @@
 				$scope.join = function () {
 					$window.location.href = 'question.html#/' + $scope.example.text;
 				}
-			}]);
+                
+                //----------For grid--------------
+                //index var    
+                $scope.testings = [
+                    {number:1,
+                     name:"COMP3111"
+                    },
+                    {number:2,
+                     name:"MATH2111"
+                    },
+                    {number:3,
+                     name:"SOSC1960"
+                    },
+                    {number:4,
+                     name:"HUMA1000"
+                    },
+                    {number:5,
+                     name:"ISOM3202"
+                    },
+                    {number:6,
+                     name:"ELEC1100"
+                    }];
+            }]);
+
 			</script>
 		</body>
 		</html>
