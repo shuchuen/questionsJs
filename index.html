@@ -187,9 +187,9 @@
 					$window.location.href = 'question.html#/' + $scope.example.text;
 				}
                 
-                $scope.joinRoom = function (roomName) {
-                $window.location.href = 'question.html#/' + roomName;                
-                }
+//                $scope.joinRoom = function (roomName) {
+//                    $window.location.href = 'question.html#/' + roomName;                
+//                }
                 
                 //----------For grid--------------
                 //index var    
@@ -232,19 +232,18 @@
                  }
                };
             })
-            .directive('gridRoom', ['$firebaseArray', function($firebaseArray){    
+            .directive('gridRoom', ['$location', '$firebaseArray','$window', function($location, $firebaseArray,$window){    
                   return{
-                      restrict: 'AE',
+                      restrict: 'E',
                       transclude: true,
-                      scope:{},
-                      link: function($scope, $element){
-                        $scope.loading=true;
+                      link: function(scope, element, $window, $location){
+                        scope.loading=true;
                         var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
                         var echoRef = new Firebase(firebaseURL).limitToFirst(6);
                         
                         $firebaseArray(echoRef).$loaded(function(loadedValue) {
-                            $scope.loading=false;
-                            $scope.testings = loadedValue;
+                            scope.loading = false;
+                            scope.testings = loadedValue;
                         });
                       },
                       templateUrl:"js/directives/gridRoom.html",
