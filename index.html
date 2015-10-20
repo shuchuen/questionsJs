@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" scroll data-framework="firebase">
 <head>
    	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -88,9 +88,10 @@
 								ng-trim="false"
 								autofocus
 								aria-describedby="sizing-addon1"
-								placeholder="Room name" />
+								placeholder="Room name" capitalize/>
                     <button class="btn input-lg col-xs-2 btn-iqJoin"
-								ng-disabled="form.input.$error.required || form.input.$error.pattern"
+								ng-disabled="form.input.$error.required || form.input.$error.pattern" 
+    style="padding: 0px;"
 								ng-click="join()"
                             >Join</button>
                     
@@ -133,35 +134,21 @@
 					</div>
 
 				</div>
-                        <div id="works"  class=" clearfix grid"> 
-                            <figure class="effect-oscar  wowload fadeInUp" ng-repeat="testing in testings">
-                                <img ng-src="img/grid/{{testing.number}}.jpg" alt="img01"/>
+                        
+                    <grid-room></grid-room>
+<!--            
+                            <figure class="effect-oscar wowload fadeInUp" ng-repeat="testing in testings" ng-click="joinRoom(testing.$id)">
+                                <img ng-src="img/grid/{{$index+1}}.jpg" alt="img01"/>
                                 <figcaption>
-                                    <h2>{{testing.name}}</h2>
-                                    <p>Lily likes to play with crayons and pencils<br>
-                                    <a ng-href="img/grid/{{testing.number}}.jpg" title="1" data-gallery>View more</a></p>            
+                                    <h2>{{testing.$id}}</h2>
+                                    <p>
+                                        Lily likes to play with crayons and pencils
+                                        <br>
+                                    <a ng-href="img/grid/{{$index+1}}.jpg" title="1" data-gallery>Join</a></p>            
                                 </figcaption>
                             </figure>
-                            
-                        </div>
+-->
 			</div>
-    
-
-    
-<!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-    <!-- The container for the modal slides -->
-    <div class="slides"></div>
-    <!-- Controls for the borderless lightbox -->
-    <h3 class="title">Title</h3>
-    <a class="prev">‹</a>
-    <a class="next">›</a>
-    <a class="close">×</a>
-    <!-- The modal dialog, which will be used to wrap the lightbox content -->    
-</div>
-    
-			<!-- Bootstrap core JavaScript
-			================================================== -->
 			<!-- Placed at the end of the document so the pages load faster -->
             <!-- jquery -->
 			<script src="js/lib/jquery.min.js"></script>
@@ -171,24 +158,27 @@
             <script src="js/respond/respond.js"></script>
     
             <!-- 1.4.2 -->
-			<script src="js/lib/angular.min.js"></script>
+            <script src="js/lib/firebase.js"></script>
+            <script src="js/lib/angular.min.js"></script>
+            <script src="js/lib/angularfire.js"></script>
     
             <!-- boostrap -->
 			<script src="js/lib/bootstrap.min.js"></script>
 
             <!-- wow script -->
-            <script src="js/wow/wow.min.js"></script>
+<!--            <script src="js/wow/wow.min.js"></script>-->
     
             <!-- gallery -->
-            <script src="js/gallery/jquery.blueimp-gallery.min.js"></script>
+<!--            <script src="js/gallery/jquery.blueimp-gallery.min.js"></script>-->
 
             <!-- custom script -->
-            <script src="js/script.js"></script>
+<!--            <script src="js/script.js"></script>-->
     
 			<script>
-			angular.module('app', [])
-			.controller('controller', ['$scope', '$location', '$window', function($scope, $location, $window) {
-				$scope.example = {
+			angular.module('app', ['firebase'])
+			.controller('controller', ['$scope', '$location', '$firebaseArray','$window', '$filter', function($scope, $location, $firebaseArray, $window, $filter) {
+                
+                $scope.example = {
 					text: '',
 					word: /^\s*\w*\s*$/
 				};
@@ -197,29 +187,71 @@
 					$window.location.href = 'question.html#/' + $scope.example.text;
 				}
                 
+                $scope.joinRoom = function (roomName) {
+                $window.location.href = 'question.html#/' + roomName;                
+                }
+                
                 //----------For grid--------------
                 //index var    
-                $scope.testings = [
-                    {number:1,
-                     name:"COMP3111"
-                    },
-                    {number:2,
-                     name:"MATH2111"
-                    },
-                    {number:3,
-                     name:"SOSC1960"
-                    },
-                    {number:4,
-                     name:"HUMA1000"
-                    },
-                    {number:5,
-                     name:"ISOM3202"
-                    },
-                    {number:6,
-                     name:"ELEC1100"
-                    }];
+//                $scope.testings = [
+//                    {number:1,
+//                     name:"COMP3111"
+//                    },
+//                    {number:2,
+//                     name:"MATH2111"
+//                    },
+//                    {number:3,
+//                     name:"SOSC1960"
+//                    },
+//                    {number:4,
+//                     name:"HUMA1000"
+//                    },
+//                    {number:5,
+//                     name:"ISOM3202"
+//                    },
+//                    {number:6,
+//                     name:"ELEC1100"
+//                    }];
+            }])
+            
+            .directive('capitalize', function() {
+               return {
+                 require: 'ngModel',
+                 link: function(scope, element, attrs, modelCtrl) {
+                    var capitalize = function(inputValue) {
+                       if(inputValue == undefined) inputValue = '';
+                       var capitalized = inputValue.toUpperCase();
+                       if(capitalized !== inputValue) {
+                          modelCtrl.$setViewValue(capitalized);
+                          modelCtrl.$render();
+                        }         
+                        return capitalized;
+                     }
+                     modelCtrl.$parsers.push(capitalize);
+                     capitalize(scope[attrs.ngModel]);  // capitalize initial value
+                 }
+               };
+            })
+            .directive('gridRoom', ['$firebaseArray', function($firebaseArray){    
+                  return{
+                      restrict: 'AE',
+                      transclude: true,
+                      scope:{},
+                      link: function($scope, $element){
+                        $scope.loading=true;
+                        var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
+                        var echoRef = new Firebase(firebaseURL).limitToFirst(6);
+                        
+                        $firebaseArray(echoRef).$loaded(function(loadedValue) {
+                            $scope.loading=false;
+                            $scope.testings = loadedValue;
+                        });
+                      },
+                      templateUrl:"js/directives/gridRoom.html",
+                    replace: true
+                };
             }]);
-
+            // Auto Uppercase ref: http://stackoverflow.com/questions/16388562/angularjs-force-uppercase-in-textbox
 			</script>
 		</body>
 		</html>

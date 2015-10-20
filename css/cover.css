@@ -26,7 +26,7 @@ a:hover {
 
 html,
 body {
-  height: 100%;
+/*  height: 100%;*/
   background-image: url(../img/indexbgd.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -223,5 +223,31 @@ body {
     width:90%;
     max-width: 900px;
     margin-top: 75px;
-    margin-bottom:100px;
+    margin-bottom:50px;
+}
+
+.animate-enter, 
+.animate-leave
+{ 
+    -webkit-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+    -moz-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+    -ms-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+    -o-transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+    transition: 300ms cubic-bezier(0.250, 0.100, 0.250, 1.000) all;
+    position: relative;
+    display: block;
+} 
+ 
+.animate-enter.animate-enter-active, 
+.animate-leave {
+    opacity: 1;
+    left: 0;
+    height: 30px;
+}
+ 
+.animate-leave.animate-leave-active,
+.animate-enter {
+    opacity: 0;
+    left: -50px;
+    height: 0px;
 }

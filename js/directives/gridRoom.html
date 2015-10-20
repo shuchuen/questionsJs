@@ -1,0 +1,12 @@
+<div id="works"  class=" clearfix grid">
+    <img ng-if="loading" src="img/loading-x.gif"></img>
+<figure  ng-if="!loading" class="effect-oscar fadeInUp" ng-repeat="testing in testings" ng-animate=" 'animate' " ng-click="joinRoom(testing.$id)">
+    <img ng-src="img/grid/{{$index+1}}.jpg" alt="{{testing.$id}}"/>
+    <figcaption>
+        <h2>{{testing.$id}}</h2>
+        <p>
+            <br>
+        <a ng-title="{{testing.$id}}">Join</a></p>            
+    </figcaption>
+</figure>
+</div>

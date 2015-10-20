@@ -121,6 +121,8 @@ $scope.addTodo = function () {
 		echo: 0,
 		order: 0
 	});
+    
+//    $scope.todos.parent().$add({activeTime:Firebase.ServerValue.TIMESTAMP});
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
 };
