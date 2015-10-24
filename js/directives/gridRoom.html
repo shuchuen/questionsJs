@@ -1,6 +1,12 @@
 <div id="works"  class=" clearfix grid">
     
-    <img ng-if="loading" class="img-responsive"  src="img/loading-x.gif" style="width:100%"/>
+<!--    <img  class="img-responsive"  src="img/loading-x.gif" style="width:100%"/>-->
+
+    <div ng-if="loading" id="loader-wrapper">
+        <div id="loader">
+        </div>
+        <h4 class="loadingMessage">Loading recent chatroom</h4>
+    </div>
     
     <figure  ng-if="!loading" class="effect-oscar fadeInUp" ng-repeat="testing in testings" ng-animate=" 'animate' " >
         <img ng-src="img/grid/{{$index+1}}.jpg" alt="{{testing.$id}}"/>

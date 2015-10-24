@@ -34,15 +34,26 @@
     
     <!-- Custom styles for this template -->
 	<link href="css/cover.css" rel="stylesheet">
-
+    
+    <!--Preloader-->
+    <!--ref: https://ihatetomatoes.net/create-css3-spinning-preloader/-->
+    <!--ref: http://stackoverflow.com/questions/16782498/changing-text-could-animatedly-by-css3-->
+    <link href="css/preloader.css" rel="stylesheet">
     
 </head>
 <body ng-controller="controller">
 	<div class="site-wrapper">
 		<div class="site-wrapper-inner">
+            <div class="navbar">
+                <ul class="nav nav-pills pull-right">
+                  <li role="presentation"><a href="#">Features</a></li>
+                  <li role="presentation"><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            
 			<div class="cover-container">
-				<div class="masthead clearfix">
 <!--
+				<div class="masthead clearfix">
 					<div class="inner">
 						<h3 class="masthead-brand">Question Room</h3>
 						<nav>
@@ -53,8 +64,8 @@
 							</ul>
 						</nav>
 					</div>
--->
 				</div>
+-->
 
 				<div class="inner cover">
 <!--
@@ -62,42 +73,25 @@
 					<p class="lead">This totally anonymous and real-time updating question moderated system permits students to ask more questions in a typical class setting.
 						Simply join a question room using a simple name (such as comp3111).</p>
 -->
-                    <img class="iqicon" src="img/logo.png"></img>
-                    
-<!--
-						<p class="lead" class="col-md-2 col-md-offset-5">
-							<form name="form" ng-submit="join()" class="navbar-form navbar-left" role="search">
-								<input type="text" name = "input" class="form-control large"
-								ng-model="example.text"
-								ng-pattern="example.word" required
-								ng-trim="false"
-								autofocus
-								aria-describedby="sizing-addon1"
-								placeholder="Room name">
-								<a href="#" class="btn btn-lg btn-default"
-								ng-hide="form.input.$error.required || form.input.$error.pattern"
-								ng-click="join()"
-								>Join</a>
-							</form>
-						</p>
--->         <p class="lead" class="col-md-2 col-md-offset-5">
-                <form name="form" ng-submit="join()" role="search" class="lead joinForm">
-                    <input type="text" name = "input" class="input-iqJoin input-lg col-xs-10"
-								ng-model="example.text"
-								ng-pattern="example.word" required
-								ng-trim="false"
-								autofocus
-								aria-describedby="sizing-addon1"
-								placeholder="Room name" capitalize/>
-                    <button class="btn input-lg col-xs-2 btn-iqJoin"
-								ng-disabled="form.input.$error.required || form.input.$error.pattern" 
-    style="padding: 0px;"
-								ng-click="join()"
-                            >Join</button>
-                    
-                </form>
-            </p>    
+                    <div class="logo">    
+                        <img class="iqicon" src="img/logo.png"></img>
+                    </div>    
+               
+                    <form name="joinForm" ng-submit="join()" class="joinForm inner cover">
+                        <input type="text" name = "input" class="input-iqJoin input-lg col-xs-10"
+                                    ng-model="example.text"
+                                    ng-pattern="example.word" required
+                                    ng-trim="false"
+                                    autofocus
+                                    aria-describedby="sizing-addon1"
+                                    placeholder="Room name" capitalize/>
+                        <button class="btn input-lg col-xs-2 btn-iqJoin"
+                                    ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern" 
+        style="padding: 0px;"
+                                    ng-click="join()"
+                                >Join</button>
 
+                    </form>
 <!--
 						<div class="alert alert-warning" role="alert" ng-show="form.input.$error.required">
 							Room name is required!</div>
@@ -115,39 +109,13 @@
 							</div>
 						</div>
 -->
-
-<!-- grid layout -->
-            <!--
-                        <div id="works"  class=" clearfix grid"> 
-                            <figure class="effect-oscar  wowload fadeInUp" ng-repeat="testing in testings">
-                                <img ng-src="img/grid/{{testing}}.jpg" alt="img01"/>
-                                <figcaption>
-                                    <h2>Cappuchino</h2>
-                                    <p>Lily likes to play with crayons and pencils<br>
-                                    <a ng-href="img/grid/{{testing}}.jpg" title="1" data-gallery>View more</a></p>            
-                                </figcaption>
-                            </figure>
-                            
-                        </div>
--->
             
 					</div>
-
-				</div>
-                        
+                    
+                </div>     
                     <grid-room></grid-room>
-<!--            
-                            <figure class="effect-oscar wowload fadeInUp" ng-repeat="testing in testings" ng-click="joinRoom(testing.$id)">
-                                <img ng-src="img/grid/{{$index+1}}.jpg" alt="img01"/>
-                                <figcaption>
-                                    <h2>{{testing.$id}}</h2>
-                                    <p>
-                                        Lily likes to play with crayons and pencils
-                                        <br>
-                                    <a ng-href="img/grid/{{$index+1}}.jpg" title="1" data-gallery>Join</a></p>            
-                                </figcaption>
-                            </figure>
--->
+				</div>
+                   
 			</div>
 			<!-- Placed at the end of the document so the pages load faster -->
             <!-- jquery -->
@@ -245,6 +213,10 @@
                             scope.loading = false;
                             scope.testings = loadedValue;
                         });
+                          
+                        scope.getRepeatTimes = function(num) {
+                            return new Array(num);
+                        }  
                       },
                       templateUrl:"js/directives/gridRoom.html",
                     replace: true
