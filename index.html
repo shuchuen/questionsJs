@@ -1,139 +1,131 @@
 <!DOCTYPE html>
-<html ng-app="app" scroll="" data-framework="firebase" lang="en"><head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="img/logo.png"><title>InstaQuest</title>
+<html ng-app="app" scroll="" data-framework="firebase" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="img/logo.png">
+        <title>InstaQuest</title>
 
-<!-- Google fonts -->
-<link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Josefin+Sans:600" rel="stylesheet" type="text/css">
-<!-- font awesome -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<!-- bootstrap -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<!-- Web Font -->
-<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" type="text/css">
-<!-- animate.css -->
-<link rel="stylesheet" href="css/animate/animate.css">
-<link rel="stylesheet" href="css/animate/set.css">
-<!-- gallery -->
-<link rel="stylesheet" href="css/gallery/blueimp-gallery.min.css">
-<!-- Custom styles for this template -->
-<link href="css/cover.css" rel="stylesheet">
-<!--Preloader--><!--ref: https://ihatetomatoes.net/create-css3-spinning-preloader/--><!--ref: http://stackoverflow.com/questions/16782498/changing-text-could-animatedly-by-css3-->
-<link href="css/preloader.css" rel="stylesheet">
-</head>
+        <!-- Google fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,700" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Josefin+Sans:600" rel="stylesheet" type="text/css">
+        <!-- font awesome -->
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- Web Font -->
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" type="text/css">
+        <!-- animate.css -->
+        <link rel="stylesheet" href="css/animate/animate.css">
+        <link rel="stylesheet" href="css/animate/set.css">
+        <!-- gallery -->
+        <link rel="stylesheet" href="css/gallery/blueimp-gallery.min.css">
+        <!-- Custom styles for this template -->
+        <link href="css/cover.css" rel="stylesheet">
+        <!--Preloader--><!--ref: https://ihatetomatoes.net/create-css3-spinning-preloader/-->
+        <!--ref: http://stackoverflow.com/questions/16782498/changing-text-could-animatedly-by-css3-->
+        <link href="css/preloader.css" rel="stylesheet">
+    </head>
 
-<body ng-controller="controller">
-<div class="site-wrapper">
-<div class="site-wrapper-inner">
-<div class="navbar">
-<ul class="nav nav-pills pull-right dropdown">
-<li role="presentation"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Features</a>
-<ul class="dropdown-menu">
-<li><a href="#">Tag</a></li>
-<li><a href="#">Dislike button</a></li>
-<li><a href="#">Polling</a></li>
-<li><a href="#">Emoji</a></li>
-<li><a href="#">Photo attachment</a></li>
-<li><a href="#">Google login</a></li>
-</ul>
-</li>
-<li role="presentation"><a href="#">Contact</a></li>
-</ul>
-</div>
-<div class="cover-container"><!-- <div class="masthead clearfix"> <div class="inner"> <h3 class="masthead-brand">Question Room</h3> <nav> <ul class="nav masthead-nav"> <li class="active"><a href="#">Home</a></li> <li><a href="#">Features</a></li> <li><a href="#">Contact</a></li> </ul> </nav> </div> </div> -->
-<div class="inner cover"><!-- <h1 class="cover-heading">Ask More Questions</h1> <p class="lead">This totally anonymous and real-time updating question moderated system permits students to ask more questions in a typical class setting. Simply join a question room using a simple name (such as comp3111).</p> -->
-<div class="logo"> <img class="iqicon" src="img/logo.png"> </div>
-<form name="joinForm" ng-submit="join()" class="joinForm inner cover"> <input name="input" class="input-iqJoin input-lg col-xs-10" ng-model="example.text" ng-pattern="example.word" required="" ng-trim="false" autofocus="" aria-describedby="sizing-addon1" placeholder="Room name" capitalize="" type="text">
-<button class="btn input-lg col-xs-2 btn-iqJoin" ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern" style="padding: 0px;" ng-click="join()">Join</button>
-</form>
-<!-- <div class="alert alert-warning" role="alert" ng-show="form.input.$error.required"> Room name is required!</div> <div class="alert alert-warning" role="alert" ng-show="form.input.$error.pattern"> Room name must be a single English word! </div> </div> -->
-<!-- <div class="mastfoot"> <div class="inner"> <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> </div> </div> --></div>
-</div>
-<grid-room></grid-room> </div>
-</div>
-<!-- Placed at the end of the document so the pages load faster --><!-- jquery -->
-<script src="js/lib/jquery.min.js"></script><!-- jquery mobile -->
-<script src="js/mobile/touchSwipe.min.js"></script>
-<script src="js/respond/respond.js"></script><!-- 1.4.2 -->
-<script src="js/lib/firebase.js"></script>
-<script src="js/lib/angular.min.js"></script>
-<script src="js/lib/angularfire.js"></script><!-- boostrap -->
-<script src="js/lib/bootstrap.min.js"></script><!-- wow script --><!-- <script src="js/wow/wow.min.js"></script>--><!-- gallery --><!-- <script src="js/gallery/jquery.blueimp-gallery.min.js"></script>--><!-- custom script --><!-- <script src="js/script.js"></script>-->
-<script>
-angular.module('app', ['firebase'])
-.controller('controller', ['$scope', '$location', '$firebaseArray','$window', '$filter', function($scope, $location, $firebaseArray, $window, $filter) {
-$scope.example = {
-text: '',
-word: /^\s*\w*\s*$/
-};
-$scope.join = function () {
-$window.location.href = 'question.html#/' + $scope.example.text;
-}
-// $scope.joinRoom = function (roomName) {
-// $window.location.href = 'question.html#/' + roomName; // }
-//----------For grid--------------
-//index var // $scope.testings = [
-// {number:1,
-// name:"COMP3111"
-// },
-// {number:2,
-// name:"MATH2111"
-// },
-// {number:3,
-// name:"SOSC1960"
-// },
-// {number:4,
-// name:"HUMA1000"
-// },
-// {number:5,
-// name:"ISOM3202"
-// },
-// {number:6,
-// name:"ELEC1100"
-// }];
-}])
-.directive('capitalize', function() {
-return {
-require: 'ngModel',
-link: function(scope, element, attrs, modelCtrl) {
-var capitalize = function(inputValue) {
-if(inputValue == undefined) inputValue = '';
-var capitalized = inputValue.toUpperCase();
-if(capitalized !== inputValue) {
-modelCtrl.$setViewValue(capitalized);
-modelCtrl.$render();
-} return capitalized;
-}
-modelCtrl.$parsers.push(capitalize);
-capitalize(scope[attrs.ngModel]); // capitalize initial value
-}
-};
-})
-.directive('gridRoom', ['$location', '$firebaseArray','$window', function($location, $firebaseArray,$window){ return{
-restrict: 'E',
-transclude: true,
-link: function(scope, element, $window, $location){
-scope.loading=true;
-var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
-var echoRef = new Firebase(firebaseURL).limitToFirst(6);
-$firebaseArray(echoRef).$loaded(function(loadedValue) {
-scope.loading = false;
-scope.testings = loadedValue;
-});
-scope.getRepeatTimes = function(num) {
-return new Array(num);
-} },
-templateUrl:"js/directives/gridRoom.html",
-replace: true
-};
-}]);
-// Auto Uppercase ref: http://stackoverflow.com/questions/16388562/angularjs-force-uppercase-in-textbox
-</script>
-</body></html>
+    <body ng-controller="controller">
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="navbar">
+                    <ul class="nav nav-pills pull-right dropdown iqNav">
+                        <li role="presentation">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Features</a>
+                            <ul class="dropdown-menu iqDropdown">
+                                <li><a href="#">Tag</a></li>
+                                <li><a href="#">Dislike button</a></li>
+                                <li><a href="#">Polling</a></li>
+                                <li><a href="#">Emoji</a></li>
+                                <li><a href="#">Photo attachment</a></li>
+                                <li><a href="#">Google login</a></li>
+                            </ul>
+                        </li>
+                        <li role="presentation"><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="cover-container">
+                    
+                    <div class="inner cover">
+                        <div class="logo"> 
+                            <img class="iqicon" src="img/logo.png"> 
+                        </div>
+                        <form name="joinForm" ng-submit="join()" class="joinForm inner cover"> 
+                            <input name="input" class="input-iqJoin input-lg col-xs-10" ng-model="example.text" ng-pattern="example.word" required="" ng-trim="false" autofocus="" aria-describedby="sizing-addon1" placeholder="Room name" capitalize="" type="text">
+                            <button class="btn input-lg col-xs-2 btn-iqJoin" ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern" style="padding: 0px;" ng-click="join()">Join</button>
+                        </form>
+                        <!-- <div class="alert alert-warning" role="alert" ng-show="form.input.$error.required"> Room name is required!</div> <div class="alert alert-warning" role="alert" ng-show="form.input.$error.pattern"> Room name must be a single English word! </div> </div> -->
+                        <!-- <div class="mastfoot"> <div class="inner"> <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> </div> </div> -->
+                    </div>
+                </div>
+                <grid-room></grid-room> 
+            </div>
+        </div>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- jquery -->
+        <script src="js/lib/jquery.min.js"></script><!-- jquery mobile -->
+        <script src="js/mobile/touchSwipe.min.js"></script>
+        <script src="js/respond/respond.js"></script><!-- 1.4.2 -->
+        <script src="js/lib/firebase.js"></script>
+        <script src="js/lib/angular.min.js"></script>
+        <script src="js/lib/angularfire.js"></script><!-- boostrap -->
+        <script src="js/lib/bootstrap.min.js"></script><!-- wow script --><!-- <script src="js/wow/wow.min.js"></script>--><!-- gallery --><!-- <script src="js/gallery/jquery.blueimp-gallery.min.js"></script>--><!-- custom script --><!-- <script src="js/script.js"></script>-->
+        <script>
+        angular.module('app', ['firebase'])
+        .controller('controller', ['$scope', '$location', '$firebaseArray','$window', '$filter', function($scope, $location, $firebaseArray, $window, $filter) {
+            $scope.example = {
+                text: '',
+                word: /^\s*\w*\s*$/
+            };
+            $scope.join = function () {
+                $window.location.href = 'question.html#/' + $scope.example.text;
+            }
+            // $scope.joinRoom = function (roomName) {
+            // $window.location.href = 'question.html#/' + roomName; // }
+        }])
+        .directive('capitalize', function() {
+            return {
+                require: 'ngModel',
+                link: function(scope, element, attrs, modelCtrl) {
+                var capitalize = function(inputValue) {
+                    if(inputValue == undefined) inputValue = '';
+                        var capitalized = inputValue.toUpperCase();
+                    
+                        if(capitalized !== inputValue) {
+                            modelCtrl.$setViewValue(capitalized);
+                            modelCtrl.$render();
+                        } return capitalized;
+                    }
+                    modelCtrl.$parsers.push(capitalize);
+                    capitalize(scope[attrs.ngModel]); // capitalize initial value
+                }
+            };
+        })
+        .directive('gridRoom', ['$location', '$firebaseArray','$window', function($location, $firebaseArray,$window){ 
+            return{
+                restrict: 'E',
+                transclude: true,
+                link: function(scope, element, $window, $location){
+                    scope.loading=true;
+                    var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
+                    var echoRef = new Firebase(firebaseURL).limitToFirst(6);
+                        $firebaseArray(echoRef).$loaded(function(loadedValue) {
+                            scope.loading = false;
+                            scope.testings = loadedValue;
+                        });
+                },
+                templateUrl:"js/directives/gridRoom.html",
+                replace: true
+            };
+        }]);
+        // Auto Uppercase ref: http://stackoverflow.com/questions/16388562/angularjs-force-uppercase-in-textbox
+        </script>
+    </body>
+</html>
