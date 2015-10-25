@@ -72,8 +72,8 @@ ng-model="input.wholeMsg" autofocus></textarea>
 			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 		</h4>
-		<p class="list-group-item-text"><span ng-bind="todo.trustedDesc"></span></p>
-        <p>created: {{todo.dateString}}
+		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>
+        <p>created: <span am-time-ago="todo.timestamp"></span>
 			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
 
 			<button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
@@ -114,5 +114,9 @@ ng-model="input.wholeMsg" autofocus></textarea>
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
+<!-- AngularMoment-->
+<script src="js/lib/moment.js"></script>
+<script src="js/lib/angular-moment.min.js"></script>
+    
 </body>
 </html>
