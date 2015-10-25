@@ -272,11 +272,20 @@ body {
     min-height: 0px;
 }
 
-.nav>li>a:focus,
-.nav>li>a:hover {
+.iqNav>li>a:focus,
+.iqNav>li>a:hover {
     text-decoration: none;
     background-color: rgba(135,206,235,1);
 }
 .nav-pills>li>a {
+    border-radius: 0px;
+}
+
+.iqNav .open>a, .iqNav .open>a:focus, .iqNav .open>a:hover {
+    background-color: rgba(135,206,235,1);
+    border-color: #337ab7;
+}
+
+.iqDropdown{
     border-radius: 0px;
 }
