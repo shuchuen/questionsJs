@@ -36,23 +36,55 @@
         <div class="site-wrapper">
             <div class="site-wrapper-inner">
                 <div class="navbar">
-                    <ul class="nav nav-pills pull-right dropdown iqNav">
-                        <li role="presentation">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Features</a>
-                            <ul class="dropdown-menu iqDropdown">
-                                <li><a href="#">Tag</a></li>
-                                <li><a href="#">Dislike button</a></li>
-                                <li><a href="#">Polling</a></li>
-                                <li><a href="#">Emoji</a></li>
-                                <li><a href="#">Photo attachment</a></li>
-                                <li><a href="#">Google login</a></li>
-                            </ul>
-                        </li>
-                        <li role="presentation"><a href="#">Contact</a></li>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"><a href="#popup1">Features</a></li>
+						<li role="presentation"><a href="#popup2">Contact</a></li>
                     </ul>
                 </div>
+				
+				<!-- popup windows content -->
+				<div id="/popup1" class="overlay">
+					<div class="popup">
+						<h2>Feature</h2>
+						<a class="close" href="#">×</a>
+						<div class="content">
+							<p>More Interactive, Less Boring</p>
+							<ul class="list-bullet">
+								<p><li>Asking questions is no longer difficult</li>
+									<ul class="list-bullet-sub">
+										<li>Provide chat rooms for instant questioning and answering</li>
+										<li>Smart room entry box provides suggestion for easy searching</li>
+										<li>Recent chat rooms are listed out for quick access</li>
+									</ul></p>
+								<p><li>Encourage exchange of ideas</li>
+									<ul class="list-bullet-sub">
+										<li>Allow students and professors to give responses on questions</li>
+										<li>Provide polling functions for collecting opinions</li>
+										<li>Support photo attachments for easy idea exchange</li>
+										<li>With Like and Dislike buttons for easy responses</li>
+										<li>Topic are categorized with tag and according to topic for easy searching</li>
+									</ul></p>
+								<p><li>Whats more...</li>
+									<ul class="list-bullet-sub">
+										<li>Login using Facebook or Google to enjoy more functions such as notification</li>
+										<li>Extra functions for professors and TA to highlight meaningful message</li>
+										<li>Provide Emoji for easy expression of feelings</li>
+									</ul></p>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="/popup2" class="overlay">
+					<div class="popup">
+						<h2>Contact</h2>
+						<a class="close" href="#">×</a>
+						<div class="content">
+							Send us an [<a href="mailto:#">E-mail</a>]
+						</div>
+					</div>
+				</div>
+				
                 <div class="cover-container">
-                    
                     <div class="inner cover">
                         <div class="logo"> 
                             <img class="iqicon" src="img/logo.png"> 
@@ -68,7 +100,8 @@
                 <grid-room></grid-room> 
             </div>
         </div>
-        <!-- Placed at the end of the document so the pages load faster -->
+        
+		<!-- Placed at the end of the document so the pages load faster -->
         <!-- jquery -->
         <script src="js/lib/jquery.min.js"></script><!-- jquery mobile -->
         <script src="js/mobile/touchSwipe.min.js"></script>
