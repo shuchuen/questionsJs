@@ -27,7 +27,9 @@
     
     <!-- animate.css -->
     <link rel="stylesheet" href="css/animate/animate.css">
-    <link rel="stylesheet" href="css/animate/set.css">  
+    <link rel="stylesheet" href="css/animate/set.css"> 
+    <!-- vegas.css-->
+    <link rel="stylesheet" href="/js/vegas/vegas.min.css">
     
     <!--Preloader--><!--ref: https://ihatetomatoes.net/create-css3-spinning-preloader/-->
 <!--ref: http://stackoverflow.com/questions/16782498/changing-text-could-animatedly-by-css3-->
@@ -336,6 +338,22 @@
     <script src="js/lib/angular.min.js"></script>
     
     <script src="js/lib/angularfire.js"></script><!-- boostrap -->
+        <!-- vegas.js-->
+    <script src="/js/vegas/vegas.min.js"></script>
+    
+    <script>
+    $("header").vegas({
+        delay: 9000,
+        timer: false,
+        transition: 'blur',
+        transitionDurtion: 1500,
+    slides: [
+        { src: "/img/indexbgd.jpg" },
+        { src: "/img/indexbgd2.jpg" },
+        { src: "/img/indexbgd3.jpg" }
+    ]
+});
+    </script>
     
     <script>
         angular.module('app', ['firebase'])
