@@ -73,7 +73,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 		</h4>
 		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>
-        <p>created: <span am-time-ago="todo.timestamp"></span>							<!--change the time format to N hours ago-->
+        <p><span am-time-ago="todo.timestamp"></span>							<!--change the time format to N hours ago-->
 			<span ng-show="todo.tags">tags: [<a ng-repeat="tag in todo.tags track by $index" ng-click="searchTag(tag)">{{tag}} </a>]</span></p>
 
 			<button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
