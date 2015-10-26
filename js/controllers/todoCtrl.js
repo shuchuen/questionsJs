@@ -25,9 +25,10 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 //});
 
 var splits = $location.path().trim().split("/");
-var roomId = angular.lowercase(splits[1]);
+var roomId = angular.uppercase(splits[1]);
 if (!roomId || roomId.length === 0) {
-	roomId = "all";
+//        roomId = "all";
+  $window.location.href = 'index.html?roomNameError=true';
 }
 
 // TODO: Please change this URL for your app
@@ -37,6 +38,10 @@ var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
 $scope.roomId = roomId;
 var url = firebaseURL + roomId + "/questions/";
 var echoRef = new Firebase(url);
+
+//when access the chatromm, renew the active time
+var parentRef = echoRef.parent();
+parentRef.child("activeTime").set(new Date().getTime());
 
 var query = echoRef.orderByChild("order");
 // Should we limit?
@@ -118,6 +123,8 @@ $scope.addTodo = function () {
 	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
+//    var tags = newTodo.match(/#\w+/g);
+    
     
 	$scope.todos.$add({
 		wholeMsg: newTodo,
@@ -127,14 +134,14 @@ $scope.addTodo = function () {
 		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
 		completed: false,
 		timestamp: new Date().getTime(),
-		tags: newTodo.match(/<a\b[^>]*>|\B(#[^\W_][\w-]*)/g),
+		tags: newTodo.match(/#\w+/g),
 		echo: 0,
 		order: 0
 	});
     
-//    $scope.todos.parent().$add({activeTime:Firebase.ServerValue.TIMESTAMP});
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
+    
 };
 
 $scope.editTodo = function (todo) {
@@ -225,7 +232,9 @@ $scope.toTop =function toTop() {
 };
     
 $scope.refresh =function refreshPage() {
+    $scope.input = '';
 	$scope.todos = $firebaseArray(query);
+    
 };
 
 // Not sure what is this code. Todel
@@ -248,6 +257,11 @@ angular.element($window).bind("scroll", function() {
 		$scope.$apply();
 	}
 });
+    
+$scope.searchTag =function searchTag(tag) {
+	$scope.input = {wholeMsg:tag};
+};
+   
 
 }])
 
@@ -263,13 +277,14 @@ angular.element($window).bind("scroll", function() {
     }
 ])
 
-.factory('onlineUserCountService', ['$rootScope', '$location',
-    function($rootScope, $location) {
+.factory('onlineUserCountService', ['$rootScope', '$location','$window',
+    function($rootScope, $location, $window) {
       var onlineUsers = 0;
       var splits = $location.path().trim().split("/");
-      var roomId = angular.lowercase(splits[1]);
+      var roomId = angular.uppercase(splits[1]);
       if (!roomId || roomId.length === 0) {
-        roomId = "all";
+//        roomId = "all";
+          $window.location.href = 'index.html?roomNameError=true';
       }
         
     var fireBaseUrl = 'https://instaquest.firebaseio.com/';
@@ -278,7 +293,11 @@ angular.element($window).bind("scroll", function() {
       var listRef = new Firebase(fireBaseUrl+'rooms/'+roomId+'/presence');
       var userRef = listRef.push(); // This creates a unique reference for each user
       var presenceRef = new Firebase(fireBaseUrl+'.info/connected');
-
+    
+//      $cookies.put(roomId,true);
+//      if($cookies.getObject(roomId)==true){
+//          alert("Added cookies");
+//      }
       // Add ourselves to presence list when online.
       presenceRef.on('value', function(snap) {
         if (snap.val()) {
@@ -287,6 +306,15 @@ angular.element($window).bind("scroll", function() {
           userRef.onDisconnect().remove();
         }
       });
+        
+//      presenceRef.on('child_removed', function(oldChildSnapshot) {
+//          // code to handle child removal.
+//          $cookies.remove(roomId);
+//      });
+//        
+//      if($cookies.getObject(roomId)==null){
+//          alert("deleted cookies");
+//      }
 
       // Get the user count and notify the application
       listRef.on('value', function(snap) {

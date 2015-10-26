@@ -148,10 +148,10 @@
                 link: function(scope, element, $window, $location){
                     scope.loading=true;
                     var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
-                    var echoRef = new Firebase(firebaseURL).limitToFirst(6);
+                    var echoRef = new Firebase(firebaseURL).orderByChild("activeTime").limitToFirst(6);
                         $firebaseArray(echoRef).$loaded(function(loadedValue) {
                             scope.loading = false;
-                            scope.testings = loadedValue;
+                            scope.roomList = loadedValue.reverse();
                         });
                 },
                 templateUrl:"js/directives/gridRoom.html",

@@ -8,13 +8,13 @@
         <h4 class="loadingMessage">Loading recent chatroom</h4>
     </div>
     
-    <figure  ng-if="!loading" class="effect-oscar fadeInUp" ng-repeat="testing in testings" ng-animate=" 'animate' " >
-        <img ng-src="img/grid/{{$index+1}}.jpg" alt="{{testing.$id}}"/>
+    <figure  ng-if="!loading" class="effect-oscar fadeInUp" ng-repeat="room in roomList" ng-animate=" 'animate' " >
+        <img ng-src="img/grid/{{$index+1}}.jpg" alt="{{room.$id}}"/>
         <figcaption>
-            <h2>{{testing.$id}}</h2>
+            <h2>{{room.$id}}</h2>
             <p>
                 <br>
-            <a ng-href="question.html#/{{testing.$id|uppercase}}" ng-title="{{testing.$id}}">Join</a></p>            
+            <a ng-href="question.html#/{{room.$id|uppercase}}" ng-title="{{room.$id}}">Join</a></p>            
         </figcaption>
     </figure>
 </div>
