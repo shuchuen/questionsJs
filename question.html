@@ -42,7 +42,7 @@
 <button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>
 
 <!--Refresh button-->
-    <button class="btn btn-success pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span><span>Refresh</span></button>
+    <button class="btn btn-success pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span><span>Refresh</span></button>			<!-- button for refreshing the page to show the latest message -->
 
    <!-- <a href="uniondraw.html"><button class="btn btn-danger pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-pencil"></span><span>Share Canvas</span></button></a> hide--> 
 
@@ -73,7 +73,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 		</h4>
 		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>
-        <p>created: <span am-time-ago="todo.timestamp"></span>
+        <p>created: <span am-time-ago="todo.timestamp"></span>							<!--change the time format to N hours ago-->
 			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
 
 			<button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
@@ -85,7 +85,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 	
 
-	<div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>
+	<div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>		<!-- button for going back to the top of page-->
 
 <!--
 	<button ng-hide="totalCount>=maxQuestion"
@@ -94,7 +94,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 -->
 
 
-    <p ng-controller="onlineUserCtrl"><span class="onlineUser">No. of online user: </span>{{totalViewers}}</p>
+    <p ng-controller="onlineUserCtrl"><span class="onlineUser">No. of online user: </span>{{totalViewers}}</p>			<!--shows the number of online users -->
 
 
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
@@ -102,7 +102,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 <!-- 2.2.2 -->
 <script src="js/lib/firebase.js"></script>
-<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/angular.min.js"></script>					<!--credit to urish : https://github.com/urish/angular-moment -->
 <script src="js/lib/angularfire.js"></script>
 
 <!-- Ng storage 0.3.6  -->
@@ -116,7 +116,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 <script src="js/directives/todoEscape.js"></script>
 <!-- AngularMoment-->
 <script src="js/lib/moment.js"></script>
-<script src="js/lib/angular-moment.min.js"></script>
+<script src="js/lib/angular-moment.min.js"></script>			<!--credit to urish : https://github.com/urish/angular-moment -->
     
 </body>
 </html>

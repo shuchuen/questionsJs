@@ -99,6 +99,16 @@ $scope.getFirstAndRestSentence = function($string) {
 
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
+	
+	// rough filter: filter words before sending the input to the database
+
+/**
+	var filters = [[/fuck/g, "love"], [/asshole/g, "sung"]];
+	for(var i = 0; i < filters.length; i++){
+		newTodo = newTodo.replace(filters[i][0], filters[i][1]);
+	}
+	
+*/	
 
 	// No input, so just do nothing
 	if (!newTodo.length) {
