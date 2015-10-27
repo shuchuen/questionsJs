@@ -50,6 +50,19 @@ $scope.todos = $firebaseArray(query);
 
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
+
+// bad word filter
+$scope.filter = function (s) {
+	var filters = [["fuck", "love"],
+		["shit", "banana"],
+		["damn", "praise"]];
+	for (var i in filters) {
+		var reg = new RegExp(filters[i][0], "ig");
+		s = s.replace(reg, filters[i][1]);
+		console.log(reg);
+	}
+	return s;
+};
                 
 // pre-precessing for collection
 $scope.$watchCollection('todos', function () {
@@ -105,15 +118,7 @@ $scope.getFirstAndRestSentence = function($string) {
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
 	
-	// rough filter: filter words before sending the input to the database
 
-/**
-	var filters = [[/fuck/g, "love"], [/asshole/g, "sung"]];
-	for(var i = 0; i < filters.length; i++){
-		newTodo = newTodo.replace(filters[i][0], filters[i][1]);
-	}
-	
-*/	
 
 	// No input, so just do nothing
 	if (!newTodo.length) {
