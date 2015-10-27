@@ -26,10 +26,14 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 
 var splits = $location.path().trim().split("/");
 var roomId = angular.uppercase(splits[1]);
-if (!roomId || roomId.length === 0) {
+if (!roomId || roomId.length === 0 ) {
 //        roomId = "all";
-  $window.location.href = 'index.html?roomNameError=true';
+    $window.location.href = 'index.html?roomNameError=true';
 }
+    
+if(!roomId.match(/^\s*\w*\s*$/)){
+    $window.location.href = 'index.html?roomNameError=true';
+}    
 
 // TODO: Please change this URL for your app
 var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
@@ -58,7 +62,7 @@ $scope.filter = function (s) {
 	for (var i in filters) {
 		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
 		s = s.replace(reg, filters[i][1]);
-		console.log(reg);
+//		console.log(reg);
 	}
 	return s;
 };

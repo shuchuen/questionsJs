@@ -194,7 +194,7 @@ fieldset[disabled] .btn-xl.active {
 @media (min-width: 768px) {
   .navbar-default {
     background-color: transparent;
-    padding: 25px 0;
+    padding: 5px 0;
     -webkit-transition: padding 0.3s;
     -moz-transition: padding 0.3s;
     transition: padding 0.3s;
@@ -213,7 +213,7 @@ fieldset[disabled] .btn-xl.active {
   }
   .navbar-default.navbar-shrink {
     background-color: #222;
-    padding: 10px 0;
+/*    padding: 5px 0;*/
   }
   .navbar-default.navbar-shrink .navbar-brand {
     font-size: 1.5em;
@@ -603,7 +603,7 @@ section#contact .text-danger {
   color: #e74c3c;
 }
 footer {
-  padding: 25px 0;
+/*  padding: 25px 0;*/
   text-align: center;
 }
 footer span.copyright {
