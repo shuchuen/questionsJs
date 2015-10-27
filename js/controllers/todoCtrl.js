@@ -41,7 +41,6 @@ var echoRef = new Firebase(url);
 
 //when access the chatromm, renew the active time
 var parentRef = echoRef.parent();
-parentRef.child("activeTime").set(new Date().getTime());
 
 var query = echoRef.orderByChild("order");
 // Should we limit?
@@ -57,7 +56,7 @@ $scope.filter = function (s) {
 		["shit", "banana"],
 		["damn", "praise"]];
 	for (var i in filters) {
-		var reg = new RegExp(filters[i][0], "ig");
+		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
 		s = s.replace(reg, filters[i][1]);
 		console.log(reg);
 	}
@@ -146,7 +145,8 @@ $scope.addTodo = function () {
     
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
-    
+    //renew the access time
+    parentRef.child("activeTime").set(new Date().getTime());
 };
 
 $scope.editTodo = function (todo) {
