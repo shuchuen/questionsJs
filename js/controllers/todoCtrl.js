@@ -41,7 +41,6 @@ var echoRef = new Firebase(url);
 
 //when access the chatromm, renew the active time
 var parentRef = echoRef.parent();
-parentRef.child("activeTime").set(new Date().getTime());
 
 var query = echoRef.orderByChild("order");
 // Should we limit?
@@ -146,7 +145,8 @@ $scope.addTodo = function () {
     
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
-    
+    //renew the access time
+    parentRef.child("activeTime").set(new Date().getTime());
 };
 
 $scope.editTodo = function (todo) {

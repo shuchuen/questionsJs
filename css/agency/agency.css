@@ -763,7 +763,8 @@ body {
     color: white;
     max-width:100px;
     min-width:50px;
-    opacity:0.8;
+    font-size: large;
+    padding: 0px;
 }
 
 .btn-iqJoin:hover{

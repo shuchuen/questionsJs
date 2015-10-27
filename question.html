@@ -76,14 +76,13 @@ ng-model="input.wholeMsg" autofocus></textarea>
         <p><span am-time-ago="todo.timestamp" class = "time-color"></span>							<!--change the time format to N hours ago-->
 			<span ng-show="todo.tags">tags: [<a ng-repeat="tag in todo.tags track by $index" ng-click="searchTag(tag)">{{tag}} </a>]</span></p>
 
-<!--			<button ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">-->
-				
-			<img ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]" src=img/questionLogo/like.gif height="20px" width="20pix"></button>
+        <button ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]" class="likeButton">
+            <img src="img/questionLogo/like.gif" height="30px" width="30px">
+        </button>
 																												  
 <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
-		<button src=img/questionLogo/like.gif ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">
 		
-			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
+			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>
 			&nbsp;
 			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
 		</span>
@@ -97,7 +96,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 	<button ng-hide="totalCount>=maxQuestion"
 	class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
 	type="button" ng-click="increaseMax()"> Show more</button>
-
+-->
 
 
     <p ng-controller="onlineUserCtrl"><span class="onlineUser">No. of online user: </span>{{totalViewers}}</p>			<!--shows the number of online users -->
