@@ -57,7 +57,7 @@ $scope.filter = function (s) {
 		["shit", "banana"],
 		["damn", "praise"]];
 	for (var i in filters) {
-		var reg = new RegExp(filters[i][0], "ig");
+		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
 		s = s.replace(reg, filters[i][1]);
 		console.log(reg);
 	}
