@@ -1,3 +1,16 @@
+html,
+body {
+/*  height: 100%;*/
+  min-height: 800px;
+  background-image: url(../img/indexbgd.jpg); 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 body {
   overflow-x: hidden;
   font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -174,7 +187,7 @@ fieldset[disabled] .btn-xl.active {
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 1px;
-  color: white;
+  color: #BDBDBD;
 }
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {
@@ -200,9 +213,7 @@ fieldset[disabled] .btn-xl.active {
     transition: padding 0.3s;
     border: none;
   }
-    .navbar-default .navbar-color {
-    background-color: #82CAFA;
-  }
+  
   .navbar-default .navbar-brand {
     font-size: 2em;
     -webkit-transition: all 0.3s;
