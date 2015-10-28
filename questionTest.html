@@ -3,63 +3,48 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Storystrap Template</title>
+		<title>Instaquest</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
+		<link href="css/question.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 	</head>
-	<body>
-<header class="navbar navbar-bright navbar-fixed-top" role="banner">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">Home</a>
-    </div>
-<!--
-    <nav class="collapse navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="#">Category</a>
-        </li>
-        <li>
-          <a href="#">Category</a>
-        </li>
-        <li>
-          <a href="#">Category</a>
-        </li>
-        <li>
-          <a href="#">Category</a>
-        </li>
-      </ul>
-      <ul class="nav navbar-right navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
-          <ul class="dropdown-menu" style="padding:12px;">
-            <form class="form-inline">
-              <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
-            </form>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </div>
--->
-</header>
+<body>
+  <div ng-controller="controller" class="navbar navbar-bright navbar-fixed-top">
+        <div class="site-wrapper">
+            <div class="site-wrapper-inner">
+                <div class="navbar">
+                    <ul class="nav nav-pills pull-right dropdown iqNav">
+                        <li role="presentation">
+                            <a id="dlabel" class="dropdown-toggle" data-toggle="dropdown" href="#">Features</a>
+							<ul class="dropdown-menu iqDropdown" role="menu">
+                                <li><a href="#">Tag</a></li>
+                                <li><a href="#">Dislike button</a></li>
+                                <li><a href="#">Polling</a></li>
+                                <li><a href="#">Emoji</a></li>
+                                <li><a href="#">Photo attachment</a></li>
+                                <li><a href="#">Google login</a></li>
+                            </ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+	  </div>
+		</div>
+		
 
 <div id="masthead">  
   <div class="container">
     <div class="row">
-      <div class="col-md-7">
+      <div class="div-center">
         <div class="form-group form-group-lg">
 			<h1>Question Room: {{roomId}}</h1>
 <!--			<input class="form-control" type="text" id="lg">-->
@@ -106,16 +91,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 			  
 		  
       </div>
-      <div class="col-md-5">
-        <div class="well well-lg"> 
-          <div class="row">
-            <div class="col-sm-12">
-              
-			
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div> 
   </div><!-- /cont -->
   
@@ -294,7 +270,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
   </div>
 </footer>
 	<!-- script references -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 	</body>
 </html>
