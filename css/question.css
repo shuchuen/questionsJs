@@ -15,6 +15,10 @@ h1,h2,h3,.highlight,.navbar a,#masthead h4 {
   font-family:'Oswald',arial narrow,sans-serif;
 }
 
+header{
+margin-top: 10 px;
+}
+
 footer {
 
   margin-top:40px;
@@ -165,3 +169,9 @@ a,a:hover {
 .btn-twitter:hover {background-color:#3088FF;color:#62BBFF;}
 .btn-facebook:hover {background-color:#2A4998;color:#4C6BBA;}
 .btn-google-plus:hover {background-color:#C23836;color:#E45A58;}
+
+.div-center{
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0 30px;
+}
