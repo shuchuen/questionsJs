@@ -62,7 +62,6 @@ $scope.filter = function (s) {
 	for (var i in filters) {
 		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
 		s = s.replace(reg, filters[i][1]);
-//		console.log(reg);
 	}
 	return s;
 };
@@ -121,8 +120,6 @@ $scope.getFirstAndRestSentence = function($string) {
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
 	
-
-
 	// No input, so just do nothing
 	if (!newTodo.length) {
 		return;
@@ -246,11 +243,11 @@ $scope.refresh =function refreshPage() {
     
 };
 
-// Not sure what is this code. Todel
-if ($location.path() === '') {
-	$location.path('/');
-}
-$scope.location = $location;
+//// Not sure what is this code. Todel
+//if ($location.path() === '') {
+//	$location.path('/');
+//}
+//$scope.location = $location;
 
 // autoscroll
 angular.element($window).bind("scroll", function() {

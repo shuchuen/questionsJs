@@ -48,7 +48,7 @@ describe('controllers unit test', function(){
     var results = scope.getFirstAndRestSentence("Hello?? This is Sung");
     var results = scope.getFirstAndRestSentence("H?.H");		
 
-	expect(results[0]).toEqual('Hello?');
+	expect(results[0]).toEqual('H?');
   }));
 
 });
