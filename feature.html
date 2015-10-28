@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="Chi Wing,Mok">
     
     <link rel="icon" href="img/logo.png">
     <title>InstaQuest | Feature</title>
@@ -16,7 +15,7 @@
     <link href="css/agency/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/agency/agency2.css" rel="stylesheet">
+    <link href="css/agency/agency.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -29,11 +28,7 @@
     <link rel="stylesheet" href="css/animate/animate.css">
     <link rel="stylesheet" href="css/animate/set.css"> 
     <!-- vegas.css-->
-    <link rel="stylesheet" href="/js/vegas/vegas.min.css">
-    
-    <!--Preloader--><!--ref: https://ihatetomatoes.net/create-css3-spinning-preloader/-->
-<!--ref: http://stackoverflow.com/questions/16782498/changing-text-could-animatedly-by-css3-->
-    <link href="css/preloader.css" rel="stylesheet">
+<!--    <link rel="stylesheet" href="/js/vegas/vegas.min.css">-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,7 +42,7 @@
 <body id="page-top" class="index" ng-controller="controller">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="featureNav navbar navbar-default navbar-fixed-top">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
@@ -63,13 +58,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
                     <li>
                         <a href="index.html">HOME</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a class="page-scroll" href="#">Features</a>
                     </li>
                     <li>
@@ -183,21 +175,10 @@
     <footer class="dark-grey">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-xs-12">
                     <span class="copyright">Created by HKUST Team - Code for food 2015</span>
                 </div>
-<!--
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
--->
+
                 <div class="col-md-4">
                     <ul class="list-inline quicklinks">
 <!--
@@ -388,93 +369,27 @@
     <script src="js/agency/classie.js"></script>
     <script src="js/agency/cbpAnimatedHeader.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="js/agency/jqBootstrapValidation.js"></script>
-    <script src="js/agency/contact_me.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency/agency.js"></script>
     
     <script src="js/respond/respond.js"></script><!-- 1.4.2 -->
     
+<!--
     <script src="js/lib/firebase.js"></script>
     
     <script src="js/lib/angular.min.js"></script>
     
-    <script src="js/lib/angularfire.js"></script><!-- boostrap -->
+    <script src="js/lib/angularfire.js"></script>
+-->
+    <!-- boostrap -->
         <!-- vegas.js-->
-    <script src="/js/vegas/vegas.min.js"></script>
+<!--    <script src="/js/vegas/vegas.min.js"></script>-->
     <!-- wow.js-->
     <script src="js/wow/wow.min.js"></script>
     <script>
               new WOW().init();
     </script>
-    
-    <script>
-    $("header").vegas({
-        delay: 9000,
-        timer: false,
-        transition: 'blur',
-        transitionDurtion: 1500,
-    slides: [
-        { src: "/img/indexbgd.jpg" },
-        { src: "/img/indexbgd2.jpg" },
-        { src: "/img/indexbgd3.jpg" }
-    ]
-});
-    </script>
-    
-    <script>
-        angular.module('app', ['firebase'])
-        .controller('controller', ['$scope', '$location', '$firebaseArray','$window', '$filter', function($scope, $location, $firebaseArray, $window, $filter) {
-            $scope.example = {
-                text: '',
-                word: /^\s*\w*\s*$/
-            };
-            $scope.join = function () {
-                $window.location.href = 'question.html#/' + $scope.example.text;
-            }
-            // $scope.joinRoom = function (roomName) {
-            // $window.location.href = 'question.html#/' + roomName; // }
-        }])
-        .directive('capitalize', function() {
-            return {
-                require: 'ngModel',
-                link: function(scope, element, attrs, modelCtrl) {
-                var capitalize = function(inputValue) {
-                    if(inputValue == undefined) inputValue = '';
-                        var capitalized = inputValue.toUpperCase();
-                    
-                        if(capitalized !== inputValue) {
-                            modelCtrl.$setViewValue(capitalized);
-                            modelCtrl.$render();
-                        } return capitalized;
-                    }
-                    modelCtrl.$parsers.push(capitalize);
-                    capitalize(scope[attrs.ngModel]); // capitalize initial value
-                }
-            };
-        })
-        .directive('gridRoom', ['$location', '$firebaseArray','$window', function($location, $firebaseArray,$window){ 
-            return{
-                restrict: 'E',
-                transclude: true,
-                link: function(scope, element, $window, $location){
-                    scope.loading=true;
-                    var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
-                    var echoRef = new Firebase(firebaseURL).orderByChild("activeTime").limitToFirst(6);
-                        $firebaseArray(echoRef).$loaded(function(loadedValue) {
-                            scope.loading = false;
-                            scope.roomList = loadedValue.reverse();
-
-                        });
-                },
-                templateUrl:"js/directives/gridRoom.html",
-                replace: true
-            };
-        }]);
-        // Auto Uppercase ref: http://stackoverflow.com/questions/16388562/angularjs-force-uppercase-in-textbox
-        </script>   
 
 </body>
 

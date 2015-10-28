@@ -93,8 +93,8 @@
                 <div class="intro-heading">
 <!--                    It's Nice To Meet You-->
                   <form name="joinForm" ng-submit="join()" class="joinForm inner cover wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"> 
-                    <input name="input" class="input-iqJoin input-lg col-xs-10" ng-model="example.text" ng-pattern="example.word" required="" ng-trim="false" autofocus="" aria-describedby="sizing-addon1" placeholder="Room name" capitalize="" type="text">
-                    <button class="btn input-lg col-xs-2 btn-iqJoin" ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern"  ng-click="join()">Join</button>
+                    <input name="input" class="input-iqJoin input-lg col-sm-10 col-xs-9" ng-model="example.text" ng-pattern="example.word" required="" ng-trim="false" autofocus="" aria-describedby="sizing-addon1" placeholder="Room name" capitalize="" type="text">
+                    <button class="btn input-lg col-sm-2 col-xs-3 btn-iqJoin" ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern"  ng-click="join()">Join</button>
                     </form>                   
                 </div>
                 <a href="#recentChatRoom" class="page-scroll btn btn-xl btn-opt" onclick="showRecentChatRoom()">Recent ChatRoom</a>
@@ -117,172 +117,6 @@
         </div>
     </section>
 
-    <!-- Portfolio Grid Section -->
-    
-<!--
-    <section id="portfolio" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Features</h2>
-                    <h3 class="section-subheading text-muted">More Interactive, Less Boring.</h3>
-                </div>
-            </div>
-            <div class="row wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.7s">
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-heart fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/coming.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Asking Questions Instantly</h4>
-                        <p class="text-muted">Within a second</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-heart fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/coming.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Show Recent Room </h4>
-                        <p class="text-muted">Find the right room for you</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-heart fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/coming.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Polling</h4>
-                        <p class="text-muted">Share your idea</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-heart fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/coming.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Photo Attachments</h4>
-                        <p class="text-muted">More than words</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-heart fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/coming.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Bad word filter</h4>
-                        <p class="text-muted">No more fight</p>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-heart fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/coming.png" class="img-responsive" alt="">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Multiple Login Method </h4>
-                        <p class="text-muted">Pick yours favourite</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
--->
-
-    <!-- Team Section -->
-    <!--
-    <section id="team" class="">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Our Amazing Team</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/1.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Kay Garland</h4>
-                        <p class="text-muted">Lead Designer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/2.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Larry Parker</h4>
-                        <p class="text-muted">Lead Marketer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member">
-                        <img src="img/team/3.jpg" class="img-responsive img-circle" alt="">
-                        <h4>Diana Pertersen</h4>
-                        <p class="text-muted">Lead Developer</p>
-                        <ul class="list-inline social-buttons">
-                            <li><a href="#"><i class="fa fa-twitter"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                </div>
-            </div>
-        </div>
-    </section>
--->
     <footer class="dark-grey">
         <div class="container">
             <div class="row">
@@ -327,9 +161,11 @@
     <script src="js/agency/classie.js"></script>
     <script src="js/agency/cbpAnimatedHeader.js"></script>
 
-    <!-- Contact Form JavaScript -->
+<!--
+     Contact Form JavaScript 
     <script src="js/agency/jqBootstrapValidation.js"></script>
     <script src="js/agency/contact_me.js"></script>
+-->
 
     <!-- Custom Theme JavaScript -->
     <script src="js/agency/agency.js"></script>
