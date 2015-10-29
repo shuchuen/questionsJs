@@ -255,6 +255,34 @@
                         $firebaseArray(echoRef).$loaded(function(loadedValue) {
                             scope.loading = false;
                             scope.roomList = loadedValue.reverse();
+                            scope.sub_image = function(index){
+                                var str = scope.roomList[index].$id.substring(0,4);
+                                var patt = /\d/;
+                                var num = scope.roomList[index].$id.substring(4,5);
+
+                                if(num.match(patt) == null)
+                                    return "default";
+                                
+                                switch(str){
+                                    case "COMP": return "1";
+                                        break;
+                                    case "MATH": return "2";
+                                        break;                                        
+                                    case "SOSC": return "3";
+                                        break;
+                                    case "HUMA": return "4";
+                                        break;
+                                    case "ISOM": return "5";
+                                        break;
+                                    case "ELEC": return "6";
+                                        break;
+                                    default:
+                                        return "default";
+                                        
+                                }
+                                    return "should not go in this return";
+                            }
+                                
 
                         });
                 },
