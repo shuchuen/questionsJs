@@ -251,8 +251,8 @@
                 link: function(scope, element, $window, $location){
                     scope.loading=true;
                     var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
-                    var echoRef = new Firebase(firebaseURL).orderByChild("activeTime").limitToFirst(6);
-                        $firebaseArray(echoRef).$loaded(function(loadedValue) {
+                    var echoRef = new Firebase(firebaseURL);
+                     var query = echoRef.orderByChild("activeTime").limitToLast(6); $firebaseArray(query).$loaded(function(loadedValue) {
                             scope.loading = false;
                             scope.roomList = loadedValue.reverse();
                             scope.sub_image = function(index){
