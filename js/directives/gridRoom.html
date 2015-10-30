@@ -9,7 +9,7 @@
     </div>
     
     <figure  ng-if="!loading" class="effect-oscar fadeInUp" ng-repeat="room in roomList" ng-animate=" 'animate' " >
-        <img ng-src="img/grid/{{$index+1}}.jpg" alt="{{room.$id}}"/>
+        <img ng-src="img/grid/{{sub_image($index)}}.jpg" alt="{{room.$id}}"/>
         <figcaption>
             <h2>{{room.$id}}</h2>
             <p>

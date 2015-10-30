@@ -27,6 +27,12 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
+      'js/lib/agency/*.js',
+      'js/agency/*.js',
+      'js/lib/wow/*.js',
+      'js/lib/vegas/*.js',
+      'js/lib/respond/*.js',
+      'js/UnionDraw.js'
     ],
 
 

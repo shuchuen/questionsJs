@@ -71,28 +71,28 @@ beforeEach(module('todomvc'));
     });
 
 	
-    it('todoEscape Testing', function () {
-      var temp = false,
-      element = angular.element('<input todo-blur="todoEscape()">');
+     it('todoEscape Testing', function () {
+      var escape = false; 
+      var element = angular.element('<input todo-escape="todoEscape()">');
 
       scope.todoEscape = function () {
-        temp = !temp;
+        escape = !escape;
       };
 
       compile(element)(scope);
 
-	  temp = false,
-      triggerKeyDown(element, 12);
-      expect(temp).toBe(false);
-	  
       triggerKeyDown(element, 27);
-      expect(temp).toBe(true);
+      expect(escape).toBe(true);
 
+      escape = false;
+      triggerKeyDown(element, 28);
+      expect(escape).toBe(false);
 
       spyOn(element, 'unbind');
       scope.$destroy();
       
     });
+
 
     it('todoFocus Testing', function () {
       var element = angular.element('<input todo-focus="focus">');

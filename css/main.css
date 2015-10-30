@@ -3,7 +3,6 @@
 	text-decoration: line-through;
 }
 
-
 .icon{display: inline-block;}
 .icon,
 .icon + span{vertical-align: middle;}
@@ -36,4 +35,10 @@
 
 .time-color {
     color: #9197a3;
+}
+
+.likeButton{
+    background: transparent;
+    border: 0px;
+    padding: 0px;
 }
