@@ -42,3 +42,12 @@
     border: 0px;
     padding: 0px;
 }
+
+textarea#new-todo {
+   resize: none;
+}
+
+.catagory{
+    width: 110px !important;
+    border-radius: 0px;
+}

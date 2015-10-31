@@ -50,7 +50,8 @@ var query = echoRef.orderByChild("timestamp");
 // Should we limit?
 //.limitToFirst(1000);
 $scope.todos = $firebaseArray(query);
-
+//$scope.input.category = 'Other';
+    
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
 
@@ -82,7 +83,7 @@ $scope.$watchCollection('todos', function () {
 		}
 
 		// set time
-		todo.dateString = new Date(todo.timestamp).toString();
+//		todo.dateString = new Date(todo.timestamp).toString();
 		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 //		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
@@ -142,7 +143,7 @@ $scope.addTodo = function () {
 		tags: newTodo.match(/#\w+/g),
 		like: 0,
 		dislike: 0,
-        category:"...",
+        category: $scope.input.category==null? "Other":$scope.input.category,
         questioner:"...",
         order: 0,
         attachment:"..."
@@ -150,6 +151,8 @@ $scope.addTodo = function () {
     
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
+    $scope.input = '';
+    
     //renew the access time
     parentRef.child("activeTime").set(new Date().getTime());
     
