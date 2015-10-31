@@ -228,6 +228,12 @@ $scope.markAll = function (allCompleted) {
 	});
 };
 
+$scope.normalSignUp = function () {
+	var ref = new Firebase(firebaseURL);
+	
+};    
+    
+    
 $scope.FBLogin = function () {
 	var ref = new Firebase(firebaseURL);
 	ref.authWithOAuthPopup("facebook", function(error, authData) {
@@ -236,6 +242,7 @@ $scope.FBLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
+                $('#loginModal').modal('hide')
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -251,11 +258,13 @@ $scope.GoogleLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
+                $('#loginModal').modal('hide')
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	});
     $scope.googleLogin = true;
+    
 };    
     
 $scope.Logout = function () {

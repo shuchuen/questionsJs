@@ -1,3 +1,150 @@
+/*navbar css*/
+.navbar-default {
+  background-color:rgba(0,149,255, 1);
+  border-color: transparent;
+}
+
+.navbar-default .navbar-collapse {
+  border-color: skyblue;
+}
+.navbar-default .navbar-toggle {
+  background-color: rgba(135, 206, 235,1);
+  border-color: skyblue;
+  border-radius: 0px;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: skyblue;
+}
+.navbar-default .nav li a {
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: white;
+}
+
+#iqMenu > ul.nav.navbar-nav.navbar-right > li> a.iqLogin:hover{
+    color: #fff !important;
+    background-color: #5bc0de !important;
+    border-color: #46b8da !important;
+}
+
+#iqMenu > ul.nav.navbar-nav.navbar-right > li> a.iqLogout:hover{
+    color: #fff !important;
+    background-color: #5cb85c !important;
+    border-color: #5cb85c !important;
+}
+
+.navbar-default .nav li a:hover,
+.navbar-default .nav li a:focus {
+  color: skyblue;
+  outline: none;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    border-bottom: 5px solid #23958c;
+    color: white;
+    background-color: inherit;
+}
+
+.nav li a.iqLogin:hover, .nav li a.iqLogin:visit{
+    color: #fff !important;
+    background-color: #5bc0de !important;
+    border-color: #46b8da !important;
+}
+
+.nav li a.iqLogout:hover, .nav li a.iqLogout:visit{
+    color: #fff !important;
+    background-color: #449d44 !important;
+    border-color: #398439 !important;
+}
+
+@media (min-width: 768px) {
+    
+  .navbar-default {
+    padding: 5px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+    border: none;
+  }
+    
+  .navbar-default .navbar-nav > .active > a {
+    border-radius: 0px;
+  }
+    
+}
+
+/*end of navbar css*/
+
+/*mainBody css*/
+.mainBody{
+    position: relative;
+    top:50px;
+}
+
+.refreshBtn{
+  position: fixed;
+  top:50px;  
+  right:0px;
+}
+
+.jumbotron{
+    background-image: url(http://www.ece.ust.hk/~palomar/photos/HKUST_campus/lateral_view_HKUST.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #FFF;
+}
+
+@media(max-width:768px){
+    .askBtn{
+        float:right;
+    }
+}
+
+@media (min-width: 768px) {
+    
+  .mainBody{
+    position: relative;
+    top:62px;
+}
+
+.refreshBtn{
+  position: fixed;
+  top:62px;  
+  right:0px;
+  border-radius: 5;
+}
+    
+    
+}
+
+.iqTextArea, .iqButtonGp{
+    padding-right: 0px;
+    padding-left: 0px; 
+}
+
+.zeroBorder{
+    border:0px;
+}
+
+.catagory{
+/*
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px; 
+*/
+    
+    border: 0; 
+    outline: 2px solid white; 
+    outline-offset:-2px;
+}
+/*end of mainBody css*/
+
 .completed {
 	color: #d9d9d9;
 	text-decoration: line-through;
