@@ -21,6 +21,9 @@
     position: absolute;
 }
 
+.btn{
+    border-radius: 0px !important;
+}
 
 #toTop{
 	position: fixed;
@@ -47,7 +50,7 @@ textarea#new-todo {
    resize: none;
 }
 
-.catagory{
+.dropdown-toggle.category{
     width: 110px !important;
-    border-radius: 0px;
+    
 }

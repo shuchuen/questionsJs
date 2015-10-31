@@ -236,18 +236,34 @@ $scope.FBLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
-				$scope.isAdmin = true;
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	});
+    $scope.FbLogin = true;
 };
 
-$scope.FBLogout = function () {
+$scope.GoogleLogin = function () {
+	var ref = new Firebase(firebaseURL);
+	ref.authWithOAuthPopup("google", function(error, authData) {
+		if (error) {
+			console.log("Login Failed!", error);
+		} else {
+			$scope.$apply(function() {
+				$scope.$authData = authData;
+			});
+			console.log("Authenticated successfully with payload:", authData);
+		}
+	});
+    $scope.googleLogin = true;
+};    
+    
+$scope.Logout = function () {
 	var ref = new Firebase(firebaseURL);
 	ref.unauth();
 	delete $scope.$authData;
-	$scope.isAdmin = false;
+    $scope.googleLogin = false;
+    $scope.FbLogin = false;
 };
 
 $scope.increaseMax = function () {

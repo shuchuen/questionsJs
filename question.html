@@ -33,18 +33,19 @@
 
 <p><small>Share room url: {{absurl}}</small></p>
 <a class="btn btn-default" href="/index.html"><span class="glyphicon glyphicon-home"></span> Main</a>
-<button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Want Admin? Sign in with Facebook</button>
-
+<button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Facebook</button>
+<button ng-hide="$authData" class="btn btn-danger left" type="button" ng-click="GoogleLogin()">Google</button>
 <!-- after login -->
-<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
+<img ng-show="$authData&&FbLogin" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" width="30px" height="30px"/>
 {{$authData.facebook.displayName}}
-<button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>
+<img ng-show="$authData&&googleLogin" ng-src="{{$authData.google.profileImageURL}}" alt="{{name}}" width="30px" height="30px"/>
+{{$authData.google.displayName}}
+<button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="Logout()">Logout</button>
 
 <!--Refresh button-->
     <button class="btn btn-success pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span><span> Refresh</span></button>			<!-- button for refreshing the page to show the latest message -->
 
    <!-- <a href="uniondraw.html"><button class="btn btn-danger pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-pencil"></span><span>Share Canvas</span></button></a> hide--> 
-
     
 <br/>
 
