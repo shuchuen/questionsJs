@@ -133,16 +133,16 @@ $scope.addTodo = function () {
     
     
 	$scope.todos.$add({
-		wholeMsg: newTodo,
-//		head: head,
-//		headLastChar: head.slice(-1),
-//		desc: desc,
-//		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
-		completed: false,
-		timestamp: new Date().getTime(),
-		tags: newTodo.match(/#\w+/g),
-		like: 0,
-		dislike: 0,
+        wholeMsg: newTodo,
+        //		head: head,
+        //		headLastChar: head.slice(-1),
+        //		desc: desc,
+        //		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
+        completed: false,
+        timestamp: new Date().getTime(),
+        tags: newTodo.match(/#\w+/g),
+        like: 0,
+        dislike: 0,
         category: $scope.input.category==null? "Other":$scope.input.category,
         questioner:"...",
         order: 0,
@@ -228,6 +228,12 @@ $scope.markAll = function (allCompleted) {
 	});
 };
 
+$scope.checkNew = function (todo){
+    if(todo.timestamp > new Date().getTime() - 180000)
+        return true;
+    return false;
+}    
+    
 $scope.normalSignUp = function () {
 	var ref = new Firebase(firebaseURL);
 	

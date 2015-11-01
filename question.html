@@ -146,9 +146,10 @@
     </div>
         <div class="container">
         <div class="list-group" id="todo-list">
-        <span class="zeroBorderRadius list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+        <span class="zeroBorderRadius list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:'-timestamp'" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+<!--   | questionFilter:maxQuestion          -->
             <h4 class="list-group-item-heading">
-                <span class="label label-danger" ng-show="todo.new">New</span>
+                <span class="label label-danger" ng-show="checkNew(todo)">New</span>
                 <span class="badge">{{todo.category}}</span>
             </h4>
             <h4 class="list-group-item-heading">
