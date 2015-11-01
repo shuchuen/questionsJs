@@ -58,8 +58,17 @@ $scope.editedTodo = null;
 // bad word filter
 $scope.filter = function (s) {
 	var filters = [["fuck", "love"],
+		["fucking", "peace"],
+		["motherfucker", "dutiful"],
 		["shit", "banana"],
-		["damn", "praise"]];
+		["damn", "praise"],
+		["asshole", "chrysanthemum"],
+		["ass hole", "chrysanthemum"],
+		["bitch", "beauty"],
+		["penis", "spine"],
+		["pussy", "putty"],
+		["wtf", "Welcome to firebase"]];
+		
 	for (var i in filters) {
 		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
 		s = s.replace(reg, filters[i][1]);
