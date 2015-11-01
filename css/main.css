@@ -91,6 +91,7 @@
   position: fixed;
   top:50px;  
   right:0px;
+  z-index: 3;    
 }
 
 .jumbotron{
@@ -99,6 +100,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     color: #FFF;
+}
+
+.shareUrl{
+    overflow:auto;
+}
+
+.zeroBorderRadius{
+    border-radius: 0px !important;
 }
 
 @media(max-width:768px){

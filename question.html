@@ -82,7 +82,7 @@
                 <a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
             -->
 
-            <p><small>Share room url: {{absurl}}</small></p>
+            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>
             <!-- after login -->   
             <div class="userInfo pull-right">
                 <img ng-show="$authData&&FbLogin" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" width="30px" height="30px"/>
@@ -146,7 +146,7 @@
     </div>
         <div class="container">
         <div class="list-group" id="todo-list">
-        <span class="list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+        <span class="zeroBorderRadius list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
             <h4 class="list-group-item-heading">
                 <span class="label label-danger" ng-show="todo.new">New</span>
                 <span class="badge">{{todo.category}}</span>
@@ -193,7 +193,7 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content zeroBorderRadius">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"></button>
         <h4 class="modal-title">Sign up/Login</h4>
