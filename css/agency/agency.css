@@ -161,6 +161,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default .navbar-toggle {
   background-color: #23958c;
   border-color: #23958c;
+  border-radius: 0px;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: white;
@@ -181,10 +182,11 @@ fieldset[disabled] .btn-xl.active {
   color: #23958c;
   outline: none;
 }
+
 .navbar-default .navbar-nav > .active > a {
-  border-radius: 0;
-  color: white;
-  background-color: #23958c;
+    border-bottom: 5px solid #23958c;
+    color: white;
+    background-color: inherit;
 }
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
@@ -217,7 +219,7 @@ fieldset[disabled] .btn-xl.active {
     
 
   .navbar-default .navbar-nav > .active > a {
-    border-radius: 3px;
+    border-radius: 0px;
   }
   .navbar-default.navbar-shrink {
     background-color:rgba(12,78,97,0.9);

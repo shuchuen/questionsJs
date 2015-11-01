@@ -58,8 +58,17 @@ $scope.editedTodo = null;
 // bad word filter
 $scope.filter = function (s) {
 	var filters = [["fuck", "love"],
+		["fucking", "peace"],
+		["motherfucker", "dutiful"],
 		["shit", "banana"],
-		["damn", "praise"]];
+		["damn", "praise"],
+		["asshole", "chrysanthemum"],
+		["ass hole", "chrysanthemum"],
+		["bitch", "beauty"],
+		["penis", "spine"],
+		["pussy", "putty"],
+		["wtf", "Welcome to firebase"]];
+		
 	for (var i in filters) {
 		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
 		s = s.replace(reg, filters[i][1]);
@@ -133,16 +142,16 @@ $scope.addTodo = function () {
     
     
 	$scope.todos.$add({
-		wholeMsg: newTodo,
-//		head: head,
-//		headLastChar: head.slice(-1),
-//		desc: desc,
-//		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
-		completed: false,
-		timestamp: new Date().getTime(),
-		tags: newTodo.match(/#\w+/g),
-		like: 0,
-		dislike: 0,
+        wholeMsg: newTodo,
+        //		head: head,
+        //		headLastChar: head.slice(-1),
+        //		desc: desc,
+        //		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
+        completed: false,
+        timestamp: new Date().getTime(),
+        tags: newTodo.match(/#\w+/g),
+        like: 0,
+        dislike: 0,
         category: $scope.input.category==null? "Other":$scope.input.category,
         questioner:"...",
         order: 0,
@@ -228,6 +237,18 @@ $scope.markAll = function (allCompleted) {
 	});
 };
 
+$scope.checkNew = function (todo){
+    if(todo.timestamp > new Date().getTime() - 180000)
+        return true;
+    return false;
+}    
+    
+$scope.normalSignUp = function () {
+	var ref = new Firebase(firebaseURL);
+	
+};    
+    
+    
 $scope.FBLogin = function () {
 	var ref = new Firebase(firebaseURL);
 	ref.authWithOAuthPopup("facebook", function(error, authData) {
@@ -236,6 +257,7 @@ $scope.FBLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
+                $('#loginModal').modal('hide')
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -251,11 +273,13 @@ $scope.GoogleLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
+                $('#loginModal').modal('hide')
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	});
     $scope.googleLogin = true;
+    
 };    
     
 $scope.Logout = function () {
