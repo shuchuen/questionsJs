@@ -26,14 +26,10 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 
 var splits = $location.path().trim().split("/");
 var roomId = angular.uppercase(splits[1]);
-if (!roomId || roomId.length === 0 ) {
+if (!roomId || roomId.length === 0 || !roomId.match(/^\s*\w*\s*$/)) {
 //        roomId = "all";
     $window.location.href = 'index.html?roomNameError=true';
-}
-    
-if(!roomId.match(/^\s*\w*\s*$/)){
-    $window.location.href = 'index.html?roomNameError=true';
-}    
+}   
 
 // TODO: Please change this URL for your app
 var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
@@ -82,7 +78,7 @@ $scope.$watchCollection('todos', function () {
 	var remaining = 0;
 	$scope.todos.forEach(function (todo) {
 		// Skip invalid entries so they don't break the entire app.
-		if (!todo ) {
+		if (!todo || !todo.wholeMsg) {
 			return;
 		}
 
@@ -93,7 +89,7 @@ $scope.$watchCollection('todos', function () {
 
 		// set time
 //		todo.dateString = new Date(todo.timestamp).toString();
-		todo.tags = todo.wholeMsg.match(/#\w+/g);
+//		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 //		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
 	});
@@ -138,8 +134,8 @@ $scope.addTodo = function () {
 //	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 //	var head = firstAndLast[0];
 //	var desc = firstAndLast[1];
-//    var tags = newTodo.match(/#\w+/g);
-    
+    var tags = newTodo.match(/#\w+/g);
+    var category = $scope.input.category==null? "Other":$scope.input.category;
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
@@ -149,10 +145,10 @@ $scope.addTodo = function () {
         //		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
         completed: false,
         timestamp: new Date().getTime(),
-        tags: newTodo.match(/#\w+/g),
+        tags: tags,
         like: 0,
         dislike: 0,
-        category: $scope.input.category==null? "Other":$scope.input.category,
+        category: category,
 //        questioner:"",
         order: 0,
         attachment:"..."
@@ -160,7 +156,7 @@ $scope.addTodo = function () {
     
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
-    $scope.input = '';
+//    $scope.input = '';
     
     //renew the access time
     parentRef.child("activeTime").set(new Date().getTime());
@@ -242,12 +238,7 @@ $scope.checkNew = function (todo){
         return true;
     return false;
 }    
-    
-$scope.normalSignUp = function () {
-	var ref = new Firebase(firebaseURL);
-	
-};    
-    
+       
     
 $scope.FBLogin = function () {
 	var ref = new Firebase(firebaseURL);

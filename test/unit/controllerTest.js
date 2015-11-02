@@ -42,27 +42,27 @@ describe('TodoCtrl', function() {
     }));
 
     describe('TodoCtrl Testing', function() {
-      it('setFirstAndRestSentence', function() {
-        var ctrl = controller('TodoCtrl', {
-          $scope: scope
-        });
-
-        var testInputs = [
-          {str:"Hello? This is Sung", exp: "Hello?"},
-          {str:"Hello.co? This is Sung", exp: "Hello.co?"},
-          {str:"Hello.co This is Sung", exp: "Hello.co This is Sung"},
-          {str:"Hello.co \nThis is Sung", exp: "Hello.co \n"},
-		  {str:"! Hello.co. This is Sung", exp: "!"},
-          {str:". Hello.co? This is Sung", exp: "."},
-          {str:"Hello?? This is Sung", exp: "Hello??"},
-		  {str:"? . .", exp: "?"},
-        ];
-
-        for (var i in testInputs) {
-          var results = scope.getFirstAndRestSentence(testInputs[i].str);
-          expect(results[0]).toEqual(testInputs[i].exp);
-        }
-      });
+//      it('setFirstAndRestSentence', function() {
+//        var ctrl = controller('TodoCtrl', {
+//          $scope: scope
+//        });
+//
+//        var testInputs = [
+//          {str:"Hello? This is Sung", exp: "Hello?"},
+//          {str:"Hello.co? This is Sung", exp: "Hello.co?"},
+//          {str:"Hello.co This is Sung", exp: "Hello.co This is Sung"},
+//          {str:"Hello.co \nThis is Sung", exp: "Hello.co \n"},
+//		  {str:"! Hello.co. This is Sung", exp: "!"},
+//          {str:". Hello.co? This is Sung", exp: "."},
+//          {str:"Hello?? This is Sung", exp: "Hello??"},
+//		  {str:"? . .", exp: "?"},
+//        ];
+//
+//        for (var i in testInputs) {
+//          var results = scope.getFirstAndRestSentence(testInputs[i].str);
+//          expect(results[0]).toEqual(testInputs[i].exp);
+//        }
+//      });
 
       it('RoomId', function() {
         location.path('/new/path');
@@ -91,27 +91,6 @@ describe('TodoCtrl', function() {
         expect(window.scrollY).toBe(0);
       });
 
-      it('addTodo Testing', function() {
-
-        var ctrl = controller('TodoCtrl', {
-          $scope: scope,
-          $location: location,
-          $firebaseArray: firebaseArray,
-          $sce: sce,
-          $localStorage: localStorage,
-          $window: window
-        });
-		scope.input={};
-		scope.input.wholeMsg="new todo";
-        scope.addTodo();
-        expect(scope.input.wholeMsg).toBe('');
-		
-		scope.input.wholeMsg="";
-        scope.addTodo();
-        expect(scope.input.wholeMsg).toBe('');		
-		
-      });	  
-	  
 	it('watchCollection Testing', function() {
 
         var ctrl = controller('TodoCtrl', {
@@ -125,44 +104,47 @@ describe('TodoCtrl', function() {
         
         scope.todos=[{
             wholeMsg: "Hi",
-            head: "head",
-            headLastChar: "?",
-            desc: "desc",
-            linkedDesc: "linkedDesc",
             completed: false,
             timestamp: 0,
             tags: "...",
-            echo: 1,
+            like: 1,
+            dislike:0,
             order: 1
-          },{ },{
+          },{
             wholeMsg: "Hi2",
-            head: "head",
-            headLastChar: "?",
-            desc: "desc",
-            linkedDesc: "linkedDesc",
             completed: true,
             timestamp: new Date().getTime(),
             tags: "...",
-            echo: 2,
+            like: 2,
+            dislike:0,
             order: 2
-          }];
+          },{}];
 
         scope.$digest();
       });
+
 
       it('addTodo Testing', function() {
 		
         var ctrl = controller('TodoCtrl', {
           $scope: scope,
         });
+          
 		scope.input = {};
-		scope.input.wholeMsg = 'Hello';
+		scope.input.wholeMsg = "Hello";
 		scope.addTodo();
-		expect(scope.input.wholeMsg).toBe('');
+		expect(scope.input.wholeMsg).toBe("");
 		
+        scope.input = {};  
 		scope.input.wholeMsg = '     '; // It will be trimmed to 0
 		scope.addTodo();
 		expect(scope.input.wholeMsg).toBe('     '); // Because the last reset will not be done
+          
+        scope.input = {};
+        scope.input.wholeMsg = "testing";  
+		scope.input.category = "Final";
+		scope.addTodo();
+		expect(scope.input.category).toBe("Final"); // Because the last reset will not be done  
 		
       });	  
 
@@ -185,6 +167,31 @@ describe('TodoCtrl', function() {
 		scope.input.wholeMsg = 'abc';
         scope.doneEditing(scope.input);		
       });
+        
+        it('editTodo Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+            
+        scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1
+          }];
+        scope.$digest();    
+        scope.editTodo(scope.todos[0]);
+      });
+
 
 //      it('revertEditing  Testing', function() {
 //
@@ -197,9 +204,10 @@ describe('TodoCtrl', function() {
 //          $window: window
 //        });
 //        scope.input = {};
-//		scope.input.wholeMsg = '';
-//        scope.revertEditing(scope.input);
-//        expect(scope.input.wholeMsg).toBe(scope.originalTodo.wholeMsg);
+//		scope.input.wholeMsg = 'Hi';
+//        scope.revertEditing();
+//        scope.originalTodo.  
+//        expect(scope.input).toBe(scope.originalTodo);
 //      });
 
       it('clearCompletedTodos  Testing', function() {
@@ -274,11 +282,10 @@ describe('TodoCtrl', function() {
           $window: window
         });
         scope.FBLogin();
-		scope.todos.push({ name: 'testing.'});
-        scope.$digest();
+          
       });
-
-      it('FBLogout Testing', function() {
+        
+        it('GoogleLogin Testing', function() {
 
         var ctrl = controller('TodoCtrl', {
           $scope: scope,
@@ -288,7 +295,20 @@ describe('TodoCtrl', function() {
           $localStorage: localStorage,
           $window: window
         });
-        scope.FBLogout();
+        scope.GoogleLogin();
+      });    
+
+      it('Logout Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+        scope.Logout();
       });
 
       it('increaseMax Testing', function() {
@@ -326,9 +346,8 @@ describe('TodoCtrl', function() {
           expect(scope.input.wholeMsg).toBe('#tag');
             
       });
-        
-        
-      it('searchTag Testing', function() {
+            
+      it('Filter Testing', function() {
 
         var ctrl = controller('TodoCtrl', {
           $scope: scope,
@@ -341,10 +360,110 @@ describe('TodoCtrl', function() {
 		
         var test = "shit";
         var result = scope.filter(test);
-        expect(result).toEqual("banana");
+        expect(result).toEqual("nice");
             
-      });    
-	  
+      });
+        
+      it('checknew Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+		scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1
+          },{
+            wholeMsg: "Hi2",
+            completed: true,
+            timestamp: new Date().getTime(),
+            tags: "...",
+            like: 2,
+            dislike:0,
+            order: 2
+          }];
+        scope.$digest();
+          
+        var result = scope.checkNew(scope.todos[0]);
+        expect(result).toEqual(false);
+        result = scope.checkNew(scope.todos[1]);
+        expect(result).toEqual(true);
+            
+      });
+        
+//    it('like Testing', function() {
+//
+//        var ctrl = controller('TodoCtrl', {
+//          $scope: scope,
+//          $location: location,
+//          $firebaseArray: firebaseArray,
+//          $sce: sce,
+//          $localStorage: localStorage,
+//          $window: window
+//        });
+//          
+//		scope.todos=[{
+//            wholeMsg: "Hi",
+//            completed: false,
+//            timestamp: 0,
+//            tags: "...",
+//            like: 1,
+//            dislike:0,
+//            order: 1
+//          },{
+//            wholeMsg: "Hi2",
+//            completed: true,
+//            timestamp: new Date().getTime(),
+//            tags: "...",
+//            like: 2,
+//            dislike:0,
+//            order: 2
+//          }];
+//        
+//        scope.$digest();
+//          
+//        scope.like(scope.todos[0]);
+//        expect(scope.todos[0].like).toEqual(2);
+//      });
+//        
+//        it('dislike Testing', function() {
+//
+//            var ctrl = controller('TodoCtrl', {
+//              $scope: scope,
+//              $location: location,
+//              $firebaseArray: firebaseArray,
+//              $sce: sce,
+//              $localStorage: localStorage,
+//              $window: window
+//            });
+//
+//            scope.todos=[{
+//                wholeMsg: "Hi",
+//                completed: false,
+//                timestamp: 0,
+//                tags: "...",
+//                like: 1,
+//                dislike:0,
+//                order: 1
+//              }];
+//
+//            scope.$digest();
+//
+//            scope.like(scope.todos[0]);
+//            expect(scope.todos[0].dislike).toEqual(1);
+//          });     
+        
+            
 //      it('angular.element   Testing', function() {
 //
 //        var ctrl = controller('TodoCtrl', {
@@ -355,11 +474,16 @@ describe('TodoCtrl', function() {
 //          $localStorage: localStorage,
 //          $window: window
 //        });
-//		window.innerHeight = 0;
-//		window.scrollY = 00;
+//        window = {};
+//        $(window).scroll();
+//		window.innerHeight = 10;
+//		window.scrollY = 10;
+//        window.document = {};
+//        window.document.body = {}
 //		window.document.body.offsetHeight = 10;
 //		scope.increaseMax();
 //		scope.$apply();
+//        
 //      });
 	  
         

@@ -24,10 +24,10 @@ todomvc.filter('questionFilter', function () {
       // sorting new questions based on the time if echo is the same.
       // Newer ones are on the top
       newQuestions.sort(function(a, b) {
-        if (a.like == b.like) {
+        if (a.echo == b.echo) {
           return b.timestamp - a.timestamp;
         }
-        return b.like - a.like;
+        return b.echo - a.echo;
       });
     });
 
