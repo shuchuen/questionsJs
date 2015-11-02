@@ -118,7 +118,7 @@
 
 @media (min-width: 768px) {
     
-  .mainBody{
+.mainBody{
     position: relative;
     top:62px;
 }
@@ -202,8 +202,10 @@
     padding: 0px;
 }
 
+
 textarea#new-todo {
-   resize: none;
+    min-height: 7em;
+    resize: none;
 }
 
 .dropdown-toggle.category{

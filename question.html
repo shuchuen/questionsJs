@@ -21,6 +21,11 @@
     <!--font-awesome icons library-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+<!--
+    <link href="css/nanoscroller.css" rel="stylesheet">
+    <link href="css/emoji.css" rel="stylesheet">
+-->
+    
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
 	<link rel="stylesheet" href="css/main.css">
 
@@ -127,68 +132,76 @@
         -->
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
-                        <textarea type="text" id="new-todo" class="form-control zeroBorder"
+                        <textarea type="text" id="new-todo" class="form-control textarea-control zeroBorder"
                         placeholder="Search or Post Question"
-                        ng-model="input.wholeMsg" autofocus rows="3" cols="50" required></textarea>
+                        ng-model="input.wholeMsg" autofocus rows="3" required>
+                        </textarea>
                     </div>
                     <div class="col-sm-1 col-xs-12 iqButtonGp">
-
-    <!--                        <span class="input-group-btn">-->
-                        <button class="btn btn-default zeroBorder askBtn" type="button" ng-click="addTodo()"><i class="fa fa-question-circle"></i> Ask</button>
-    <!--                        </span>-->
-                            
+                        <button class="btn btn-default zeroBorder askBtn" type="button" ng-click="addTodo()">
+                            <i class="fa fa-question-circle"></i> Ask
+                        </button>
                     </div>
                 </div>
                 </form>
                 <!-- /form-group -->
-                
         </div>
     </div>
         <div class="container">
-        <div class="list-group" id="todo-list">
-        <span class="zeroBorderRadius list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:'-timestamp'" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-<!--   | questionFilter:maxQuestion          -->
-            <h4 class="list-group-item-heading">
-                <span class="label label-danger" ng-show="checkNew(todo)">New</span>
-                <span class="badge">{{todo.category}}</span>
-            </h4>
-            <h4 class="list-group-item-heading">
-                <span ng-class="{completed: todo.completed}">{{filter(todo.wholeMsg)}}</span>
-            </h4>
-    <!--		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>-->
-            <p><span am-time-ago="todo.timestamp" class = "time-color"></span>							<!--change the time format to N hours ago-->
-                <span ng-show="todo.tags">tags: [<a ng-repeat="tag in todo.tags track by $index" ng-click="searchTag(tag)">{{tag}} </a>]</span></p>
+            <div class="list-group" id="todo-list">
+                <span class="zeroBorderRadius list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:'-timestamp'" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+        <!--   | questionFilter:maxQuestion          -->
+                    <h4 class="list-group-item-heading">
+                        <span class="label label-danger" ng-show="checkNew(todo)">New</span>
+                        <span class="badge">{{todo.category}}</span>
+                    </h4>
+                    <h4 class="list-group-item-heading">
+                        <span ng-class="{completed: todo.completed}">{{filter(todo.wholeMsg)}}</span>
+                    </h4>
+            <!--		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>-->
+                    <p>
+                        <span am-time-ago="todo.timestamp" class = "time-color"></span>
+                        <!--change the time format to N hours ago-->
+                        <span ng-show="todo.tags">tags: [<a ng-repeat="tag in todo.tags track by $index" ng-click="searchTag(tag)">{{tag}} </a>]                        </span>
+                    </p>
 
-            <button ng-click="like(todo)" ng-disabled="$storage[todo.$id]" class="likeButton">
-                <img src="img/questionLogo/like.gif" height="30px" width="30px"><span>{{todo.like}}</span>
-            </button>
+                    <button ng-click="like(todo)" ng-disabled="$storage[todo.$id]" class="likeButton">
+                        <img src="img/questionLogo/like.gif" height="30px" width="30px"><span>{{todo.like}}</span>
+                    </button>
 
-            <button ng-click="dislike(todo)"  ng-disabled="$storage[todo.$id]" class="likeButton">
-                <img src="img/questionLogo/unlike.gif" height="30px" width="30px"><span>{{todo.dislike}}</span>
-            </button>
+                    <button ng-click="dislike(todo)"  ng-disabled="$storage[todo.$id]" class="likeButton">
+                        <img src="img/questionLogo/unlike.gif" height="30px" width="30px"><span>{{todo.dislike}}</span>
+                    </button>
 
-    <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
+            <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
 
-                <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>
-                &nbsp;
-                <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-            </span>
-            </div>
-            </div>
+                        <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>
+                        &nbsp;
+                        <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+                    </span>
+                </div>
+        </div>
         <div class="container">
-        <div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>		<!-- button for going back to the top of page-->
+<!--        <div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>		 button for going back to the top of page-->
 
     <!--
         <button ng-hide="totalCount>=maxQuestion"
         class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
         type="button" ng-click="increaseMax()"> Show more</button>
     -->
-
-
-        <p ng-controller="onlineUserCtrl"><span class="onlineUser">No. of online user: </span>{{totalViewers}}</p>			<!--shows the number of online users -->
-</div>
-</div>
-    
+        
+        </div>
+    <footer class="footer">    
+        <div class="container">
+            <div class="pull-left" ng-controller="onlineUserCtrl">
+                <!--shows the number of online users -->
+                <span class="onlineUser">No. of online user: {{totalViewers}} </span>	
+            </div>
+            <div class="pull-right">
+<!--                <span>Emoji provided free by <a href="http://emojione.com/">Emoji One</a></span>-->
+            </div>    
+        </div> 
+    </footer> 
 <!-- Modal -->
 <div id="loginModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -240,5 +253,28 @@
 <script src="js/lib/angular-moment.min.js"></script>			
 <!--credit to urish : https://github.com/urish/angular-moment -->
     
+<!--
+        
+<script src="js/nanoscroller.min.js"></script>
+<script src="js/tether.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/util.js"></script>
+<script src="js/jquery.emojiarea.js"></script>
+<script src="js/emoji-picker.js"></script>
+
+        
+<script>
+    $(function() {
+      
+      window.emojiPicker = new EmojiPicker({
+        emojiable_selector: '[data-emojiable=true]',
+        assetsPath: 'img/',
+        popupButtonClasses: 'fa fa-smile-o'
+      });
+      
+      window.emojiPicker.discover();
+    });
+  </script>        
+-->
 </body>
 </html>
