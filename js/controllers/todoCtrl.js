@@ -60,10 +60,10 @@ $scope.filter = function (s) {
 	var filters = [["fuck", "love"],
 		["fucking", "peace"],
 		["motherfucker", "dutiful"],
-		["shit", "banana"],
-		["damn", "praise"],
-		["asshole", "chrysanthemum"],
-		["ass hole", "chrysanthemum"],
+		["shit", "nice"],
+		["damn", "god"],
+		["asshole", "javascript"],
+		["ass hole", "java script"],
 		["bitch", "beauty"],
 		["penis", "spine"],
 		["pussy", "putty"],
@@ -153,7 +153,7 @@ $scope.addTodo = function () {
         like: 0,
         dislike: 0,
         category: $scope.input.category==null? "Other":$scope.input.category,
-        questioner:"...",
+//        questioner:"",
         order: 0,
         attachment:"..."
 	});
