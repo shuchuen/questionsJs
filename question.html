@@ -220,10 +220,53 @@
         <h4 class="modal-title">Sign up/Login</h4>
       </div>
       <div class="modal-body">
-        <p>Login with:</p>  
-        <button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()"><i class="fa fa-facebook-official"></i>  Facebook</button>
-        <button ng-hide="$authData" class="btn btn-danger left" type="button" ng-click="GoogleLogin()"><i class="fa fa-google-plus-square"></i> Google</button>
+          
+          <p class="bg-success" ng-model="showSignUp" ng-init="showSignUp = false">
+              <span>Sign up:</span>
+              <span>
+                  <i class="fa fa-chevron-down pull-right" ng-show="!showSignUp" ng-click="showSignUp = !showSignUp" ></i>
+                  <i class="fa fa-chevron-up pull-right" ng-show="showSignUp" ng-click="showSignUp = !showSignUp" ></i>
+              </span>
+          </p>
+          <form id="signUpForm" class="csl-xs-12" ng-submit = "signUpForm()" ng-show="showSignUp">
+              <div class="form-group">
+                  <label for="signupUsername">Email address:</label>
+                  <input class="form-control zeroRadius" type="email"  id="signupUsername" ng-model="signup.username" placeholder="Email" required/>
+              </div>
+              <div class="form-group">
+                  <label for="signupPassword">Password:</label>
+                  <input class="form-control zeroRadius" type="password" id="signupPassword" ng-model="signup.password" placeholder="Password" required />
+              </div> 
+              <input class="btn btn-warning pull-right" type="submit" value="Sign Up">
+          </form>
+        <hr/>
+        <div >  
+          <p class="bg-success" ng-model="showSignUp" ng-init="showLogin = false">
+              <span>Login with:</span>
+              <span>
+                  <i class="fa fa-chevron-down pull-right" ng-show="!showLogin" ng-click="showLogin = !showLogin"></i>
+                  <i class="fa fa-chevron-up pull-right" ng-show="showLogin" ng-click="showLogin = !showLogin"></i>
+              </span>
+          </p> 
+          <form id="loginForm" class="csl-xs-12" ng-submit = "loginForm()" ng-show="showLogin">
+              <div class="form-group">
+                  <label for="loginUsername">Email address:</label>
+                  <input class="form-control zeroRadius" type="email"  id="loginUsername" ng-model="login.username" placeholder="Email" required/>
+              </div>
+              <div class="form-group">
+                  <label for="loginPassword">Password:</label>
+                  <input class="form-control zeroRadius" type="password" id="loginPassword" ng-model="login.password" placeholder="Password" required />
+              </div>      
+              <input class="btn btn-warning pull-right" type="submit" value="Login">
+          </form>  
+          
+        <br/>
+          
+            <button class="btn btn-primary left csl-xs-12" type="button" ng-click="FBLogin()"><i class="fa fa-facebook-official"></i>  Facebook</button>
+            <button class="btn btn-danger left csl-xs-12" type="button" ng-click="GoogleLogin()"><i class="fa fa-google-plus-square"></i> Google</button>
+        </div>    
       </div>
+          
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>

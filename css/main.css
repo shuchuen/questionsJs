@@ -142,6 +142,10 @@
     border:0px;
 }
 
+.zeroRadius{
+    border-radius: 0px;
+}
+
 .category{
 /*
     -webkit-appearance: none;
@@ -211,4 +215,8 @@ textarea#new-todo {
 .dropdown-toggle.category{
     width: 110px !important;
     
+}
+
+#signUpForm, #loginForm{
+    overflow:auto;
 }

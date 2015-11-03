@@ -238,17 +238,71 @@ $scope.checkNew = function (todo){
         return true;
     return false;
 }    
-       
+
+
+$scope.signUpForm = function(){
+    var ref = new Firebase(firebaseURL);
+    if($scope.signup){
+        ref.createUser({
+          email    : $scope.signup.username,
+          password : $scope.signup.password
+        }, function(error, authData) {
+          if (error) {
+            console.log("Error creating user:", error);
+            $scope.$apply(function() {
+                $scope.createFail = true;
+            });  
+          } else {
+            $scope.$apply(function() {
+				$scope.$authData = authData;
+                $('#loginModal').modal('hide');
+                alert(1);
+			});
+            console.log("Successfully created user account with uid:", userData.uid);  
+          }
+        });
+        $scope.normalLogin = true;
+    }
+    
+}
+
+$scope.loginForm = function(){
+    var ref = new Firebase(firebaseURL);
+    if($scope.login){
+        ref.authWithPassword({
+            email    : $scope.login.username,
+            password : $scope.login.password
+        }, function(error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+            $scope.$apply(function() {
+                $scope.authFail = true;
+            });  
+          } else {
+            $scope.$apply(function() {
+                $scope.$authData = authData;
+                $scope.login = "";
+                $('#loginModal').modal('hide');
+            });  
+            console.log("Authenticated successfully with payload:", authData);
+          }
+        });
+        $scope.normalLogin = true;
+    }
+}
     
 $scope.FBLogin = function () {
 	var ref = new Firebase(firebaseURL);
 	ref.authWithOAuthPopup("facebook", function(error, authData) {
 		if (error) {
 			console.log("Login Failed!", error);
+            $scope.$apply(function() {
+                $scope.authFail = true;
+            });
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
-                $('#loginModal').modal('hide')
+                $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -261,10 +315,13 @@ $scope.GoogleLogin = function () {
 	ref.authWithOAuthPopup("google", function(error, authData) {
 		if (error) {
 			console.log("Login Failed!", error);
+            $scope.$apply(function() {
+                $scope.authFail = true;
+            });
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
-                $('#loginModal').modal('hide')
+                $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -279,6 +336,7 @@ $scope.Logout = function () {
 	delete $scope.$authData;
     $scope.googleLogin = false;
     $scope.FbLogin = false;
+    $scope.normalLogin = false;
 };
 
 $scope.increaseMax = function () {
@@ -364,6 +422,7 @@ $scope.searchTag =function searchTag(tag) {
           userRef.set(true);
           // Remove ourselves when we disconnect.
           userRef.onDisconnect().remove();
+        
         }
       });
         
