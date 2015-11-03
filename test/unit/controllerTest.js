@@ -464,27 +464,24 @@ describe('TodoCtrl', function() {
 //          });     
         
             
-//      it('angular.element   Testing', function() {
-//
-//        var ctrl = controller('TodoCtrl', {
-//          $scope: scope,
-//          $location: location,
-//          $firebaseArray: firebaseArray,
-//          $sce: sce,
-//          $localStorage: localStorage,
-//          $window: window
-//        });
-//        window = {};
-//        $(window).scroll();
-//		window.innerHeight = 10;
-//		window.scrollY = 10;
-//        window.document = {};
-//        window.document.body = {}
-//		window.document.body.offsetHeight = 10;
-//		scope.increaseMax();
-//		scope.$apply();
-//        
-//      });
+      it('angular.element Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $window: window
+        });
+        
+          var scrollEvent = window.document.createEvent('CustomEvent');
+          scrollEvent.initCustomEvent('scroll', false, false, null);
+          window.scrollTo(window.scrollX, window.document.body.offsetHeight + 10);
+          window.dispatchEvent(scrollEvent);
+          
+          scrollEvent.initCustomEvent('scroll', false, false, null);
+          window.innerHeight = -10;
+          window.scrollTo(window.scrollX, window.document.body.offsetHeight - 10);
+          window.dispatchEvent(scrollEvent);
+            
+      });
 	  
         
         
