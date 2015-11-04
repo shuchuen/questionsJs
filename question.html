@@ -60,11 +60,12 @@
                     </ul>
                     
                     <ul class="nav navbar-nav navbar-right">
+                        
                         <li ng-hide="$authData">
                             <a class="btn btn-info iqLogin" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i> Sign up/Login</a>
                         </li>
                         <li ng-show="$authData">
-                            <a class="btn btn-success iqLogout" ng-click="Logout()"><i class="fa fa-sign-out"></i> Logout</a>
+                            <a class="btn btn-success iqLogout" ng-click="Logout()"><i class="fa fa-sign-out"></i>Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -76,6 +77,11 @@
     <div class="mainBody">
         <div class="jumbotron">
             <div class="container">
+                <span class="userInfo">
+                        <img ng-show="$authData&&FbLogin" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" width="30px" height="30px"/>{{$authData.facebook.displayName}}
+                        <img ng-show="$authData&&googleLogin" ng-src="{{$authData.google.profileImageURL}}" width="30px" height="30px"/> {{$authData.google.displayName}}
+                        <img ng-show="$authData&&normalLogin" ng-src="{{$authData.password.profileImageURL}}" width="30px" height="30px"/>{{$authData.password.email}}
+                </span>
                 <p>
                     <font size="10">Chatroom for <span class="text-success">{{roomId}}</span></font>
                 </p>
@@ -89,12 +95,7 @@
 
             <p class="shareUrl"><small>Share room: {{absurl}}</small></p>
             <!-- after login -->   
-            <div class="userInfo pull-right">
-                <img ng-show="$authData&&FbLogin" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" width="30px" height="30px"/>
-            {{$authData.facebook.displayName}}
-                <img ng-show="$authData&&googleLogin" ng-src="{{$authData.google.profileImageURL}}" alt="{{name}}" width="30px" height="30px"/>
-            {{$authData.google.displayName}}
-            </div>  
+              
                 
 				<!--ON OFF function for bad word filter-->
 
@@ -104,8 +105,12 @@
 				-->
 				
             <!--Refresh button-->
-            <button class="btn btn-success pull-right refreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i></button>			<!-- button for refreshing the page to show the latest message -->
-
+            <!-- button for refreshing the page to show the latest message -->    
+            <button class="btn btn-success pull-right refreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i> Refresh</button>
+                
+            <!--get the right of staff-->
+            <button ng-show="$authData&&!isStaff" class="btn btn-danger pull-right staffBtn" type="button" ng-click="getStaffRight()" title="Get the right of staff"><i class="fa fa-unlock"></i><span> Get the right of staff</span></button>
+                
                <!-- <a href="uniondraw.html"><button class="btn btn-danger pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-pencil"></span><span>Share Canvas</span></button></a> hide--> 
             
             <br/>
@@ -153,10 +158,13 @@
                 </form>
                 <!-- /form-group -->
         </div>
+            <div id="secMsg">
+                <span>You are not in the staffs list, please contact technical team.</span>
+            </div>    
     </div>
         <div class="container">
             <div class="list-group" id="todo-list">
-                <span class="zeroBorderRadius list-group-item"  ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:'-timestamp'" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+                <span class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:'-timestamp'" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
                         <span class="label label-danger" ng-show="checkNew(todo)">New</span>
@@ -182,9 +190,9 @@
 
             <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
 
-                        <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>
-                        &nbsp;
-                        <button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+<!--                    <button ng-show="!isStaff" class="btn btn-danger glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>-->
+                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
+                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best Question</button>
                     </span>
                 </div>
         </div>
@@ -220,7 +228,6 @@
         <h4 class="modal-title">Sign up/Login</h4>
       </div>
       <div class="modal-body">
-          
           <p class="bg-success" ng-model="showSignUp" ng-init="showSignUp = false">
               <span>Sign up:</span>
               <span>
@@ -228,6 +235,7 @@
                   <i class="fa fa-chevron-up pull-right" ng-show="showSignUp" ng-click="showSignUp = !showSignUp" ></i>
               </span>
           </p>
+          <p class="bg-warning" ng-show="createFail"><span class="text-danger">{{createError.toString()}}</span></p>
           <form id="signUpForm" class="csl-xs-12" ng-submit = "signUpForm()" ng-show="showSignUp">
               <div class="form-group">
                   <label for="signupUsername">Email address:</label>
@@ -239,16 +247,17 @@
               </div> 
               <input class="btn btn-warning pull-right" type="submit" value="Sign Up">
           </form>
+          
         <hr/>
-        <div >  
-          <p class="bg-success" ng-model="showSignUp" ng-init="showLogin = false">
-              <span>Login with:</span>
+          <p class="bg-success" ng-model="showSignUp" ng-init="showLogin = true">
+              <span>Login:</span>
               <span>
                   <i class="fa fa-chevron-down pull-right" ng-show="!showLogin" ng-click="showLogin = !showLogin"></i>
                   <i class="fa fa-chevron-up pull-right" ng-show="showLogin" ng-click="showLogin = !showLogin"></i>
               </span>
-          </p> 
-          <form id="loginForm" class="csl-xs-12" ng-submit = "loginForm()" ng-show="showLogin">
+          </p>
+          <p class="bg-warning" ng-show="authFail"><span class="text-danger">{{authError.toString()}}</span></p>
+          <form id="loginForm" class="csl-xs-12" ng-submit = "loginForm()" ng-show="showLogin" style="margin-botton=5px;">
               <div class="form-group">
                   <label for="loginUsername">Email address:</label>
                   <input class="form-control zeroRadius" type="email"  id="loginUsername" ng-model="login.username" placeholder="Email" required/>
@@ -260,11 +269,9 @@
               <input class="btn btn-warning pull-right" type="submit" value="Login">
           </form>  
           
-        <br/>
-          
             <button class="btn btn-primary left csl-xs-12" type="button" ng-click="FBLogin()"><i class="fa fa-facebook-official"></i>  Facebook</button>
             <button class="btn btn-danger left csl-xs-12" type="button" ng-click="GoogleLogin()"><i class="fa fa-google-plus-square"></i> Google</button>
-        </div>    
+          
       </div>
           
       <div class="modal-footer">

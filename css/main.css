@@ -94,6 +94,13 @@
   z-index: 3;    
 }
 
+.staffBtn{
+    position: fixed;
+    right: 94px;
+    top: 50px;
+    z-index: 3;
+}
+
 .jumbotron{
     background-image: url(../img/lateral_view_HKUST.jpg);
     background-position: center center;
@@ -108,6 +115,17 @@
 
 .zeroBorderRadius{
     border-radius: 0px !important;
+}
+
+#secMsg{ 
+    background-color: chartreuse;
+    position: fixed;
+    top:20%;
+    right: 0px;
+    z-index: 4;
+    color: black;
+    text-align: center;
+    display: none;
 }
 
 @media(max-width:768px){
@@ -127,9 +145,15 @@
   position: fixed;
   top:62px;  
   right:0px;
-  border-radius: 5;
+  z-index: 3;    
 }
-    
+
+.staffBtn{
+    position: fixed;
+    right: 94px;
+    top: 62px;
+    z-index: 3;
+}    
     
 }
 
@@ -192,6 +216,7 @@
 	cursor: pointer;
 	display: none;
 }
+
 #toTop .fa {margin-right: 5px;}
 
 

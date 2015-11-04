@@ -32,11 +32,11 @@ if (!roomId || roomId.length === 0 || !roomId.match(/^\s*\w*\s*$/)) {
 }   
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
+var firebaseURL = "https://instaquest.firebaseio.com/";
 
 
 $scope.roomId = roomId;
-var url = firebaseURL + roomId + "/questions/";
+var url = firebaseURL + "rooms/" + roomId + "/questions/";
 var echoRef = new Firebase(url);
 
 //when access the chatromm, renew the active time
@@ -123,6 +123,28 @@ $scope.$watchCollection('todos', function () {
 //	return [head, desc];
 //};
 
+    
+$scope.getQuestioner = function(){
+    
+    if($scope.$authData){
+        if ($scope.$authData.facebook){
+
+            return $scope.$authData.facebook.email;
+        }
+
+        if ($scope.$authData.google){
+
+            return $scope.$authData.facebook.email;
+        }
+
+        if ($scope.$authData.password){
+
+            return $scope.$authData.password.email;
+        }
+    }
+    return "Anonymous";
+}
+
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
 	
@@ -136,6 +158,7 @@ $scope.addTodo = function () {
 //	var desc = firstAndLast[1];
     var tags = newTodo.match(/#\w+/g);
     var category = $scope.input.category==null? "Other":$scope.input.category;
+    var questioner = $scope.getQuestioner();
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
@@ -149,7 +172,7 @@ $scope.addTodo = function () {
         like: 0,
         dislike: 0,
         category: category,
-//        questioner:"",
+        questioner: questioner,
         order: 0,
         attachment:"..."
 	});
@@ -248,10 +271,11 @@ $scope.signUpForm = function(){
           password : $scope.signup.password
         }, function(error, authData) {
           if (error) {
-            console.log("Error creating user:", error);
             $scope.$apply(function() {
                 $scope.createFail = true;
-            });  
+                $scope.createError = error;
+            });
+            console.log("Error creating user:", error);  
           } else {
             $scope.$apply(function() {
 				$scope.$authData = authData;
@@ -277,6 +301,7 @@ $scope.loginForm = function(){
             console.log("Login Failed!", error);
             $scope.$apply(function() {
                 $scope.authFail = true;
+                $scope.authError = error;
             });  
           } else {
             $scope.$apply(function() {
@@ -298,6 +323,7 @@ $scope.FBLogin = function () {
 			console.log("Login Failed!", error);
             $scope.$apply(function() {
                 $scope.authFail = true;
+                $scope.authError = error;
             });
 		} else {
 			$scope.$apply(function() {
@@ -317,6 +343,7 @@ $scope.GoogleLogin = function () {
 			console.log("Login Failed!", error);
             $scope.$apply(function() {
                 $scope.authFail = true;
+                $scope.authError = error;
             });
 		} else {
 			$scope.$apply(function() {
@@ -330,7 +357,7 @@ $scope.GoogleLogin = function () {
     
 };    
     
-$scope.Logout = function () {
+$scope.Logout = function() {
 	var ref = new Firebase(firebaseURL);
 	ref.unauth();
 	delete $scope.$authData;
@@ -345,15 +372,38 @@ $scope.increaseMax = function () {
 	}
 };
 
-$scope.toTop =function toTop() {
+$scope.toTop =function() {
 	$window.scrollTo(0,0);
 };
     
-$scope.refresh = function refreshPage() {
+$scope.refresh = function() {
     $scope.input = '';
 	$scope.todos = $firebaseArray(query);
     
 };
+    
+$scope.getStaffRight = function () {
+    
+    if($scope.$authData){
+        var staffUrl = firebaseURL + "users/teachingStaff/"
+        var staffRef = new Firebase(staffUrl);
+        staffRef.once("value", function(snapshot) {
+            if(snapshot.hasChild($scope.$authData.uid)){
+                $scope.$apply(function() {
+                    $scope.isStaff = true;
+			    });
+                console.log($scope.$authData.uid, "get the Staff right");
+            }else{
+                $scope.$apply(function() {
+                    $( "#secMsg" ).fadeIn( 500 ).delay( 2000 ).slideUp( 500 );
+			    });    
+            }
+        });
+      
+    }else{
+        alert("Please login first")
+    }
+}    
 
 //// Not sure what is this code. Todel
 //if ($location.path() === '') {
