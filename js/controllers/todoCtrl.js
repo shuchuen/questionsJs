@@ -372,6 +372,12 @@ $scope.increaseMax = function () {
 	}
 };
 
+$scope.bestTodo = function (todo) {
+        todo.best = !todo.best;
+        $scope.todos.$save(todo);
+};
+    
+    
 $scope.toTop =function() {
 	$window.scrollTo(0,0);
 };
@@ -390,7 +396,7 @@ $scope.getStaffRight = function () {
         staffRef.once("value", function(snapshot) {
             if(snapshot.hasChild($scope.$authData.uid)){
                 $scope.$apply(function() {
-                    $scope.isStaff = true;
+                    $scope.$storage[$scope.$authData.uid] = "isStaff";
 			    });
                 console.log($scope.$authData.uid, "get the Staff right");
             }else{

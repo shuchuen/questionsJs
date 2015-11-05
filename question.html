@@ -109,7 +109,7 @@
             <button class="btn btn-success pull-right refreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i> Refresh</button>
                 
             <!--get the right of staff-->
-            <button ng-show="$authData&&!isStaff" class="btn btn-danger pull-right staffBtn" type="button" ng-click="getStaffRight()" title="Get the right of staff"><i class="fa fa-unlock"></i><span> Get the right of staff</span></button>
+            <button ng-show="$authData&&$storage[$authData.uid]!='isStaff'" class="btn btn-danger pull-right staffBtn" type="button" ng-click="getStaffRight()" title="Get the right of staff"><i class="fa fa-unlock"></i><span> Get the right of staff</span></button>
                 
                <!-- <a href="uniondraw.html"><button class="btn btn-danger pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-pencil"></span><span>Share Canvas</span></button></a> hide--> 
             
@@ -164,7 +164,7 @@
     </div>
         <div class="container">
             <div class="list-group" id="todo-list">
-                <span class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:'-timestamp'" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+                <span class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-best','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.best}">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
                         <span class="label label-danger" ng-show="checkNew(todo)">New</span>
@@ -191,8 +191,9 @@
             <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
 
 <!--                    <button ng-show="!isStaff" class="btn btn-danger glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>-->
-                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
-                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best Question</button>
+                    <button ng-show="$storage[$authData.uid]=='isStaff'" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
+                    <button ng-show="$storage[$authData.uid]=='isStaff'" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best</button>
+                    <i ng-show="todo.best" class="fa fa-star bestQuestion"></i> 
                     </span>
                 </div>
         </div>
