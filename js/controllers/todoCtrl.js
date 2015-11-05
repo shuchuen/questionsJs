@@ -32,11 +32,11 @@ if (!roomId || roomId.length === 0 || !roomId.match(/^\s*\w*\s*$/)) {
 }   
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
+var firebaseURL = "https://instaquest.firebaseio.com/";
 
 
 $scope.roomId = roomId;
-var url = firebaseURL + roomId + "/questions/";
+var url = firebaseURL + "rooms/" + roomId + "/questions/";
 var echoRef = new Firebase(url);
 
 //when access the chatromm, renew the active time
@@ -123,6 +123,28 @@ $scope.$watchCollection('todos', function () {
 //	return [head, desc];
 //};
 
+    
+$scope.getQuestioner = function(){
+    
+    if($scope.$authData){
+        if ($scope.$authData.facebook){
+
+            return $scope.$authData.facebook.email;
+        }
+
+        if ($scope.$authData.google){
+
+            return $scope.$authData.facebook.email;
+        }
+
+        if ($scope.$authData.password){
+
+            return $scope.$authData.password.email;
+        }
+    }
+    return "Anonymous";
+}
+
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
 	
@@ -136,6 +158,7 @@ $scope.addTodo = function () {
 //	var desc = firstAndLast[1];
     var tags = newTodo.match(/#\w+/g);
     var category = $scope.input.category==null? "Other":$scope.input.category;
+    var questioner = $scope.getQuestioner();
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
@@ -149,7 +172,7 @@ $scope.addTodo = function () {
         like: 0,
         dislike: 0,
         category: category,
-//        questioner:"",
+        questioner: questioner,
         order: 0,
         attachment:"..."
 	});
@@ -238,17 +261,74 @@ $scope.checkNew = function (todo){
         return true;
     return false;
 }    
-       
+
+
+$scope.signUpForm = function(){
+    var ref = new Firebase(firebaseURL);
+    if($scope.signup){
+        ref.createUser({
+          email    : $scope.signup.username,
+          password : $scope.signup.password
+        }, function(error, authData) {
+          if (error) {
+            $scope.$apply(function() {
+                $scope.createFail = true;
+                $scope.createError = error;
+            });
+            console.log("Error creating user:", error);  
+          } else {
+            $scope.$apply(function() {
+				$scope.$authData = authData;
+                $('#loginModal').modal('hide');
+                alert(1);
+			});
+            console.log("Successfully created user account with uid:", userData.uid);  
+          }
+        });
+        $scope.normalLogin = true;
+    }
+    
+}
+
+$scope.loginForm = function(){
+    var ref = new Firebase(firebaseURL);
+    if($scope.login){
+        ref.authWithPassword({
+            email    : $scope.login.username,
+            password : $scope.login.password
+        }, function(error, authData) {
+          if (error) {
+            console.log("Login Failed!", error);
+            $scope.$apply(function() {
+                $scope.authFail = true;
+                $scope.authError = error;
+            });  
+          } else {
+            $scope.$apply(function() {
+                $scope.$authData = authData;
+                $scope.login = "";
+                $('#loginModal').modal('hide');
+            });  
+            console.log("Authenticated successfully with payload:", authData);
+          }
+        });
+        $scope.normalLogin = true;
+    }
+}
     
 $scope.FBLogin = function () {
 	var ref = new Firebase(firebaseURL);
 	ref.authWithOAuthPopup("facebook", function(error, authData) {
 		if (error) {
 			console.log("Login Failed!", error);
+            $scope.$apply(function() {
+                $scope.authFail = true;
+                $scope.authError = error;
+            });
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
-                $('#loginModal').modal('hide')
+                $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -261,10 +341,14 @@ $scope.GoogleLogin = function () {
 	ref.authWithOAuthPopup("google", function(error, authData) {
 		if (error) {
 			console.log("Login Failed!", error);
+            $scope.$apply(function() {
+                $scope.authFail = true;
+                $scope.authError = error;
+            });
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
-                $('#loginModal').modal('hide')
+                $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
@@ -273,12 +357,13 @@ $scope.GoogleLogin = function () {
     
 };    
     
-$scope.Logout = function () {
+$scope.Logout = function() {
 	var ref = new Firebase(firebaseURL);
 	ref.unauth();
 	delete $scope.$authData;
     $scope.googleLogin = false;
     $scope.FbLogin = false;
+    $scope.normalLogin = false;
 };
 
 $scope.increaseMax = function () {
@@ -287,15 +372,44 @@ $scope.increaseMax = function () {
 	}
 };
 
-$scope.toTop =function toTop() {
+$scope.bestTodo = function (todo) {
+        todo.best = !todo.best;
+        $scope.todos.$save(todo);
+};
+    
+    
+$scope.toTop =function() {
 	$window.scrollTo(0,0);
 };
     
-$scope.refresh = function refreshPage() {
+$scope.refresh = function() {
     $scope.input = '';
 	$scope.todos = $firebaseArray(query);
     
 };
+    
+$scope.getStaffRight = function () {
+    
+    if($scope.$authData){
+        var staffUrl = firebaseURL + "users/teachingStaff/"
+        var staffRef = new Firebase(staffUrl);
+        staffRef.once("value", function(snapshot) {
+            if(snapshot.hasChild($scope.$authData.uid)){
+                $scope.$apply(function() {
+                    $scope.$storage[$scope.$authData.uid] = "isStaff";
+			    });
+                console.log($scope.$authData.uid, "get the Staff right");
+            }else{
+                $scope.$apply(function() {
+                    $( "#secMsg" ).fadeIn( 500 ).delay( 2000 ).slideUp( 500 );
+			    });    
+            }
+        });
+      
+    }else{
+        alert("Please login first")
+    }
+}    
 
 //// Not sure what is this code. Todel
 //if ($location.path() === '') {
@@ -364,6 +478,7 @@ $scope.searchTag =function searchTag(tag) {
           userRef.set(true);
           // Remove ourselves when we disconnect.
           userRef.onDisconnect().remove();
+        
         }
       });
         
