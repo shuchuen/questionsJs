@@ -267,3 +267,6 @@ textarea#new-todo {
 #signUpForm, #loginForm{
     overflow:auto;
 }
+.fixBtnWidth {
+    width:80px;
+}
