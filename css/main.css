@@ -289,3 +289,15 @@ textarea#new-todo {
 .fixBtnWidth {
     width:80px;
 }
+
+.dark-grey {
+    background-color:rgba(0,149,255, 1);
+    border-color: transparent;
+    color:white;
+    text-align: center;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+}
