@@ -138,7 +138,7 @@
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" ng-click="addTodo()">
                             <i class="fa fa-question-circle"></i> Ask
                         </button>
-                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" ng-click="">
+                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" data-toggle="modal" data-target="#pollingModal">
                             <i class="fa fa-bar-chart"></i> Poll
                         </button>
                     </div>
@@ -292,7 +292,93 @@
     </div>
 
   </div>
-</div>    
+</div>
+<!-- Modal for polling-->
+<div id="pollingModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content zeroBorderRadius">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"></button>
+        <h3 class="modal-title"><i class="fa fa-bar-chart"></i>Create a Poll</h3>
+      </div>
+      <div class="modal-body">
+<!--
+          <p class="bg-success" ng-model="showSignUp" ng-init="showSignUp = false">
+              <span>Sign up:</span>
+              <span>
+                  <i class="fa fa-chevron-down pull-right" ng-show="!showSignUp" ng-click="showSignUp = !showSignUp" ></i>
+                  <i class="fa fa-chevron-up pull-right" ng-show="showSignUp" ng-click="showSignUp = !showSignUp" ></i>
+              </span>
+          </p>
+          <p class="bg-warning" ng-show="createFail"><span class="text-danger">{{createError.toString()}}</span></p>
+          <form id="signUpForm" class="csl-xs-12" ng-submit = "signUpForm()" ng-show="showSignUp">
+              <div class="form-group">
+                  <label for="signupUsername">Email address:</label>
+                  <input class="form-control zeroRadius" type="email"  id="signupUsername" ng-model="signup.username" placeholder="Email" required/>
+              </div>
+              <div class="form-group">
+                  <label for="signupPassword">Password:</label>
+                  <input class="form-control zeroRadius" type="password" id="signupPassword" ng-model="signup.password" placeholder="Password" required />
+              </div> 
+              <input class="btn btn-warning pull-right" type="submit" value="Sign Up">
+          </form>
+          
+        <hr/>
+          <p class="bg-success" ng-model="showSignUp" ng-init="showLogin = true">
+              <span>Login:</span>
+              <span>
+                  <i class="fa fa-chevron-down pull-right" ng-show="!showLogin" ng-click="showLogin = !showLogin"></i>
+                  <i class="fa fa-chevron-up pull-right" ng-show="showLogin" ng-click="showLogin = !showLogin"></i>
+              </span>
+          </p>
+          <p class="bg-warning" ng-show="authFail"><span class="text-danger">{{authError.toString()}}</span></p>
+          <form id="loginForm" class="csl-xs-12" ng-submit = "loginForm()" ng-show="showLogin" style="margin-botton=5px;">
+              <div class="form-group">
+                  <label for="loginUsername">Email address:</label>
+                  <input class="form-control zeroRadius" type="email"  id="loginUsername" ng-model="login.username" placeholder="Email" required/>
+              </div>
+              <div class="form-group">
+                  <label for="loginPassword">Password:</label>
+                  <input class="form-control zeroRadius" type="password" id="loginPassword" ng-model="login.password" placeholder="Password" required />
+              </div>      
+              <input class="btn btn-warning pull-right" type="submit" value="Login">
+          </form>  
+          
+            <button class="btn btn-primary left csl-xs-12" type="button" ng-click="FBLogin()"><i class="fa fa-facebook-official"></i>  Facebook</button>
+            <button class="btn btn-danger left csl-xs-12" type="button" ng-click="GoogleLogin()"><i class="fa fa-google-plus-square"></i> Google</button>
+          
+-->
+        <div class="createPoll">
+            <form>
+                <h4>Define poll's question</h4>
+
+                <input class="form-control" type="text" ng-model="pollForm.name" placeholder="Poll's title" class="w200"><br>
+
+                <h4>Set Poll's answers</h4>
+
+                <div ng-repeat="option in pollForm.options track by $index">
+                    Option {{ $index+1 }} <input type="text" placeholder="option"
+                                                  ng-model="pollForm.options[$index][0]">
+                    <button class="btn btn-danger" ng-click="removeOption($index)"> - </button>
+                </div>
+                <button class="btn btn-info" ng-click="addPollOption()">+ Add answer</button>
+                <br>
+                <br>
+                <button class="btn btn-info" ng-click="pollCreate()"> << Create the poll >> </button>
+            </form>
+            <br>
+        </div>          
+      </div>
+          
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>        
 <!-- jQuery -->
 <script src="js/agency/jquery.js"></script>
 
