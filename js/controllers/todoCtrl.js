@@ -150,6 +150,15 @@ $scope.getUser = function(){
     return "Anonymous";
 }
 
+$scope.getHighlight = function(){
+    if($scope.$authData){
+        if($scope.$storage[$scope.$authData.uid] = "isStaff"){
+            return 2;
+        }
+    }
+    return 0;
+}
+
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
 	
@@ -164,6 +173,7 @@ $scope.addTodo = function () {
     var tags = newTodo.match(/#\w+/g);
     var category = $scope.input.category==null? "Other":$scope.input.category;
     var questioner = $scope.getUser();
+    var highlightType = $scope.getHighlight();
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
@@ -179,7 +189,8 @@ $scope.addTodo = function () {
         category: category,
         questioner: questioner,
         order: 0,
-        attachment:"..."
+        attachment:"...",
+        highlight: highlightType
 	});
     
 	// remove the posted question in the input
@@ -197,7 +208,9 @@ $scope.addTodo = function () {
 
 $scope.addComment = function (replyForm, todo) {
     
-    $scope.comments[todo.$id] = commentRef.child(todo.$id);
+    if (!replyForm) {
+		return;
+	}
     
 	var newComment = replyForm.msg.trim();
 	
@@ -208,7 +221,9 @@ $scope.addComment = function (replyForm, todo) {
     var tags = newComment.match(/#\w+/g);
     var questioner = $scope.getUser();
     
-    $scope.comments[todo.$id].push({
+    $scope.comments[todo.$id] = $firebaseArray(commentRef.child(todo.$id));
+    
+    $scope.comments[todo.$id].$add({
         replyMsg: replyForm.msg,
         timestamp: new Date().getTime(),
         tags: tags,
@@ -217,8 +232,6 @@ $scope.addComment = function (replyForm, todo) {
         questioner: questioner,
         order: 0 
     });
-    
-    $scope.comments[todo.$id] = $firebaseArray(commentRef.child(todo.$id));
     
 	// remove the posted question in the input
 	replyForm.msg = '';
@@ -322,7 +335,6 @@ $scope.signUpForm = function(){
             $scope.$apply(function() {
 				$scope.$authData = authData;
                 $('#loginModal').modal('hide');
-                alert(1);
 			});
             console.log("Successfully created user account with uid:", userData.uid);  
           }
@@ -349,11 +361,13 @@ $scope.loginForm = function(){
             $scope.$apply(function() {
                 $scope.$authData = authData;
                 $scope.login = "";
+                $scope.getStaffRight();
                 $('#loginModal').modal('hide');
             });  
             console.log("Authenticated successfully with payload:", authData);
           }
         });
+        
         $scope.normalLogin = true;
     }
 }
@@ -415,8 +429,12 @@ $scope.increaseMax = function () {
 };
 
 $scope.bestTodo = function (todo) {
-        todo.best = !todo.best;
-        $scope.todos.$save(todo);
+    if(todo.highlight === 1){
+      todo.highlight = 0; 
+    }else if(todo.highlight === 0){
+        todo.highlight = 1;
+    }
+    $scope.todos.$save(todo);
 };
     
     
@@ -441,15 +459,14 @@ $scope.getStaffRight = function () {
                     $scope.$storage[$scope.$authData.uid] = "isStaff";
 			    });
                 console.log($scope.$authData.uid, "get the Staff right");
-            }else{
-                $scope.$apply(function() {
-                    $( "#secMsg" ).fadeIn( 500 ).delay( 2000 ).slideUp( 500 );
-			    });    
             }
+//            else{
+//                $scope.$apply(function() {
+//                    $( "#secMsg" ).fadeIn( 500 ).delay( 2000 ).slideUp( 500 );
+//			    });    
+//            }
         });
       
-    }else{
-        alert("Please login first")
     }
 }    
 
