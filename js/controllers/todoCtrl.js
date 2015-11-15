@@ -39,18 +39,30 @@ $scope.roomId = roomId;
 var url = firebaseURL + "rooms/" + roomId + "/questions/";
 var echoRef = new Firebase(url);
 
+var commentUrl = firebaseURL + "rooms/" + roomId + "/comment/";
+var commentRef = new Firebase(commentUrl);
+    
 //when access the chatromm, renew the active time
 var parentRef = echoRef.parent();
 
 var query = echoRef.orderByChild("timestamp");
 // Should we limit?
 //.limitToFirst(1000);
+
+var commentQuery = commentRef;
+$scope.comments = [];
+    
 $scope.todos = $firebaseArray(query);
-//$scope.input.category = 'Other';
+$firebaseArray(commentQuery).$loaded().then(function(comments){
+    comments.forEach(function(commentList){        
+        $scope.comments[commentList.$id] = commentList;
+    });
+    
+});
     
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
-
+    
 // bad word filter
 $scope.filter = function (s) {
 	var filters = [["fuck", "love"],
@@ -81,17 +93,10 @@ $scope.$watchCollection('todos', function () {
 		if (!todo || !todo.wholeMsg) {
 			return;
 		}
-
 		total++;
 		if (todo.completed === false) {
 			remaining++;
 		}
-
-		// set time
-//		todo.dateString = new Date(todo.timestamp).toString();
-//		todo.tags = todo.wholeMsg.match(/#\w+/g);
-
-//		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
 	});
 
 	$scope.totalCount = total;
@@ -124,7 +129,7 @@ $scope.$watchCollection('todos', function () {
 //};
 
     
-$scope.getQuestioner = function(){
+$scope.getUser = function(){
     
     if($scope.$authData){
         if ($scope.$authData.facebook){
@@ -158,7 +163,7 @@ $scope.addTodo = function () {
 //	var desc = firstAndLast[1];
     var tags = newTodo.match(/#\w+/g);
     var category = $scope.input.category==null? "Other":$scope.input.category;
-    var questioner = $scope.getQuestioner();
+    var questioner = $scope.getUser();
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
@@ -189,6 +194,43 @@ $scope.addTodo = function () {
       parentRef.child("recentQuestion").set(snapshot.key());
     });
 };
+
+$scope.addComment = function (replyForm, todo) {
+    
+    $scope.comments[todo.$id] = commentRef.child(todo.$id);
+    
+	var newComment = replyForm.msg.trim();
+	
+	if (!newComment.length) {
+		return;
+	}
+
+    var tags = newComment.match(/#\w+/g);
+    var questioner = $scope.getUser();
+    
+    $scope.comments[todo.$id].push({
+        replyMsg: replyForm.msg,
+        timestamp: new Date().getTime(),
+        tags: tags,
+        like: 0,
+        dislike: 0,
+        questioner: questioner,
+        order: 0 
+    });
+    
+    $scope.comments[todo.$id] = $firebaseArray(commentRef.child(todo.$id));
+    
+	// remove the posted question in the input
+	replyForm.msg = '';
+//    $scope.input = '';
+};    
+    
+//$scope.getComments = function(comment, todoId){
+//    var commentRef = new Firebase(commentUrl+todoId);
+//    alert(1);
+//    comment = $firebaseArray(commentRef); 
+//    alert(2);
+//}
 
 $scope.editTodo = function (todo) {
 	$scope.editedTodo = todo;

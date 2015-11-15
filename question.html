@@ -126,22 +126,7 @@
                             <option value="Assignment">Assignment</option>
                             <option value="Other">Other</option>
                         </select>
-                    </div>    
-
-                    <!--
-                        <div class="dropdown col-sm-12 col-xs-6 iqButtonGp" ng-model="input.category" ng-init=" input.category='Other'">
-                              <button class="btn btn-default iqButtonGp dropdown-toggle category" type="button" data-toggle="dropdown" ng-Model="displayMessage" ng-init="displayMessage='Category'">{{displayMessage}}
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li class="dropdown-header">Please select a category</li>
-                                <li ng-click="displayMessage = input.category = 'Midterm' "><a>Midterm</a></li>
-                                <li ng-click="displayMessage = input.category = 'Final' "><a>Final</a></li>
-                                <li ng-click="displayMessage = input.category = 'Assignment' "><a>Assignment</a></li>
-                                <li ng-click="displayMessage = input.category = 'Other' "><a>Other</a></li>  
-                              </ul>
-                        </div>
-        -->
+                    </div>
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
                         <textarea type="text" id="new-todo" class="form-control textarea-control zeroBorder"
@@ -163,8 +148,8 @@
             </div>    
     </div>
         <div class="container">
-            <div class="list-group" id="todo-list">
-                <span class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-best','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.best}">
+            <div class="container list-group" id="todo-list">
+                <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.best}" ng-init="showReply=false">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
                         <span class="label label-danger" ng-show="checkNew(todo)">New</span>
@@ -187,15 +172,33 @@
                     <button ng-click="dislike(todo)"  ng-disabled="$storage[todo.$id]" class="likeButton">
                         <img src="img/questionLogo/unlike.gif" height="30px" width="30px"><span>{{todo.dislike}}</span>
                     </button>
-
+                    <button class="btn-success replyButton" ng-modal="comments[todo.$id]" ng-click="showReply=!showReply">
+                        <i class="fa fa-comments-o" ></i>
+                    </button>
             <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
 
 <!--                    <button ng-show="!isStaff" class="btn btn-danger glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>-->
                     <button ng-show="$storage[$authData.uid]=='isStaff'" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
                     <button ng-show="$storage[$authData.uid]=='isStaff'" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best</button>
-                    <i ng-show="todo.best" class="fa fa-star bestQuestion"></i> 
-                    </span>
+                    <i ng-show="todo.best" class="fa fa-star bestQuestion"></i>
+                    
+                    
+                    <div ng-show="showReply">
+                        <hr/>
+                        <span ng-repeat="comment in comments[todo.$id] | orderBy: '-timestamp'">
+                            <span>{{filter(comment.replyMsg)}}</span> 
+                            <p><span am-time-ago="comment.timestamp" class = "time-color"></span> By <span>{{comment.questioner}}</span></p>
+                            
+                        </span>
+                        <div>
+                            <form class="replyForm" role="form" ng-init="reply=replyforms[$index]">                 
+                                <textarea type="text" ng-model="reply.msg" class="form-control replyArea" rows="1" style="resize:none"></textarea>
+                                <input type="submit" ng-click="addComment(reply, todo)" class="btn btn-default replySubmit" value="Reply">
+                            </form>
+                        </div>    
+					</div>
                 </div>
+            </div>
         </div>
         <div class="container">
 <!--        <div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>		 button for going back to the top of page-->
