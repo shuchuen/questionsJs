@@ -7,4 +7,5 @@
 *
 * @type {angular.Module}
 */
-var todomvc = angular.module('todomvc', ['firebase', 'ngStorage','angularMoment']);
+var todomvc = angular.module('todomvc', ['firebase', 'ngStorage','angularMoment','googlechart']);
+

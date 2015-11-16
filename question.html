@@ -351,7 +351,7 @@
             <button class="btn btn-danger left csl-xs-12" type="button" ng-click="GoogleLogin()"><i class="fa fa-google-plus-square"></i> Google</button>
           
 -->
-        <div class="createPoll">
+        <div class="createPoll" ng-controller="mainCtrl">
             <form>
                 <h4>Define poll's question</h4>
 
@@ -367,7 +367,7 @@
                 <button class="btn btn-info" ng-click="addPollOption()">+ Add answer</button>
                 <br>
                 <br>
-                <button class="btn btn-info" ng-click="pollCreate()"> << Create the poll >> </button>
+                <button class="btn btn-info" ng-click="pollCreate()">  Create the poll </button>
             </form>
             <br>
         </div>          
@@ -409,7 +409,11 @@
 <script src="js/lib/moment.js"></script>
 <script src="js/lib/angular-moment.min.js"></script>			
 <!--credit to urish : https://github.com/urish/angular-moment -->
-    
+        
+<!-- google charts directive -->
+<script src="js/controllers/ng-google-chart.js"></script>
+<!-- Main App JS -->
+<script src="js/controllers/chatCtrl.js"></script>
 <!--
         
 <script src="js/nanoscroller.min.js"></script>
