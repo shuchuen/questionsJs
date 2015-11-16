@@ -153,7 +153,7 @@ $scope.getUser = function(){
 
 $scope.getHighlight = function(){
     if($scope.$authData){
-        if($scope.$storage[$scope.$authData.uid] = "isStaff"){
+        if($scope.isStaff){
             return 2;
         }
     }
@@ -349,7 +349,7 @@ $scope.signUpForm = function(){
 				$scope.$authData = authData;
                 $('#loginModal').modal('hide');
 			});
-            console.log("Successfully created user account with uid:", userData.uid);  
+            console.log("Successfully created user account with uid:", authData.uid);  
           }
         });
         $scope.normalLogin = true;
@@ -401,7 +401,7 @@ $scope.FBLogin = function () {
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
-	});
+	}, { scope: "email" });
     $scope.FbLogin = true;
 };
 
@@ -421,12 +421,13 @@ $scope.GoogleLogin = function () {
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
-	});
+	}, {scope: "email"});
     $scope.googleLogin = true;
     
 };    
     
 $scope.Logout = function() {
+    $scope.isStaff = false;
 	var ref = new Firebase(firebaseURL);
 	ref.unauth();
 	delete $scope.$authData;
@@ -449,6 +450,14 @@ $scope.bestTodo = function (todo) {
     }
     $scope.todos.$save(todo);
 };
+
+$scope.rewardStudent = function(todo){
+    if($scope.isStaff){
+//    if($scope.$storage[$scope.$authData.uid] == "isStaff"){
+       $.post("http://ec2-52-27-32-65.us-west-2.compute.amazonaws.com/fileservice/mail",
+              {"sender":$scope.$authData.password.email, "receiver":todo.questioner, "receiverName":"Student", "type":"1"});
+    }
+}
     
     
 $scope.toTop =function() {
@@ -469,7 +478,7 @@ $scope.getStaffRight = function () {
         staffRef.once("value", function(snapshot) {
             if(snapshot.hasChild($scope.$authData.uid)){
                 $scope.$apply(function() {
-                    $scope.$storage[$scope.$authData.uid] = "isStaff";
+                    $scope.isStaff = true;
 			    });
                 console.log($scope.$authData.uid, "get the Staff right");
             }
