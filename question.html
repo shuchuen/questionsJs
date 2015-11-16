@@ -173,8 +173,10 @@
             <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
 
 <!--                    <button ng-show="!isStaff" class="btn btn-danger glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>-->
-                    <button ng-show="$storage[$authData.uid]=='isStaff'" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
-                    <button ng-show="$storage[$authData.uid]=='isStaff'" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best</button>
+                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
+                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best</button>
+                     <button ng-show="isStaff && todo.questioner != 'Anonymous'" class="btn btn-danger" aria-hidden="true" ng-click="rewardStudent(todo)"><i class="fa fa-trophy"></i> Reward</button>
+
                     <i ng-show="todo.highlight==1" class="fa fa-star bestQuestion"></i>
                     
                     
