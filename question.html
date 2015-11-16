@@ -23,6 +23,7 @@
 
     <!--Google Font Family-->
     <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind|Orbitron' rel='stylesheet' type='text/css'>
 <!--
     <link href="css/nanoscroller.css" rel="stylesheet">
     <link href="css/emoji.css" rel="stylesheet">
@@ -42,25 +43,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                    </button> 
+                    </button>
+                    <a class="navbar-brand" href="index.html">InstaQuest</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="iqMenu">
-                    
-
-                    <ul class="nav navbar-nav navbar-left">
-                        <li class="hidden">
-                            <a href="#page-top"></a>
-                        </li>
-                        <li>
-                            <a class="btn" href="index.html"><i class="fa fa-home"></i> HOME</a>
-                        </li>
-                        <li>
-                            <a class="btn" href="feature.html"><i class="fa fa-list"></i> FEATURES</a>
-                        </li>
-                    </ul>
-                    
+                                        
                     <ul class="nav navbar-nav navbar-right">
                         
                         <li ng-hide="$authData">
@@ -84,12 +73,8 @@
                         <img ng-show="$authData&&googleLogin" ng-src="{{$authData.google.profileImageURL}}" width="30px" height="30px"/> {{$authData.google.displayName}}
                         <img ng-show="$authData&&normalLogin" ng-src="{{$authData.password.profileImageURL}}" width="30px" height="30px"/>{{$authData.password.email}}
                 </span>
-<!--
-                <p>
-                    <font size="10">Chatroom for <span class="text-success">{{roomId}}</span></font>
-                </p>
--->
-                    <!--
+                    <center><font size="10"><span class="roomName">{{roomId}}</span></font></center>
+                                    <!--
 
                 <a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
                 <a ng-class="{selected: location.path() == '/tags'}" class="btn btn-success" href="#/tags">Tags</a>
@@ -194,7 +179,7 @@
                     
                     
                     <div ng-show="showReply">
-                        <hr/>
+                        <hr ng-show="showReply" style="border-color:#555"/>
                         <span ng-if="comments[todo.$id]" ng-repeat="comment in comments[todo.$id] | orderBy: 'timestamp'">
                             <span class="commentContent" ng-class="{staffComment: comment.highlight== 2}">{{filter(comment.wholeMsg)}}</span> 
                             <p><span am-time-ago="comment.timestamp" class = "time-color"></span> <i>By <span>{{comment.questioner}}</span></i></p>
@@ -252,7 +237,7 @@
     <div class="modal-content zeroBorderRadius">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"></button>
-        <h4 class="modal-title">Sign up/Login</h4>
+        <h4 class="modal-title"><i class="fa fa-sign-in"></i> Sign up/Login</h4>
       </div>
       <div class="modal-body">
           <p class="bg-success" ng-model="showSignUp" ng-init="showSignUp = false">

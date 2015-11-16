@@ -79,6 +79,17 @@
     
 }
 
+.navbar-brand {
+    color: white !important;
+    font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+}
+
+a.navbar-brand:hover {
+    color: skyblue !important;
+    outline: none;
+}
+
+
 /*end of navbar css*/
 
 /*mainBody css*/
@@ -159,7 +170,7 @@
 
 .staffQ > h4> span.questionContent, .staffComment {
     color:forestgreen;
-    font-family: Kaushan Script;
+    font-family: "Kaushan Script";
 }
 
 .replyForm{
@@ -185,6 +196,11 @@
 }
 .list-group-item {
     margin: 5px  !important;
+}
+
+.roomName{
+    color: rgba(0,149,255, 1);
+    font-family: 'Orbitron', sans-serif;
 }
 
 @media(max-width:768px){

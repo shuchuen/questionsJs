@@ -79,7 +79,8 @@ $scope.filter = function (s) {
 		
 	for (var i in filters) {
 		var reg = new RegExp("\\b" + filters[i][0] + "\\b", "ig");
-		s = s.replace(reg, filters[i][1]);
+        if(s!=null)
+		  s = s.replace(reg, filters[i][1]);
 	}
 	return s;
 };
