@@ -105,7 +105,8 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         // update value in the firebase object
         $scope.polls[$scope.selectedPoll].options[index][1] = newTotal;
         // save changes to the object and the remote firebase
-        $scope.polls.$save();
+        for(i=0;i<$scope.polls.length;i++)
+        $scope.polls.$save(i);
         //$scope.polls.$save(0);
 
     };
@@ -137,7 +138,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         pieSliceText: 'percentage',
         width: 400,
         height: 300,
-        is3D: true,
+        is3D: false,
         slices: {}
     };
 

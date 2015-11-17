@@ -283,7 +283,7 @@
         
         <div class="container col-xs-3" ng-controller="mainCtrl">
             <div class="selectPoll">
-                <h3>Select an existing poll</h3>
+                <h3>Polling list</h3>
 
                 <div ng-show="load">
                     ... Loading
@@ -292,7 +292,7 @@
                 <div ng-show="!load" class="pollList">
                     
                 <button ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
-                        class="pollSelectBtn btn btn-default">{{ value.name }} {{key}}
+                        class="pollSelectBtn btn btn-default">{{ value.name }}
                 </button>
                     
                 </div>
@@ -308,7 +308,7 @@
 
                         <div>
                             <span class="voteDiv" ng-repeat="data in selectedPollOptions">
-                                <button class="btn btn-primary" ng-click="vote($index)">{{ data[0] }} {{$index}}</button>
+                                <button class="btn btn-primary" ng-click="vote($index)">{{ data[0] }}</button>
                             </span>
                         </div>
                         </form>
