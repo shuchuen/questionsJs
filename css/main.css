@@ -295,7 +295,6 @@ a.navbar-brand:hover {
 #toTop .fa {margin-right: 5px;}
 
 
-
 .time-color {
     color: #9197a3;
 }
@@ -308,7 +307,7 @@ a.navbar-brand:hover {
 
 
 textarea#new-todo {
-    min-height: 7em;
+    min-height: 6.85em;
     resize: none;
 }
 

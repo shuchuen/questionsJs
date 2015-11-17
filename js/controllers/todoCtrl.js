@@ -167,7 +167,7 @@ $scope.addTodo = function () {
 	if (!newTodo.length) {
 		return;
 	}
-
+    
 //	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 //	var head = firstAndLast[0];
 //	var desc = firstAndLast[1];
@@ -175,13 +175,10 @@ $scope.addTodo = function () {
     var category = $scope.input.category==null? "Other":$scope.input.category;
     var questioner = $scope.getUser();
     var highlightType = $scope.getHighlight();
+    var photoAttach = reader;
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
-        //		head: head,
-        //		headLastChar: head.slice(-1),
-        //		desc: desc,
-        //		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
         completed: false,
         timestamp: new Date().getTime(),
         tags: tags,
@@ -190,7 +187,7 @@ $scope.addTodo = function () {
         category: category,
         questioner: questioner,
         order: 0,
-        attachment:"...",
+        attachment: null,
         highlight: highlightType
 	});
     
