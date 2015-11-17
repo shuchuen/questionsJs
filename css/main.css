@@ -321,10 +321,40 @@ a.navbar-brand:hover {
     padding: 0px;
 }
 
+.emojiPicker{
+    z-index: 2;
+    position: absolute;
+    bottom: 5px; 
+    color: grey; 
+    font-size: x-large;
+    right: 20px;
+    cursor: pointer;
+    width: 80%;
+}
+
+#emojiDropdownMenu{
+    float: right;
+}
+
+.emojiMenu{
+    position: absolute;
+    right: 10px;
+    height: 200px;
+    min-width: 250px;
+    font-size: x-large;
+    overflow: none;
+    overflow-y: scroll;
+}
+
+.emojiMenu > a{
+    margin: 0.2em;
+    text-decoration:none !important;
+}
 
 textarea#new-todo {
     min-height: 6.85em;
     resize: none;
+    padding-right: 30px;
 }
 
 .dropdown-toggle.category{

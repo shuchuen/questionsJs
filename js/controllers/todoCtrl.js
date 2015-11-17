@@ -161,6 +161,11 @@ $scope.getHighlight = function(){
 }
 
 $scope.addTodo = function () {
+    
+    if (!$scope.input) {
+		return;
+	}
+    
 	var newTodo = $scope.input.wholeMsg.trim();
 	
 	// No input, so just do nothing
