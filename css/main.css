@@ -350,3 +350,21 @@ textarea#new-todo {
     right:0px;
     margin-bottom:0px;
 }
+
+.pollSelectBtn {
+    width:100%;
+    height:30px;
+    overflow: hidden;
+    float: left;
+}
+
+.selectPoll {
+    clear: both;
+    background: #e1ebb3;
+    padding: 10px;
+    height:350px;
+}
+
+.pollList {
+    width:50%;
+}

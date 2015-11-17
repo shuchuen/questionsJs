@@ -214,10 +214,10 @@
             </div>    
 -->
     </div>
-        <div class="container">
+        <div class="container col-xs-9">
             <input class="pull-right" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/><span class="pull-right">Bad word filter</span>
         </div>    
-        <div class="container">    
+        <div class="container col-xs-9">    
             <div class="container list-group" id="todo-list">
                 <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">
         <!--   | questionFilter:maxQuestion          -->
@@ -275,16 +275,58 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-<!--        <div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>		 button for going back to the top of page-->
+        
+        <div class="container col-xs-3" ng-controller="mainCtrl">
+            <div class="selectPoll">
+                <h3>Select an existing poll</h3>
 
-    <!--
+                <div ng-show="load">
+                    ... Loading
+                </div>
+
+                <div ng-show="!load" class="pollList">
+                    
+                <button ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
+                        class="pollSelectBtn btn btn-default">{{ value.name }} {{key}}
+                </button>
+                    
+                </div>
+            </div>
+            <div class="googleChart">
+                    <div ng-if="selectedPoll>=0">
+                        <div google-chart chart="chart">
+                        </div>
+                        <br>
+
+                        <form>
+                            <h3>Vote:</h3><br>
+
+                        <div>
+                            <span class="voteDiv" ng-repeat="data in selectedPollOptions">
+                                <button class="btn btn-primary" ng-click="vote($index)">{{ data[0] }} {{$index}}</button>
+                            </span>
+                        </div>
+                        </form>
+
+                    </div>           
+            </div>
+            
+            
+        </div>        
+        
+<!--
+        <div class="container">
+        <div id="toTop" class="btn btn-info" ng-click="toTop()"><span class="fa fa-arrow-up">Back to Top</span></div>		 button for going back to the top of page
+
+    
         <button ng-hide="totalCount>=maxQuestion"
         class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
         type="button" ng-click="increaseMax()"> Show more</button>
-    -->
+    
         
         </div>
+-->
+        
     <footer class="footer">    
         <div class="container">
             <div class="pull-left" ng-controller="onlineUserCtrl">

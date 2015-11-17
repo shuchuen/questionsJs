@@ -22,7 +22,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
     // create basic objects
     $scope.selectedPoll = '';
     $scope.selectedPollOptions = [];
-    $scope.load = true;
+    $scope.load = false;
 
     /*
     Select a poll from the poll's list
@@ -37,7 +37,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 
     // Loading poll from the list (in the firebase object)
     $scope.selectPoll = function(id){
-        if (id){ // don't run on initial watch
+        if (id >= 0){ // don't run on initial watch
             // hold selected polls id
             $scope.selectedPoll = id;
             // clean poll options object
@@ -80,6 +80,10 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 //    $scope.polls.$on("loaded", function() {
 //           $scope.load = false;
 //    });
+//    $scope.polls.$loaded("loaded", function() {
+//           $scope.load = false;
+//    });
+
 
 
 
@@ -102,6 +106,8 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         $scope.polls[$scope.selectedPoll].options[index][1] = newTotal;
         // save changes to the object and the remote firebase
         $scope.polls.$save();
+        //$scope.polls.$save(0);
+
     };
 
 
