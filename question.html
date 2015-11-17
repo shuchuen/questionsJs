@@ -31,6 +31,9 @@
     
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
 	<link rel="stylesheet" href="css/main.css">
+	
+	<!-- emojione emoji support -->
+	<script src="//cdn.jsdelivr.net/emojione/1.5.2/lib/js/emojione.min.js"></script>
 
 </head>
 <body ng-controller="TodoCtrl">  
@@ -115,6 +118,72 @@
                             <option value="Assignment">Assignment</option>
                             <option value="Other">Other</option>
                         </select>
+						<!--emoji selection list-->
+						<select class="category form-control zeroBorder" style="width: 110px;">
+                            <option value="" disabled selected>Emoji &#x1f601</option>
+                            <option value="	&#x1f601" onclick="insertAtCaret('new-todo','&#x1f601');">&#x1f601</option>	
+							<option value="	&#x1f602" onclick="insertAtCaret('new-todo','&#x1f602');">&#x1f602</option>	
+							<option value="	&#x1f603" onclick="insertAtCaret('new-todo','&#x1f603');">&#x1f603</option>	
+							<option value="	&#x1f604" onclick="insertAtCaret('new-todo','&#x1f604');">&#x1f604</option>	
+							<option value="	&#x1f605" onclick="insertAtCaret('new-todo','&#x1f605');">&#x1f605</option>	
+							<option value="	&#x1f606" onclick="insertAtCaret('new-todo','&#x1f606');">&#x1f606</option>	
+							<option value="	&#x1f607" onclick="insertAtCaret('new-todo','&#x1f607');">&#x1f607</option>	
+							<option value="	&#x1f608" onclick="insertAtCaret('new-todo','&#x1f608');">&#x1f608</option>	
+							<option value="	&#x1f609" onclick="insertAtCaret('new-todo','&#x1f609');">&#x1f609</option>	
+							<option value="	&#x1f60a" onclick="insertAtCaret('new-todo','&#x1f60a');">&#x1f60a</option>	
+							<option value="	&#x1f60b" onclick="insertAtCaret('new-todo','&#x1f60b');">&#x1f60b</option>	
+							<option value="	&#x1f60c" onclick="insertAtCaret('new-todo','&#x1f60c');">&#x1f60c</option>	
+							<option value="	&#x1f60d" onclick="insertAtCaret('new-todo','&#x1f60d');">&#x1f60d</option>	
+							<option value="	&#x1f60e" onclick="insertAtCaret('new-todo','&#x1f60e');">&#x1f60e</option>	
+							<option value="	&#x1f60f" onclick="insertAtCaret('new-todo','&#x1f60f');">&#x1f60f</option>	
+							<option value="	&#x1f610" onclick="insertAtCaret('new-todo','&#x1f610');">&#x1f610</option>	
+							<option value="	&#x1f612" onclick="insertAtCaret('new-todo','&#x1f612');">&#x1f612</option>	
+							<option value="	&#x1f613" onclick="insertAtCaret('new-todo','&#x1f613');">&#x1f613</option>	
+							<option value="	&#x1f614" onclick="insertAtCaret('new-todo','&#x1f614');">&#x1f614</option>	
+							<option value="	&#x1f616" onclick="insertAtCaret('new-todo','&#x1f616');">&#x1f616</option>
+							<option value="	&#x1f618" onclick="insertAtCaret('new-todo','&#x1f618');">&#x1f618</option>	
+							<option value="	&#x1f61a" onclick="insertAtCaret('new-todo','&#x1f61a');">&#x1f61a</option>	
+							<option value="	&#x1f61c" onclick="insertAtCaret('new-todo','&#x1f61c');">&#x1f61c</option>	
+							<option value="	&#x1f61d" onclick="insertAtCaret('new-todo','&#x1f61d');">&#x1f61d</option>	
+							<option value="	&#x1f61e" onclick="insertAtCaret('new-todo','&#x1f61e');">&#x1f61e</option>	
+							<option value="	&#x1f620" onclick="insertAtCaret('new-todo','&#x1f620');">&#x1f620</option>	
+							<option value="	&#x1f621" onclick="insertAtCaret('new-todo','&#x1f621');">&#x1f621</option>	
+							<option value="	&#x1f622" onclick="insertAtCaret('new-todo','&#x1f622');">&#x1f622</option>	
+							<option value="	&#x1f623" onclick="insertAtCaret('new-todo','&#x1f623');">&#x1f623</option>	
+							<option value="	&#x1f624" onclick="insertAtCaret('new-todo','&#x1f624');">&#x1f624</option>	
+							<option value="	&#x1f625" onclick="insertAtCaret('new-todo','&#x1f625');">&#x1f625</option>	
+							<option value="	&#x1f628" onclick="insertAtCaret('new-todo','&#x1f628');">&#x1f628</option>	
+							<option value="	&#x1f629" onclick="insertAtCaret('new-todo','&#x1f629');">&#x1f629</option>	
+							<option value="	&#x1f62a" onclick="insertAtCaret('new-todo','&#x1f62a');">&#x1f62a</option>	
+							<option value="	&#x1f62b" onclick="insertAtCaret('new-todo','&#x1f62b');">&#x1f62b</option>		
+							<option value="	&#x1f62d" onclick="insertAtCaret('new-todo','&#x1f62d');">&#x1f62d</option>		
+							<option value="	&#x1f630" onclick="insertAtCaret('new-todo','&#x1f630');">&#x1f630</option>	
+							<option value="	&#x1f631" onclick="insertAtCaret('new-todo','&#x1f631');">&#x1f631</option>	
+							<option value="	&#x1f632" onclick="insertAtCaret('new-todo','&#x1f632');">&#x1f632</option>	
+							<option value="	&#x1f633" onclick="insertAtCaret('new-todo','&#x1f633');">&#x1f633</option>		
+							<option value="	&#x1f635" onclick="insertAtCaret('new-todo','&#x1f635');">&#x1f635</option>	
+							<option value="	&#x1f636" onclick="insertAtCaret('new-todo','&#x1f636');">&#x1f636</option>	
+							<option value="	&#x1f637" onclick="insertAtCaret('new-todo','&#x1f637');">&#x1f637</option>	
+							<option value="	&#x1f639" onclick="insertAtCaret('new-todo','&#x1f639');">&#x1f639</option>	
+							<option value="	&#x1f63a" onclick="insertAtCaret('new-todo','&#x1f63a');">&#x1f63a</option>	
+							<option value="	&#x1f63b" onclick="insertAtCaret('new-todo','&#x1f63b');">&#x1f63b</option>	
+							<option value="	&#x1f63c" onclick="insertAtCaret('new-todo','&#x1f63c');">&#x1f63c</option>	
+							<option value="	&#x1f63d" onclick="insertAtCaret('new-todo','&#x1f63d');">&#x1f63d</option>	
+							<option value="	&#x1f63e" onclick="insertAtCaret('new-todo','&#x1f63e');">&#x1f63e</option>	
+							<option value="	&#x1f63f" onclick="insertAtCaret('new-todo','&#x1f63f');">&#x1f63f</option>	
+							<option value="	&#x1f640" onclick="insertAtCaret('new-todo','&#x1f640');">&#x1f640</option>	
+							<option value="	&#x1f645" onclick="insertAtCaret('new-todo','&#x1f645');">&#x1f645</option>	
+							<option value="	&#x1f646" onclick="insertAtCaret('new-todo','&#x1f646');">&#x1f646</option>	
+							<option value="	&#x1f647" onclick="insertAtCaret('new-todo','&#x1f647');">&#x1f647</option>	
+							<option value="	&#x1f648" onclick="insertAtCaret('new-todo','&#x1f648');">&#x1f648</option>	
+							<option value="	&#x1f649" onclick="insertAtCaret('new-todo','&#x1f649');">&#x1f649</option>	
+							<option value="	&#x1f64a" onclick="insertAtCaret('new-todo','&#x1f64a');">&#x1f64a</option>	
+							<option value="	&#x1f64b" onclick="insertAtCaret('new-todo','&#x1f64b');">&#x1f64b</option>	
+							<option value="	&#x1f64c" onclick="insertAtCaret('new-todo','&#x1f64c');">&#x1f64c</option>	
+							<option value="	&#x1f64d" onclick="insertAtCaret('new-todo','&#x1f64d');">&#x1f64d</option>	
+							<option value="	&#x1f64e" onclick="insertAtCaret('new-todo','&#x1f64e');">&#x1f64e</option>	
+							<option value="	&#x1f64f" onclick="insertAtCaret('new-todo','&#x1f64f');">&#x1f64f</option>	
+						</select>
                     </div>
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
@@ -395,7 +464,13 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="js/agency/bootstrap.min.js"></script>    
-    
+
+<!-- emoji converter -->
+<!-- <script src="js/emoji/emojiConverter.js"></script> -->
+
+<!-- emoji: insertAtCaret -->
+<script src="js/emoji/insertAtCaret.js">
+
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
 <script src="js/lib/Autolinker.min.js"></script>
 
@@ -447,5 +522,6 @@
     });
   </script>        
 -->
+
 </body>
 </html>
