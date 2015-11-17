@@ -285,32 +285,34 @@
         <div class="container col-xs-3" ng-controller="mainCtrl">
             <div class="selectPoll">
                 <h3>Polling list</h3>
-
+                <hr>
                 <div ng-show="load">
                     ... Loading
                 </div>
 
                 <div ng-show="!load" class="pollList">
-                    
-                <button ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
-                        class="pollSelectBtn btn btn-default">{{ value.name }}
-                </button>
-                    
+                    <div class="list-group">
+                        <button type="button" class="list-group-item" ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
+                                class="pollSelectBtn btn btn-default">{{ value.name }}
+                            <br><span am-time-ago="value.timestamp" class = "time-color"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pollingFooter">
+                    <hr>
+                    <button type = "button" class=" btn btn-default" ng-model="selectedPoll" ng-click="selectedPoll=-1" ng-disabled="selectedPoll==-1">Hide</button>
                 </div>
             </div>
             <div class="googleChart">
                     <div ng-if="selectedPoll>=0">
                         <div google-chart chart="chart">
                         </div>
-                        <br>
-
                         <form>
-                            <h3>Vote:</h3><br>
-
+                            <h4>Vote:</h4>
                         <div>
-                            <span class="voteDiv" ng-repeat="data in selectedPollOptions">
-                                <button class="btn btn-primary" ng-click="vote($index)">{{ data[0] }}</button>
-                            </span>
+                            <div class="list-group">
+                                <button type="button" class="list-group-item" ng-repeat="data in selectedPollOptions" ng-click="vote($index)"><span>Option {{$index+1}}: </span>{{ data[0] }}</button>
+                            </div>
                         </div>
                         </form>
 

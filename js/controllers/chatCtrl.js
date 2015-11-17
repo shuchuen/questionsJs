@@ -1,7 +1,7 @@
 todomvc.controller('mainCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
-                   
+    $scope.$storage = $localStorage;               
                    
 //                   function($scope, $firebase){
     // firebase
@@ -170,6 +170,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         }
         if ($scope.pollForm.name && ($scope.pollForm.options.length>0))
         {
+            $scope.pollForm.timestamp = new Date().getTime();
             // add the new form to the firebase object. it will be updated automagically in firebase
             $scope.polls.$add($scope.pollForm);
             
