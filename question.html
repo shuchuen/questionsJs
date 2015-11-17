@@ -212,7 +212,7 @@
     </div>
         <div class="container">
             <div class="container list-group" id="todo-list">
-                <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2}" ng-init="showReply=false">
+                <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
                         <span class="label label-danger" ng-show="checkNew(todo)">New</span>

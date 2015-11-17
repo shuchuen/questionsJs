@@ -173,6 +173,22 @@ a.navbar-brand:hover {
     font-family: "Kaushan Script";
 }
 
+.transparent02{
+	opacity: 0.2
+}
+
+.transparent04{
+	opacity: 0.4
+}
+
+.transparent06{
+	opacity: 0.6
+}
+
+.transparent08{
+	opacity: 0.8
+}
+
 .replyForm{
     
     
