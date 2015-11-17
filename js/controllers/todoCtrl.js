@@ -175,7 +175,7 @@ $scope.addTodo = function () {
     var category = $scope.input.category==null? "Other":$scope.input.category;
     var questioner = $scope.getUser();
     var highlightType = $scope.getHighlight();
-    var photoAttach = reader;
+//    var photoAttach = reader;
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
