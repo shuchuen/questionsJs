@@ -219,11 +219,12 @@
             </div>    
 -->
     </div>
-        <div class="container col-xs-9">
+    <div class="container col-xs-9">
+        <div class="container col-xs-12">
             <input class="pull-right" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/><span class="pull-right">Bad word filter</span>
         </div>    
-        <div class="container col-xs-9">    
-            <div class="container list-group" id="todo-list">
+        <div class="container col-xs-12">    
+            <div class="container list-group col-xs-12" id="todo-list">
                 <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
@@ -280,7 +281,7 @@
                 </div>
             </div>
         </div>
-        
+    </div>
         <div class="container col-xs-3" ng-controller="mainCtrl">
             <div class="selectPoll">
                 <h3>Polling list</h3>
@@ -332,7 +333,7 @@
         </div>
 -->
         
-    <footer class="footer">    
+    <footer class="footer col-xs-12">    
         <div class="container">
             <div class="pull-left" ng-controller="onlineUserCtrl">
                 <!--shows the number of online users -->
