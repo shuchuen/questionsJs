@@ -7,8 +7,8 @@
 * - exposes the model to the template and provides event handlers
 */
 todomvc.controller('TodoCtrl',
-['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
-function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
+['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window','Upload',
+function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, Upload) {
 	// set local storage
 	$scope.$storage = $localStorage;
 
@@ -160,7 +160,29 @@ $scope.getHighlight = function(){
     return 0;
 }
 
+$scope.upload = function (file) {
+//        $scope.upload = function (file) {
+    Upload.upload({
+        url: 'http://ec2-52-27-32-65.us-west-2.compute.amazonaws.com/fileservice/upload/testDir/',
+        data: {file: file},
+        method: "GET"
+    }).then(function (resp) {
+        console.log(resp);
+        console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp);
+    }, function (resp) {
+        console.log('Error status: ' + resp.status);
+    }, function (evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+        console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    });
+};
+
 $scope.addTodo = function () {
+    
+    if ($scope.photoAttach) {
+//        alert(1);
+        $scope.upload($scope.photoAttach);
+    }
     
     if (!$scope.input) {
 		return;
@@ -181,6 +203,7 @@ $scope.addTodo = function () {
     var questioner = $scope.getUser();
     var highlightType = $scope.getHighlight();
 //    var photoAttach = reader;
+    
     
 	$scope.todos.$add({
         wholeMsg: newTodo,

@@ -372,6 +372,11 @@ textarea#new-todo {
     width:50px;
 }
 
+.filterSwitchLabel{
+    font-size: 20px;
+    cursor: pointer;
+}
+
 .dark-grey {
     background-color:rgba(0,149,255, 1);
     border-color: transparent;
@@ -411,11 +416,13 @@ textarea#new-todo {
 
 .newrefreshBtn {
     background-color:transparent;
-    color:darkgray;
-    padding-right:20px;
+/*    padding-right:20px;*/
     border:none;
     width:25px;
-    padding-right:35px;
+/*    padding-right:35px;*/
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 .newrefreshBtn:active, .newrefreshBtn:focus  {
@@ -424,4 +431,8 @@ textarea#new-todo {
 }
 .newrefreshBtn:hover{
     color:black;
+}
+
+.imgPreview{
+    height: 34px;
 }
