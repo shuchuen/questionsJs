@@ -107,7 +107,7 @@
             
             <br/>
                 
-            <form id="todo-form" class="col-xs-12 iqButtonGp" enctype="multipart/form-data" ng-submit="addTodo()">
+            <form id="todo-form" class="col-xs-12 iqButtonGp" method="post" enctype="multipart/form-data" ng-submit="addTodo()">
             
                 <div class="input-group col-xs-12 iqButtonGp">
                     <div class="catagory col-xs-5 iqButtonGp">
@@ -120,7 +120,7 @@
                         </select>
                     </div>
                     <div class="col-xs-6" ng-if="photoAttach">
-                        <img class="pull-right imgPreview" ngf-thumbnail="photoAttach">
+                        <img class="pull-right imgPreview" ng-src="{{photoAttach}}">
                     </div>
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
@@ -199,19 +199,17 @@
                         </div>
                     </div>
                     <div class="col-sm-1 col-xs-12 iqButtonGp">
-                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="submit">
+                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="submit" ng-disabled="picLoadig">
                             <i class="fa fa-commenting"></i>
                         </button>
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" data-toggle="modal" data-target="#pollingModal">
                             <i class="fa fa-bar-chart"></i>
                         </button>
-<!--
-                        <input id="photoAttach" type="file" class="hidden" ng-modal="input.photoAttach" ng-init="input.photoAttach=null" onchange="angular.element(this).scope().photoAttach(this)" accept="image/*"/>
-                        <label for="photoAttach" class="btn btn-default zeroBorder askBtn fixBtnWidth" style="max-width: none;">
+                        <input id="photoAttach" type="file" class="hidden" ng-modal="input.photoAttach" ng-init="input.photoAttach" onchange="angular.element(this).scope().doPhotoAttach(this)" accept="image/*"/>
+                        <label for="photoAttach" class="btn btn-default zeroBorder askBtn fixBtnWidth" style="max-width: none;" ng-modal="picLoadig" ng-init="picLoadig=false">
                             <i class="fa fa-picture-o"></i>
                         </label>
--->
-                        <div class="btn btn-default zeroBorder askBtn fixBtnWidth" ngf-select ng-model="photoAttach" name="photoAttach" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}"><i class="fa fa-picture-o"></i></div>
+<!--                              <input type="file" name="fileToUpload" id="images"/>-->
                     </div>
                 </div>
                 </form>
@@ -245,8 +243,9 @@
                         <span class="badge">{{todo.category}}</span>
                     </h4>
                     <h4 class="list-group-item-heading">
-                        <span ng-if="enableFilter" class="questionContent">{{filter(todo.wholeMsg)}}</span>
-                        <span ng-if="!enableFilter" class="questionContent">{{todo.wholeMsg}}</span>
+                        <p ng-if="enableFilter" class="questionContent">{{filter(todo.wholeMsg)}}</p>
+                        <p ng-if="!enableFilter" class="questionContent">{{todo.wholeMsg}}</p>
+                        <img class="imgAttachment" ng-src="{{todo.attachment}}"/>
                     </h4>
             <!--		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>-->
                     <p>
@@ -563,9 +562,6 @@
 <!-- Main App JS -->
 <script src="js/controllers/chatCtrl.js"></script>
 
-<!--file upload -->
-<script src="js/lib/ng-file-upload/ng-file-upload-shim.min.js"></script>
-<script src="js/lib/ng-file-upload/ng-file-upload.min.js"></script>
 <!--
         
 <script src="js/nanoscroller.min.js"></script>
