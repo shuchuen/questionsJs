@@ -98,7 +98,7 @@
 				
             <!--Refresh button-->
             <!-- button for refreshing the page to show the latest message -->    
-            <button class="btn btn-success pull-right refreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i> Refresh</button>
+<!--            <button class="btn btn-success pull-right refreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i> Refresh</button>-->
                 
             <!--get the right of staff-->
 <!--            <button ng-show="$authData&&$storage[$authData.uid]!='isStaff'" class="btn btn-danger pull-right staffBtn" type="button" ng-click="getStaffRight()" title="Get the right of staff"><i class="fa fa-unlock"></i><span> Get the right of staff</span></button>-->
@@ -199,14 +199,14 @@
                     </div>
                     <div class="col-sm-1 col-xs-12 iqButtonGp">
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="submit">
-                            <i class="fa fa-question-circle"></i> Ask
+                            <i class="fa fa-commenting"></i>
                         </button>
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" data-toggle="modal" data-target="#pollingModal">
-                            <i class="fa fa-bar-chart"></i> Poll
+                            <i class="fa fa-bar-chart"></i>
                         </button>
                         <input id="photoAttach" type="file" class="hidden" ng-modal="input.photoAttach" ng-init="input.photoAttach=null" onchange="angular.element(this).scope().photoAttach(this)" accept="image/*"/>
                         <label for="photoAttach" class="btn btn-default zeroBorder askBtn fixBtnWidth" style="max-width: none;">
-                            <i class="fa fa-picture-o"></i> Photo
+                            <i class="fa fa-picture-o"></i>
                         </label>
                     </div>
                 </div>
@@ -220,9 +220,12 @@
 -->
     </div>
     <div class="container col-xs-9">
-        <div class="container col-xs-12">
-            <input class="pull-right" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/><span class="pull-right">Bad word filter</span>
-        </div>    
+        <div class="container col-xs-11">
+            <input class="pull-right" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/><span class="pull-right">Bad word filter </span>
+        </div>
+        <div class="container col-xs-1">
+            <button class="pull-right newrefreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i></button>
+        </div>
         <div class="container col-xs-12">    
             <div class="container list-group col-xs-12" id="todo-list">
                 <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">

@@ -99,10 +99,12 @@ a.navbar-brand:hover {
 }
 
 .refreshBtn{
+
   position: fixed;
   top:50px;  
   right:0px;
   z-index: 3;    
+
 }
 
 .staffBtn{
@@ -357,6 +359,7 @@ textarea#new-todo {
     padding-right: 30px;
 }
 
+
 .dropdown-toggle.category{
     width: 110px !important;
     
@@ -366,7 +369,7 @@ textarea#new-todo {
     overflow:auto;
 }
 .fixBtnWidth {
-    width:80px;
+    width:50px;
 }
 
 .dark-grey {
@@ -404,4 +407,21 @@ textarea#new-todo {
     text-align: right;
     padding-bottom:10px;
     padding-right:10px;
+}
+
+.newrefreshBtn {
+    background-color:transparent;
+    color:darkgray;
+    padding-right:20px;
+    border:none;
+    width:25px;
+    padding-right:35px;
+}
+
+.newrefreshBtn:active, .newrefreshBtn:focus  {
+    background-color:transparent;
+    outline:0;
+}
+.newrefreshBtn:hover{
+    color:black;
 }
