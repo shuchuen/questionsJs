@@ -86,15 +86,6 @@
             -->
 
 <!--            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>-->
-            <!-- after login -->   
-              
-                
-				<!--ON OFF function for bad word filter-->
-
-				<!--	For milestone 2
-				
-				<input type="checkbox" name="filter" value="TRUE">Bad Words Filter ON<br> 
-				-->
 				
             <!--Refresh button-->
             <!-- button for refreshing the page to show the latest message -->    
@@ -107,7 +98,7 @@
             
             <br/>
                 
-            <form id="todo-form" class="col-xs-12 iqButtonGp" ng-submit="addTodo()">
+            <form id="todo-form" class="col-xs-12 iqButtonGp" ng-submit="addTodo()" name="form">
             
                 <div class="input-group col-xs-12 iqButtonGp">
                     <div class="catagory iqButtonGp">
@@ -118,8 +109,7 @@
                             <option value="Assignment">Assignment</option>
                             <option value="Other">Other</option>
                         </select>
-                        
-						<!--emoji selection list-->
+<!--                        <img ngf-src="photoAttach" class="thumb">-->
                     </div>
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
@@ -198,19 +188,23 @@
                         </div>
                     </div>
                     <div class="col-sm-1 col-xs-12 iqButtonGp">
-                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="submit">
+                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" ng-click="addTodo()">
                             <i class="fa fa-question-circle"></i> Ask
                         </button>
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" data-toggle="modal" data-target="#pollingModal">
                             <i class="fa fa-bar-chart"></i> Poll
                         </button>
-                        <input id="photoAttach" type="file" class="hidden" ng-modal="input.photoAttach" ng-init="input.photoAttach=null" onchange="angular.element(this).scope().photoAttach(this)" accept="image/*"/>
+<!--
+                        <input id="photoAttach" name="photoAttach" type="file" class="" ng-modal="photoAttach" ng-init="photoAttach=null" accept="image/*" ngf-select="" ngf-pattern="'image/*'"/>
                         <label for="photoAttach" class="btn btn-default zeroBorder askBtn fixBtnWidth" style="max-width: none;">
                             <i class="fa fa-picture-o"></i> Photo
                         </label>
+-->
+                        <div class="btn btn-default zeroBorder askBtn fixBtnWidth" ngf-select ng-model="photoAttach" name="photoAttach" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}"><i class="fa fa-picture-o"></i> Photo</div>
                     </div>
                 </div>
                 </form>
+                <img ngf-thumbnail="photoAttach" class="thumb">{{photoAttach.name}}
                 <!-- /form-group -->
         </div>
 <!--
@@ -219,12 +213,16 @@
             </div>    
 -->
     </div>
-    <div class="container col-xs-9">
-        <div class="container col-xs-12">
-            <input class="pull-right" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/><span class="pull-right">Bad word filter</span>
-        </div>    
-        <div class="container col-xs-12">    
-            <div class="container list-group col-xs-12" id="todo-list">
+    <div class="container col-md-9 col-xs-12">
+        <div class="">
+            <div class="col-xs-2 pull-right">
+                <span>Bad word filter</span>
+                <label ng-if="enableFilter" for="badWordFilterBtn" style="color:green"><i class="fa fa-toggle-on" style="green"></i></label>
+                <label ng-if="!enableFilter" for="badWordFilterBtn" ><i class="fa fa-toggle-off"></i></label>
+                <input id="badWordFilterBtn" type="checkbox" class="hidden" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" id="Bad word filter" checked/>
+            </div>    
+        </div>        
+            <div class=" list-group col-xs-12" id="todo-list">
                 <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
@@ -280,9 +278,9 @@
 					</div>
                 </div>
             </div>
-        </div>
     </div>
-        <div class="container col-xs-3" ng-controller="mainCtrl">
+<!--
+        <div class="container col-md-3 col-xs-12" ng-controller="mainCtrl">
             <div class="selectPoll">
                 <h3>Polling list</h3>
                 <hr>
@@ -321,6 +319,7 @@
             
             
         </div>        
+-->
         
 <!--
         <div class="container">
@@ -516,17 +515,18 @@
 <script src="js/agency/bootstrap.min.js"></script>    
 
 <!-- emoji converter -->
-<!-- <script src="js/emoji/emojiConverter.js"></script> -->
+ <script src="js/emoji/emojiConvert.js"></script> 
 
 <!-- emoji: insertAtCaret -->
-<script src="js/emoji/insertAtCaret.js">
+<!--<script src="js/emoji/insertAtCaret.js"></script> -->
 
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
 <script src="js/lib/Autolinker.min.js"></script>
 
 <!-- 2.2.2 -->
 <script src="js/lib/firebase.js"></script>
-<script src="js/lib/angular.min.js"></script>					
+<script src="js/lib/angular.min.js"></script>	
+        
 <!--credit to urish : https://github.com/urish/angular-moment -->
 <script src="js/lib/angularfire.js"></script>
 
@@ -549,29 +549,10 @@
 <script src="js/controllers/ng-google-chart.js"></script>
 <!-- Main App JS -->
 <script src="js/controllers/chatCtrl.js"></script>
-<!--
-        
-<script src="js/nanoscroller.min.js"></script>
-<script src="js/tether.min.js"></script>
-<script src="js/config.js"></script>
-<script src="js/util.js"></script>
-<script src="js/jquery.emojiarea.js"></script>
-<script src="js/emoji-picker.js"></script>
 
-        
-<script>
-    $(function() {
-      
-      window.emojiPicker = new EmojiPicker({
-        emojiable_selector: '[data-emojiable=true]',
-        assetsPath: 'img/',
-        popupButtonClasses: 'fa fa-smile-o'
-      });
-      
-      window.emojiPicker.discover();
-    });
-  </script>        
--->
+<!--File upload ref: https://github.com/danialfarid/ng-file-upload#usage-->
+<script src="js/lib/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+<script src="js/lib/ng-file-upload/ng-file-upload.min.js"></script>
 
 </body>
 </html>
