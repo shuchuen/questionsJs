@@ -282,7 +282,7 @@
 <!--
         <div class="container col-md-3 col-xs-12" ng-controller="mainCtrl">
             <div class="selectPoll">
-                <h3>Polling list</h3>
+                <h3><i class="fa fa-bar-chart"></i> Polling list <span class="badge">{{polls.length}}</span></h3>
                 <hr>
                 <div ng-show="load">
                     ... Loading
@@ -301,6 +301,7 @@
                     <button type = "button" class=" btn btn-default" ng-model="selectedPoll" ng-click="selectedPoll=-1" ng-disabled="selectedPoll==-1">Hide</button>
                 </div>
             </div>
+            
             <div class="googleChart">
                     <div ng-if="selectedPoll>=0">
                         <div google-chart chart="chart">
@@ -309,14 +310,13 @@
                             <h4>Vote:</h4>
                         <div>
                             <div class="list-group">
-                                <button type="button" class="list-group-item" ng-repeat="data in selectedPollOptions" ng-click="vote($index)"><span>Option {{$index+1}}: </span>{{ data[0] }}</button>
+                                <button type="button" class="list-group-item" ng-repeat="data in selectedPollOptions" ng-click="vote($index)" ng-disabled="voted[selectedPoll]==1"><span>Option {{$index+1}}: </span>{{ data[0] }}</button>
                             </div>
                         </div>
                         </form>
 
                     </div>           
             </div>
-            
             
         </div>        
 -->
