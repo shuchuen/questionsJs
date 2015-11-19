@@ -192,10 +192,9 @@
             <div class="container col-xs-12">
                 <label class="pull-right newrefreshBtn" ng-click="refresh()"><i class="fa fa-retweet" class="refreshBtn" style="color:green"></i></label>
                 
-                <label class="pull-right filterSwitchLabel" ng-if="enableFilter" for="filterSwitch" style="color:green; margin-left: 5px"> <i class="fa fa-toggle-on"></i></label>
-                <label class="pull-right filterSwitchLabel" ng-if="!enableFilter" for="filterSwitch" style="margin-left: 5px"> <i class="fa fa-toggle-off"></i></label>
+                <label class="pull-right filterSwitchLabel" ng-if="enableFilter" for="filterSwitch" style="color:green; margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_on.png"/></label>
+                <label class="pull-right filterSwitchLabel" ng-if="!enableFilter" for="filterSwitch" style="margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_off.png"/></label>
                 <input id="filterSwitch" class="pull-right hidden" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/>
-                <span class="pull-right" style="font-size: 20px;"><img id="badwordfilter" src="img/badwords.png"/>:</span>
 <!--
             </div>
             <div class="container col-xs-1">
