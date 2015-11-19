@@ -51,6 +51,7 @@ var query = echoRef.orderByChild("timestamp");
 
 var commentQuery = commentRef;
 $scope.comments = [];
+$scope.replyCounter = [];
     
 $scope.todos = $firebaseArray(query);
 $firebaseArray(commentQuery).$loaded().then(function(comments){
@@ -162,20 +163,28 @@ $scope.getHighlight = function(){
 
 $scope.doPhotoAttach = function(element) {
     $scope.photoAttach = "img/loading.gif"
-    $scope.picLoadig = true;
+    $scope.picLoading = true;
     
     $scope.$apply(function(scope) {
          
          var photofile = element.files[0];
          var reader = new FileReader();
          
+        
          reader.onloadend = function(e){
              $scope.photoAttach = reader.result;
-             $scope.picLoadig = false;
+             $scope.picLoading = false;
              element.files[0] = null;
          }
          
-         reader.readAsDataURL(photofile);
+         if(photofile.size <= 5242880){
+             if(photofile.size!=0)
+                reader.readAsDataURL(photofile);
+         }else{
+             $scope.picLoading = false;
+             $scope.photoAttach = null;
+             alert("Max size: 5MB");
+         }
      });  
 };
 
@@ -208,11 +217,7 @@ $scope.addTodo = function () {
 //        });
 //    }});
     
-//    if ($scope.picLoadig) {
-//       return;
-//    }
-    
-    if (!$scope.input) {
+    if (!$scope.input || $scope.picLoading) {
 		return;
 	}
     

@@ -119,8 +119,8 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                    <div class="col-xs-6" ng-if="photoAttach">
-                        <img class="pull-right imgPreview" ng-src="{{photoAttach}}">
+                    <div class="col-xs-6">
+                        <img ng-if="photoAttach" class="pull-right imgPreview" ng-src="{{photoAttach}}">
                     </div>
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
@@ -263,7 +263,7 @@
                         <img src="img/questionLogo/unlike.gif" height="30px" width="30px"><span>{{todo.dislike}}</span>
                     </button>
                     <button class="btn btn-success" ng-modal="comments[todo.$id]" ng-click="showReply=!showReply">
-                        <i class="fa fa-comments-o" ></i> Reply
+                        <i class="fa fa-comments-o" ng-modal="replyCounter[todo.$id]" ng-init="replyCounter[todo.$id]=0"></i> ({{replyCounter[todo.$id]}})
                     </button>
             <!--		class="btn btn-default btn-xs glyphicon glyphicon-hand-up"-->
 
@@ -278,6 +278,7 @@
                     <div ng-show="showReply">
                         <hr ng-show="showReply" style="border-color:#555"/>
                         <span ng-if="comments[todo.$id]" ng-repeat="comment in comments[todo.$id] | orderBy: 'timestamp'">
+                            <span>{{replyCounter[todo.$id] = $index + 1 }}</span>
                             <span class="commentContent" ng-class="{staffComment: comment.highlight== 2}">{{filter(comment.wholeMsg)}}</span> 
                             <p><span am-time-ago="comment.timestamp" class = "time-color"></span> <i>By <span>{{comment.questioner}}</span></i></p>
                             

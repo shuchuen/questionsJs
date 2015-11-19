@@ -32,7 +32,9 @@ module.exports = function(config) {
       'js/lib/wow/*.js',
       'js/lib/vegas/*.js',
       'js/lib/respond/*.js',
-      'js/UnionDraw.js'
+      'js/UnionDraw.js',
+      'js/lib/ng-file-upload/*'
+
     ],
 
 
