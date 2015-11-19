@@ -23,7 +23,9 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
     $scope.selectedPoll = '';
     $scope.selectedPollOptions = [];
     $scope.load = false;
-
+    //use to disable vote
+    $scope.voted = [];
+    
     /*
     Select a poll from the poll's list
     moveing the poll data to a separate object from the firebase object
@@ -108,6 +110,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         for(i=0;i<$scope.polls.length;i++)
         $scope.polls.$save(i);
         //$scope.polls.$save(0);
+        $scope.voted[$scope.selectedPoll] = 1;
 
     };
 
@@ -136,8 +139,8 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         sliceVisibilityThreshold:0,
         displayExactValues: true,
         pieSliceText: 'percentage',
-        width: 400,
-        height: 300,
+//        width: 400,
+//        height: 300,
         is3D: false,
         slices: {}
     };

@@ -8,7 +8,7 @@
 */
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
-function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
+function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, Upload) {
 	// set local storage
 	$scope.$storage = $localStorage;
 
@@ -51,6 +51,7 @@ var query = echoRef.orderByChild("timestamp");
 
 var commentQuery = commentRef;
 $scope.comments = [];
+$scope.replyCounter = [];
     
 $scope.todos = $firebaseArray(query);
 $firebaseArray(commentQuery).$loaded().then(function(comments){
@@ -160,9 +161,63 @@ $scope.getHighlight = function(){
     return 0;
 }
 
+$scope.doPhotoAttach = function(element) {
+    $scope.photoAttach = "img/loading.gif"
+    $scope.picLoading = true;
+    
+    $scope.$apply(function(scope) {
+         
+         var photofile = element.files[0];
+         var reader = new FileReader();
+         
+        
+         reader.onloadend = function(e){
+             $scope.photoAttach = reader.result;
+             $scope.picLoading = false;
+             element.files[0] = null;
+         }
+         
+         if(photofile.size <= 5242880){
+             if(photofile.size!=0)
+                reader.readAsDataURL(photofile);
+         }else{
+             $scope.picLoading = false;
+             $scope.photoAttach = null;
+             alert("Max size: 5MB");
+         }
+     });  
+};
+
 $scope.addTodo = function () {
     
-    if (!$scope.input) {
+//    Method 1
+//    var data;
+//    var imgLink = null;
+//    data = new FormData();
+//    data.append('fileToUpload', $('#images')[0].files[0]);
+//    var photoName = $('#images')[0].files[0].name;
+    
+//    $.ajax({
+//      url: 'http://ec2-52-27-32-65.us-west-2.compute.amazonaws.com/fileservice/upload/testDir/',
+//      data: data,
+//      processData: false,
+//      contentType: false,
+//      type: 'POST',
+//      success: function(data){
+//        $scope.$apply(function() {
+//            imgLink = "http://ec2-52-27-32-65.us-west-2.compute.amazonaws.com/files/public/testDir/" + photoName;
+//            console.log(data);
+//            console.log(imgLink);
+//        });
+//          
+//      },
+//    error: function(xhr, textStatus, errorThrown) {
+//        $scope.$apply(function() {
+//            console.log("error thrown: " + xhr.responseText + ", " + textStatus + ", " + errorThrown);
+//        });
+//    }});
+    
+    if (!$scope.input || $scope.picLoading) {
 		return;
 	}
     
@@ -173,14 +228,10 @@ $scope.addTodo = function () {
 		return;
 	}
     
-//	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
-//	var head = firstAndLast[0];
-//	var desc = firstAndLast[1];
     var tags = newTodo.match(/#\w+/g);
     var category = $scope.input.category==null? "Other":$scope.input.category;
     var questioner = $scope.getUser();
     var highlightType = $scope.getHighlight();
-//    var photoAttach = reader;
     
 	$scope.todos.$add({
         wholeMsg: newTodo,
@@ -192,12 +243,13 @@ $scope.addTodo = function () {
         category: category,
         questioner: questioner,
         order: 0,
-        attachment: null,
+        attachment: $scope.photoAttach,
         highlight: highlightType
 	});
     
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
+    $scope.photoAttach = '';
 //    $scope.input = '';
     
     //renew the access time
@@ -227,15 +279,7 @@ $scope.addComment = function (replyForm, todo) {
     
     $scope.comments[todo.$id] = $firebaseArray(commentRef.child(todo.$id));
     
-    $scope.comments[todo.$id].$add({
-//        replyMsg: replyForm.msg,
-//        timestamp: new Date().getTime(),
-//        tags: tags,
-//        like: 0,
-//        dislike: 0,
-//        questioner: questioner,
-//        order: 0
-        
+    $scope.comments[todo.$id].$add({        
         wholeMsg: newComment,
         completed: false,
         timestamp: new Date().getTime(),
@@ -484,11 +528,6 @@ $scope.getStaffRight = function () {
 			    });
                 console.log($scope.$authData.uid, "get the Staff right");
             }
-//            else{
-//                $scope.$apply(function() {
-//                    $( "#secMsg" ).fadeIn( 500 ).delay( 2000 ).slideUp( 500 );
-//			    });    
-//            }
         });
       
     }
@@ -503,9 +542,9 @@ $scope.getStaffRight = function () {
 // autoscroll
 angular.element($window).bind("scroll", function() {
 	if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
-		console.log('Hit the bottom2. innerHeight' +
-		$window.innerHeight + "scrollY" +
-		$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
+//		console.log('Hit the bottom2. innerHeight' +
+//		$window.innerHeight + "scrollY" +
+//		$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
 
 		// update the max value
 		$scope.increaseMax();

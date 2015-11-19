@@ -99,10 +99,12 @@ a.navbar-brand:hover {
 }
 
 .refreshBtn{
+
   position: fixed;
   top:50px;  
   right:0px;
   z-index: 3;    
+
 }
 
 .staffBtn{
@@ -168,7 +170,7 @@ a.navbar-brand:hover {
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(173,255,47,.6);
 }
 
-.staffQ > h4> span.questionContent, .staffComment {
+.staffQ > h4> p.questionContent, .staffComment {
     color:forestgreen;
     font-family: "Kaushan Script";
 }
@@ -210,8 +212,14 @@ a.navbar-brand:hover {
     top: -34px;
     float: right;
 }
+.list-group{
+    padding-right: 0px !important;
+}
+
 .list-group-item {
     margin: 5px  !important;
+    margin-left: 0px  !important;
+    margin-right: 0px  !important;
 }
 
 .roomName{
@@ -325,15 +333,13 @@ a.navbar-brand:hover {
     z-index: 2;
     position: absolute;
     bottom: 5px; 
-    color: grey; 
+    color: black; 
     font-size: x-large;
-    right: 20px;
-    cursor: pointer;
-    width: 80%;
+    left: 10px;
 }
 
 #emojiDropdownMenu{
-    float: right;
+    cursor: pointer;
 }
 
 .emojiMenu{
@@ -354,8 +360,8 @@ a.navbar-brand:hover {
 textarea#new-todo {
     min-height: 6.85em;
     resize: none;
-    padding-right: 30px;
 }
+
 
 .dropdown-toggle.category{
     width: 110px !important;
@@ -366,7 +372,12 @@ textarea#new-todo {
     overflow:auto;
 }
 .fixBtnWidth {
-    width:80px;
+    width:50px;
+}
+
+.filterSwitchLabel{
+    font-size: 20px;
+    cursor: pointer;
 }
 
 .dark-grey {
@@ -402,6 +413,36 @@ textarea#new-todo {
 
 .pollingFooter {
     text-align: right;
-    padding-bottom:10px;
-    padding-right:10px;
+}
+
+.pollingFooter > button{
+    margin:10px;
+}
+
+.newrefreshBtn {
+    background-color:transparent;
+/*    padding-right:20px;*/
+    border:none;
+    width:25px;
+/*    padding-right:35px;*/
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.newrefreshBtn:active, .newrefreshBtn:focus  {
+    background-color:transparent;
+    outline:0;
+}
+.newrefreshBtn:hover{
+    color:black;
+}
+
+.imgPreview{
+    height: 34px;
+}
+
+.imgAttachment{
+    max-width: 300px;
+    
 }
