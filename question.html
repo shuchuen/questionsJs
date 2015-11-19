@@ -205,7 +205,7 @@
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" data-toggle="modal" data-target="#pollingModal">
                             <i class="fa fa-bar-chart"></i>
                         </button>
-                        <input id="photoAttach" type="file" class="hidden" ng-modal="input.photoAttach" ng-init="input.photoAttach" onchange="angular.element(this).scope().doPhotoAttach(this)" accept="image/*"/>
+                        <input id="photoAttach" type="file" class="hidden" ng-modal="photoAttach" ng-init="photoAttach=null" onchange="angular.element(this).scope().doPhotoAttach(this)" accept="image/*"/>
                         <label for="photoAttach" class="btn btn-default zeroBorder askBtn fixBtnWidth" style="max-width: none;" ng-modal="picLoadig" ng-init="picLoadig=false">
                             <i class="fa fa-picture-o"></i>
                         </label>
@@ -278,7 +278,7 @@
                     <div ng-show="showReply">
                         <hr ng-show="showReply" style="border-color:#555"/>
                         <span ng-if="comments[todo.$id]" ng-repeat="comment in comments[todo.$id] | orderBy: 'timestamp'">
-                            <span>{{replyCounter[todo.$id] = $index + 1 }}</span>
+                            <span class="hidden">{{replyCounter[todo.$id] = $index + 1 }}</span>
                             <span class="commentContent" ng-class="{staffComment: comment.highlight== 2}">{{filter(comment.wholeMsg)}}</span> 
                             <p><span am-time-ago="comment.timestamp" class = "time-color"></span> <i>By <span>{{comment.questioner}}</span></i></p>
                             
