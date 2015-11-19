@@ -266,7 +266,7 @@ a.navbar-brand:hover {
 }
 
 .zeroRadius{
-    border-radius: 0px;
+    border-radius: 0px !important;
 }
 
 .category{
@@ -343,18 +343,20 @@ a.navbar-brand:hover {
 }
 
 .emojiMenu{
-    position: absolute;
-    right: 10px;
-    height: 200px;
-    min-width: 250px;
     font-size: x-large;
-    overflow: none;
     overflow-y: scroll;
+    height: 250px;
+    padding-left: 5px !important;
 }
 
 .emojiMenu > a{
     margin: 0.2em;
     text-decoration:none !important;
+    cursor: pointer;
+}
+
+.emojiTabs{
+    display: -webkit-inline-box;
 }
 
 textarea#new-todo {
