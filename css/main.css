@@ -191,14 +191,10 @@ a.navbar-brand:hover {
 	opacity: 0.8
 }
 
-.replyForm{
-    
-    
-}
-
 .replyArea{
     border-radius: 0px !important;
     padding-right: 92px !important;
+    padding-left: 30px !important;
 }
 
 .replyButton{
@@ -447,4 +443,13 @@ textarea#new-todo {
 .imgAttachment{
     max-width: 300px;
     
+}
+
+.emojiPickerReply{
+    z-index: 2;
+    position: absolute;
+    bottom: 10px;
+    color: black;
+    font-size: x-large;
+    left: 20px;
 }
