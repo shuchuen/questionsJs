@@ -51,7 +51,7 @@ var query = echoRef.orderByChild("timestamp");
 
 var commentQuery = commentRef;
 $scope.comments = [];
-$scope.replyCounter = [];
+$scope.replyCounter = [];  
     
 $scope.todos = $firebaseArray(query);
 $firebaseArray(commentQuery).$loaded().then(function(comments){
@@ -60,7 +60,7 @@ $firebaseArray(commentQuery).$loaded().then(function(comments){
     });
     
 });
-    
+
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
     
@@ -420,6 +420,7 @@ $scope.loginForm = function(){
           } else {
             $scope.$apply(function() {
                 $scope.$authData = authData;
+                $scope.$storage.authData = authData;
                 $scope.login = "";
                 $scope.getStaffRight();
                 $('#loginModal').modal('hide');
@@ -444,6 +445,7 @@ $scope.FBLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
+                $scope.$storage.authData = authData;
                 $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
@@ -464,6 +466,7 @@ $scope.GoogleLogin = function () {
 		} else {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
+                $scope.$storage.authData = authData;
                 $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
@@ -478,6 +481,7 @@ $scope.Logout = function() {
 	var ref = new Firebase(firebaseURL);
 	ref.unauth();
 	delete $scope.$authData;
+    delete $scope.$storage.authData
     $scope.googleLogin = false;
     $scope.FbLogin = false;
     $scope.normalLogin = false;
@@ -532,7 +536,13 @@ $scope.getStaffRight = function () {
         });
       
     }
-}    
+}
+
+if($scope.$storage.authData){
+    $scope.$authData = $scope.$storage.authData;
+    if($scope.$authData.password)
+        $scope.getStaffRight();
+} 
 
 //// Not sure what is this code. Todel
 //if ($location.path() === '') {

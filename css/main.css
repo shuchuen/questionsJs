@@ -457,3 +457,7 @@ textarea#new-todo {
     color: darkgray;
     opacity: 0.9;
 }
+
+.fb_iframe_widget span {
+    vertical-align: inherit !important;
+}

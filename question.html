@@ -51,7 +51,13 @@
                 <div class="collapse navbar-collapse" id="iqMenu">
                                         
                     <ul class="nav navbar-nav navbar-right">
-                        
+                        <li>
+                            <a class="btn">
+                                <img ng-if="$authData.facebook" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" width="20px" height="20px"/><span>{{$authData.facebook.displayName}}</span>
+                                <img ng-if="$authData.google" ng-src="{{$authData.google.profileImageURL}}" width="20px" height="20px"/> <span>{{$authData.google.displayName}}</span>
+                                <img ng-if="$authData.password" ng-src="{{$authData.password.profileImageURL}}" width="20px" height="20px"/><span>{{$authData.password.email}}</span>
+                            </a>
+                        </li>
                         <li ng-hide="$authData">
                             <a class="btn btn-info iqLogin" data-toggle="modal" data-target="#loginModal"><i class="fa fa-sign-in"></i> Sign up/Login</a>
                         </li>
@@ -68,11 +74,6 @@
     <div class="mainBody">
         <div class="jumbotron">
             <div class="container">
-                <span class="userInfo">
-                        <img ng-show="$authData&&FbLogin" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" width="30px" height="30px"/>{{$authData.facebook.displayName}}
-                        <img ng-show="$authData&&googleLogin" ng-src="{{$authData.google.profileImageURL}}" width="30px" height="30px"/> {{$authData.google.displayName}}
-                        <img ng-show="$authData&&normalLogin" ng-src="{{$authData.password.profileImageURL}}" width="30px" height="30px"/>{{$authData.password.email}}
-                </span>
                     <center><font size="10"><span class="roomName">{{roomId}}</span></font></center>
                                     <!--
 
@@ -82,7 +83,7 @@
                 <a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
             -->
 
-<!--            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>-->
+            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>
             <!-- after login -->   
               
                 
@@ -288,7 +289,9 @@
                 <span class="onlineUser">No. of online user: {{totalViewers}} </span>	
             </div>
             <div class="pull-right">
-<!--                <span>Emoji provided free by <a href="http://emojione.com/">Emoji One</a></span>-->
+                
+                <div class="g-plus" data-action="share" data-annotation="bubble" data-height="20"></div>
+                <div class="fb-share-button" data-href="{{absurl}}" data-layout="button_count"></div>
             </div>    
     </footer>
 
@@ -492,6 +495,18 @@
 <script src="js/controllers/ng-google-chart.js"></script>
 <!-- Main App JS -->
 <script src="js/controllers/chatCtrl.js"></script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=1651586755089372";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer>{lang: 'en-GB'}</script>
 
 <!--
 <script>
