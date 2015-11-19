@@ -461,3 +461,8 @@ textarea#new-todo {
 .fb_iframe_widget span {
     vertical-align: inherit !important;
 }
+
+.badwordfilter {
+    width:35px;
+    padding-bottom: 3px;
+}
