@@ -457,3 +457,8 @@ textarea#new-todo {
     color: darkgray;
     opacity: 0.9;
 }
+
+#badwordfilter {
+    width:35px;
+    padding-bottom: 3px;
+}
