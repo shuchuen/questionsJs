@@ -141,7 +141,7 @@ $scope.getUser = function(){
 
         if ($scope.$authData.google){
 
-            return $scope.$authData.facebook.email;
+            return $scope.$authData.google.email;
         }
 
         if ($scope.$authData.password){

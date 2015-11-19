@@ -66,12 +66,12 @@ describe('TodoCtrl', function() {
 
       it('RoomId', function() {
         location.path('/new/path');
-
+          
         var ctrl = controller('TodoCtrl', {
           $scope: scope,
           $location: location
         });
-
+          
         expect(scope.roomId).toBe("NEW");
       });
 
@@ -132,19 +132,22 @@ describe('TodoCtrl', function() {
           
 		scope.input = {};
 		scope.input.wholeMsg = "Hello";
+        scope.photoAttach ={};
 		scope.addTodo();
 		expect(scope.input.wholeMsg).toBe("");
 		
-        scope.input = {};  
-		scope.input.wholeMsg = '     '; // It will be trimmed to 0
+		scope.input = {};
+		scope.input.wholeMsg = "";
+        scope.photoAttach ={};
 		scope.addTodo();
-		expect(scope.input.wholeMsg).toBe('     '); // Because the last reset will not be done
-          
-        scope.input = {};
-        scope.input.wholeMsg = "testing";  
-		scope.input.category = "Final";
+		expect(scope.input.wholeMsg).toBe("");
+        
+		scope.input = {};
+		scope.input.wholeMsg = "Hello";
+        scope.photoAttach ={};
+        scope.picLoading = 1;
 		scope.addTodo();
-		expect(scope.input.category).toBe("Final"); // Because the last reset will not be done  
+		expect(scope.input.wholeMsg).toBe("Hello");
 		
       });	  
 
@@ -361,7 +364,10 @@ describe('TodoCtrl', function() {
         var test = "shit";
         var result = scope.filter(test);
         expect(result).toEqual("nice");
-            
+          
+        var test = null;
+        var result = scope.filter(test);          
+        expect(result).toEqual(null);    
       });
         
       it('checknew Testing', function() {
@@ -482,7 +488,356 @@ describe('TodoCtrl', function() {
           window.dispatchEvent(scrollEvent);
             
       });
-	  
+//-------------------mile stone2--------------------//
+      it('getUser Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window,
+        });
+          scope.$authData = true;
+          scope.getUser();
+          
+          scope.$authData = false;
+          scope.getUser();
+          
+          scope.$authData = {};
+          scope.$authData.facebook = true;
+          scope.getUser();
+          scope.$authData.facebook = false;
+          
+          scope.$authData = {};
+          scope.$authData.google = true;
+          scope.getUser();
+          scope.$authData.google = false;
+          
+          scope.$authData = {};
+          scope.$authData.password = true;
+          scope.getUser();
+          scope.$authData.password = false;
+            
+      });
+        
+      it('getHighlight Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          scope.$authData = true;
+          scope.isStaff = true;
+          scope.getHighlight();
+          
+          scope.$authData = false;
+          scope.isStaff = true;
+          scope.getHighlight();
+           
+          scope.$authData = true;
+          scope.isStaff = false;
+          scope.getHighlight();
+      }); 
+
+      it('doPhotoAttach Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+            var element = {};
+            element.files = [];
+            element.files[0] = "aefjeijfpo";        
+            scope.doPhotoAttach(element);
+      });
+        
+       it('addComment  Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+           
+           var replyForms={};
+           replyForms.msg = {};
+           replyForms.msg.trim= function(){return ""};          
+           
+            scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1
+          },{
+            wholeMsg: "Hi2",
+            completed: true,
+            timestamp: new Date().getTime(),
+            tags: "...",
+            like: 2,
+            dislike:0,
+            order: 2
+          },{}];
+           
+        scope.addComment(replyForms, scope.todos[0]);
+        var replyForms = false;
+        scope.addComment(replyForms, scope.todos[0]);
+           
+           
+      });       
+        
+      it('like Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+        scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1
+          }];
+          
+        scope.todos.$save = function(todo){
+            
+        }
+        scope.$digest();    
+        scope.like(scope.todos[0]);
+          
+      });        
+        
+        
+       it('dislike Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+        scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1
+          }];
+          
+        scope.todos.$save = function(todo){
+            
+        }
+        scope.$digest();    
+        scope.dislike(scope.todos[0]);
+          
+      });        
+        
+       it('revertEditing  Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+        scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1
+          }];
+        scope.todos.$save = function(todo){};  
+        scope.originalTodo = {};
+        scope.originalTodo.wholeMsg = "abc";   
+           
+        scope.$digest();    
+        scope.revertEditing (scope.todos[0]);
+          
+      });        
+        
+       it('signUpForm  Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+//        scope.signup = {};
+//        scope.signup.email = "abc@hotmail.com";
+//        scope.signup.passowrd = "12345";
+        scope.signup = false;
+           
+        scope.$digest();    
+        scope.signUpForm();
+          
+      });
+        
+        it('loginForm  Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+//        scope.signup = {};
+//        scope.signup.email = "abc@hotmail.com";
+//        scope.signup.passowrd = "12345";
+        scope.signup = false;
+           
+        scope.$digest();    
+        scope.loginForm();
+          
+      });       
+       it('bestTodo Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+        scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1,
+            highlight: 1
+          },{            
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1,
+            highlight: 0},
+            {            
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1,
+            highlight: -1}];
+        scope.todos.$save = function(todo){};  
+           
+        scope.$digest();    
+        scope.bestTodo (scope.todos[0]);
+        scope.bestTodo (scope.todos[1]);
+        scope.bestTodo (scope.todos[2]);
+          
+      });
+        
+        it('rewardStudent Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+          
+        scope.todos=[{
+            wholeMsg: "Hi",
+            completed: false,
+            timestamp: 0,
+            tags: "...",
+            like: 1,
+            dislike:0,
+            order: 1,
+            highlight: 1
+          }];
+        
+        scope.isStaff = false;
+        scope.rewardStudent(scope.todos[0]);
+        
+          
+      });       
+       
+         it('refresh Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+        scope.refresh();
+        expect(scope.input).toBe('');
+          
+      });        
+        
+          it('getStaffRight Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+              
+        scope.$authData = false;
+        scope.getStaffRight();
+          
+      });        
+        
+        
+        
         
         
     });

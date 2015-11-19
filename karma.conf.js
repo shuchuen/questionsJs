@@ -20,7 +20,6 @@ module.exports = function(config) {
       'js/lib/*.js',
       'js/*.js',
       'js/**/*.js',
-
       'test/unit/*.js'
     ],
 
@@ -32,9 +31,7 @@ module.exports = function(config) {
       'js/lib/wow/*.js',
       'js/lib/vegas/*.js',
       'js/lib/respond/*.js',
-      'js/UnionDraw.js',
       'js/lib/ng-file-upload/*'
-
     ],
 
 
@@ -42,7 +39,7 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'js/*.js': 'coverage',
-      'js/controllers/*.js': 'coverage',
+      'js/controllers/todoCtrl.js': 'coverage',
       'js/filters/*.js': 'coverage',
       'js/directives/*.js': 'coverage'
     },
