@@ -392,8 +392,9 @@ $scope.signUpForm = function(){
             console.log("Error creating user:", error);  
           } else {
             $scope.$apply(function() {
-				$scope.$authData = authData;
-                $('#loginModal').modal('hide');
+                $scope.createSuccess = true;
+				$scope.signup="";
+//                $('#loginModal').modal('hide');
 			});
             console.log("Successfully created user account with uid:", authData.uid);  
           }
