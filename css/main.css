@@ -453,3 +453,7 @@ textarea#new-todo {
     font-size: x-large;
     left: 20px;
 }
+.onlineUser {
+    color: darkgray;
+    opacity: 0.9;
+}
