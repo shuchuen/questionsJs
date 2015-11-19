@@ -249,7 +249,8 @@
                         <hr ng-show="showReply" style="border-color:#555"/>
                         <span ng-if="comments[todo.$id]" ng-repeat="comment in comments[todo.$id] | orderBy: 'timestamp'">
                             <span class="hidden">{{replyCounter[todo.$id] = $index + 1 }}</span>
-                            <span class="commentContent" ng-class="{staffComment: comment.highlight== 2}">{{filter(comment.wholeMsg)}}</span> 
+                            <span ng-if="enableFilter" class="commentContent" ng-class="{staffComment: comment.highlight== 2}">{{filter(comment.wholeMsg)}}</span>
+                            <span ng-if="!enableFilter" class="commentContent" ng-class="{staffComment: comment.highlight== 2}">{{comment.wholeMsg}}</span>
                             <p><span am-time-ago="comment.timestamp" class = "time-color"></span> <i>By <span>{{comment.questioner}}</span></i></p>
                             
                         </span>
@@ -321,6 +322,7 @@
               </span>
           </p>
           <p class="bg-warning" ng-show="createFail"><span class="text-danger">{{createError.toString()}}</span></p>
+          <p class="bg-info" ng-show="createSuccess"><span class="text-success">Account Created, please login.</span></p>
           <form id="signUpForm" class="csl-xs-12" ng-submit = "signUpForm()" ng-show="showSignUp">
               <div class="form-group">
                   <label for="signupUsername">Email address:</label>
