@@ -217,7 +217,48 @@
         </div>
 
     </div>
-    <div class="container col-xs-9">
+    <div class="container col-md-3 col-sm-12 col-xs-12 pull-right" ng-controller="mainCtrl">
+<!--        <div class="container">-->
+            <div class="selectPoll">
+                <h3><i class="fa fa-bar-chart"></i> Polling list <span class="badge">{{polls.length}}</span></h3>
+                <hr>
+                <div ng-show="load">
+                    ... Loading
+                </div>
+
+                <div ng-show="!load" class="pollList">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item" ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
+                                class="pollSelectBtn btn btn-default">{{ value.name }}
+                            <br><span am-time-ago="value.timestamp" class = "time-color"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="pollingFooter">
+                    <hr>
+                    <button type = "button" class="btn btn-default" ng-model="selectedPoll" ng-click="selectedPoll=-1" ng-disabled="selectedPoll==-1">Hide</button>
+                </div>
+            </div>
+            
+            <div class="googleChart">
+                    <div ng-if="selectedPoll>=0">
+                        <div google-chart chart="chart">
+                        </div>
+                        <form>
+                            <h4>Vote:</h4>
+                        <div>
+                            <div class="list-group">
+                                <button type="button" class="list-group-item" ng-repeat="data in selectedPollOptions" ng-click="vote($index)" ng-disabled="voted[selectedPoll]==1"><span>Option {{$index+1}}: </span>{{ data[0] }}</button>
+                            </div>
+                        </div>
+                        </form>
+
+                    </div>           
+            </div>
+<!--        </div>-->
+    </div>      
+        
+    <div class="container col-md-9 col-sm-12 col-xs-12 pull-left">
         <div class="container col-xs-12"> 
             <div class="container col-xs-12">
                 <label class="pull-right newrefreshBtn" ng-click="refresh()"><i class="fa fa-retweet" class="refreshBtn" style="color:green"></i></label>
@@ -234,8 +275,8 @@
                     
             </div>
         </div>
-        <div class="container col-xs-12">    
-            <div class="container list-group col-xs-12" id="todo-list">
+        <div class="">    
+            <div class="list-group col-xs-12" id="todo-list">
                 <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">
         <!--   | questionFilter:maxQuestion          -->
                     <h4 class="list-group-item-heading">
@@ -295,45 +336,7 @@
             </div>
         </div>
     </div>
-        <div class="container col-xs-3" ng-controller="mainCtrl">
-            <div class="selectPoll">
-                <h3><i class="fa fa-bar-chart"></i> Polling list <span class="badge">{{polls.length}}</span></h3>
-                <hr>
-                <div ng-show="load">
-                    ... Loading
-                </div>
-
-                <div ng-show="!load" class="pollList">
-                    <div class="list-group">
-                        <button type="button" class="list-group-item" ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
-                                class="pollSelectBtn btn btn-default">{{ value.name }}
-                            <br><span am-time-ago="value.timestamp" class = "time-color"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="pollingFooter">
-                    <hr>
-                    <button type = "button" class=" btn btn-default" ng-model="selectedPoll" ng-click="selectedPoll=-1" ng-disabled="selectedPoll==-1">Hide</button>
-                </div>
-            </div>
-            
-            <div class="googleChart">
-                    <div ng-if="selectedPoll>=0">
-                        <div google-chart chart="chart">
-                        </div>
-                        <form>
-                            <h4>Vote:</h4>
-                        <div>
-                            <div class="list-group">
-                                <button type="button" class="list-group-item" ng-repeat="data in selectedPollOptions" ng-click="vote($index)" ng-disabled="voted[selectedPoll]==1"><span>Option {{$index+1}}: </span>{{ data[0] }}</button>
-                            </div>
-                        </div>
-                        </form>
-
-                    </div>           
-            </div>
-            
-        </div>        
+              
         
 <!--
         <div class="container">

@@ -212,8 +212,14 @@ a.navbar-brand:hover {
     top: -34px;
     float: right;
 }
+.list-group{
+    padding-right: 0px !important;
+}
+
 .list-group-item {
     margin: 5px  !important;
+    margin-left: 0px  !important;
+    margin-right: 0px  !important;
 }
 
 .roomName{
@@ -407,8 +413,10 @@ textarea#new-todo {
 
 .pollingFooter {
     text-align: right;
-    padding-bottom:10px;
-    padding-right:10px;
+}
+
+.pollingFooter > button{
+    margin:10px;
 }
 
 .newrefreshBtn {
