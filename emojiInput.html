@@ -1,7 +1,7 @@
-<div class="dropdown emojiPicker">
+<div class="dropdown emojiPicker{{$parent.$index}}">
     <script>
-    $('div.dropdown-menu ul li a').on('click', function (event) {
-        $('.emojiTabs li').removeClass('active');
+    $('div.dropdown-menu ul.emojiTabsAsk li a').on('click', function (event) {
+        $('.emojiTabsAsk li').removeClass('active');
         $(this).parent().addClass('active');
         event.stopPropagation();
     });
@@ -12,7 +12,7 @@
     
     
     function showTab(target){
-        $('.tab-pane').removeClass('active');
+        $('.tab-pane-ask').removeClass('active');
         $('#'+target).addClass('active');
     }
     
@@ -21,7 +21,7 @@
 							<i class=" fa fa-smile-o dropdown-toggle" id="emojiDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
                             <div class="dropdown-menu zeroRadius" aria-labelledby="emojiDropdownMenu"> 
                                
-                                <ul class="nav nav-tabs emojiTabs" role="tablist">
+                                <ul class="nav nav-tabs emojiTabs emojiTabsAsk" role="tablist">
                                     <li role="presentation" class="active"><a class="zeroRadius" onclick="showTab('classics')" aria-controls="classics" role="tab" data-toggle="tab"><i class=" fa fa-smile-o"></i></a></li>
                                     <li role="presentation"><a class="zeroRadius" onclick="showTab('clothes')" aria-controls="clothes" role="tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
                                     <li role="presentation"><a class="zeroRadius" onclick="showTab('flower')" aria-controls="flower" role="tab" data-toggle="tab"><i class="fa fa-pagelines"></i></a></li>
@@ -32,7 +32,7 @@
 
                                   <!-- Tab panes -->
                                   <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active zeroRadius" id="classics">
+                                    <div role="tabpanel" class="tab-pane tab-pane-ask active zeroRadius" id="classics">
                                         <!--emoji selection list-->
                                         <ul class="emojiMenu" >
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1f601'">&#x1f601</a> 
@@ -101,7 +101,7 @@
                                       
                                     
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="clothes">
+                                    <div role="tabpanel" class="tab-pane tab-pane-ask zeroRadius" id="clothes">
                                         <!--emoji: clothes-->
                                         <ul class="emojiMenu">
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F43D'">&#x1F43D</a> 
@@ -213,7 +213,7 @@
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F4AC'">&#x1F4AC</a> 
                                         </ul>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="flower">
+                                    <div role="tabpanel" class="tab-pane tab-pane-ask zeroRadius" id="flower">
                                       <ul class="emojiMenu">
                                         <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F300'">&#x1F300</a> 
                                         <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F301'">&#x1F301</a> 
@@ -302,7 +302,7 @@
                                       
                                       
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="food">
+                                    <div role="tabpanel" class="tab-pane tab-pane-ask zeroRadius" id="food">
                                       <ul class="emojiMenu">
                                         <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F345'">&#x1F345</a> 
                                         <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F346'">&#x1F346</a> 
@@ -359,7 +359,7 @@
                                         <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F37B'">&#x1F37B</a> 
                                     </ul>             
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="transport">
+                                    <div role="tabpanel" class="tab-pane tab-pane-ask zeroRadius" id="transport">
                                         <ul class="emojiMenu">
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F680'">&#x1F680</a> 
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F683'">&#x1F683</a> 
@@ -397,7 +397,7 @@
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x1F6C0'">&#x1F6C0</a> 
                                         </ul>
                                       </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="symbol">
+                                    <div role="tabpanel" class="tab-pane tab-pane-ask zeroRadius" id="symbol">
                                         <ul class="emojiMenu">
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x2702'">&#x2702</a> 
                                             <a ng-click="$parent.input.wholeMsg=$parent.input.wholeMsg+'&#x2705'">&#x2705</a> 
