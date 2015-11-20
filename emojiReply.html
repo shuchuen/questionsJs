@@ -1,8 +1,9 @@
 <div class="dropup emojiPickerReply">
     <script>
-    $('div.dropdown-menu ul li a').on('click', function (event) {
-        $('.emojiTabs li').removeClass('active');
-        $(this).parent().addClass('active');
+    $('div.dropdown-menu ul.emojiTabsReply li a').on('click', function (event) {
+        $('.emojiTabsReply li').removeClass('active');
+        var liClass = $(this).parent().attr("class");
+        $('li.'+liClass).addClass('active');
         event.stopPropagation();
     });
     
@@ -11,28 +12,28 @@
     });
     
     
-    function showTab(target){
-        $('.tab-pane').removeClass('active');
-        $('#'+target).addClass('active');
+    function showTabReply(target){
+        $('.tab-pane-reply').removeClass('active');
+        $('.'+target).addClass('active');
     }
     
 </script>        
 							<!--emoji: facial expression-->
-							<i class=" fa fa-smile-o dropdown-toggle" id="emojiDropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
-                            <div class="dropdown-menu zeroRadius" aria-labelledby="emojiDropdownMenu"> 
+							<i class=" fa fa-smile-o dropdown-toggle" id="emojiDropdownMenuReply" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"></i>
+                            <div class="dropdown-menu zeroRadius" aria-labelledby="emojiDropdownMenuReply"> 
                                
-                                <ul class="nav nav-tabs emojiTabs" role="tablist">
-                                    <li role="presentation" class="active"><a class="zeroRadius" onclick="showTab('classics')" aria-controls="classics" role="tab" data-toggle="tab"><i class=" fa fa-smile-o"></i></a></li>
-                                    <li role="presentation"><a class="zeroRadius" onclick="showTab('clothes')" aria-controls="clothes" role="tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
-                                    <li role="presentation"><a class="zeroRadius" onclick="showTab('flower')" aria-controls="flower" role="tab" data-toggle="tab"><i class="fa fa-pagelines"></i></a></li>
-                                    <li role="presentation"><a class="zeroRadius" onclick="showTab('food')" aria-controls="food" role="tab" data-toggle="tab"><i class="fa fa-cutlery"></i></a></li>
-                                    <li role="presentation"><a class="zeroRadius" onclick="showTab('transport')" aria-controls="transport" role="tab" data-toggle="tab"><i class="fa fa-rocket"></i></a></li>
-                                    <li role="presentation"><a class="zeroRadius" onclick="showTab('symbol')" aria-controls="symbol" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i></a></li>
+                                <ul class="nav nav-tabs emojiTabs emojiTabsReply" role="tablist">
+                                    <li class="classicsReply active" role="presentation"><a class="zeroRadius" onclick="showTabReply('classicsReply')" aria-controls="classicsReply" role="tab" data-toggle="tab"><i class=" fa fa-smile-o"></i></a></li>
+                                    <li class="clothesReply" role="presentation"><a class="zeroRadius" onclick="showTabReply('clothesReply')" aria-controls="clothesReply" role="tab" data-toggle="tab"><i class="fa fa-user"></i></a></li>
+                                    <li  class="flowerReply" role="presentation"><a class="zeroRadius" onclick="showTabReply('flowerReply')" aria-controls="flowerReply" role="tab" data-toggle="tab"><i class="fa fa-pagelines"></i></a></li>
+                                    <li  class="foodReply" role="presentation"><a class="zeroRadius" onclick="showTabReply('foodReply')" aria-controls="foodReply" role="tab" data-toggle="tab"><i class="fa fa-cutlery"></i></a></li>
+                                    <li  class="transportReply" role="presentation"><a class="zeroRadius" onclick="showTabReply('transportReply')" aria-controls="transportReply" role="tab" data-toggle="tab"><i class="fa fa-rocket"></i></a></li>
+                                    <li  class="symbolReply" role="presentation"><a class="zeroRadius" onclick="showTabReply('symbolReply')" aria-controls="symbolReply" role="tab" data-toggle="tab"><i class="fa fa-question-circle"></i></a></li>
                                 </ul>
 
                                   <!-- Tab panes -->
                                   <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active zeroRadius" id="classics">
+                                    <div role="tabpanel" class="tab-pane tab-pane-reply active zeroRadius classicsReply" id="classicsReply">
                                         <!--emoji selection list-->
                                         <ul class="emojiMenu" >
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1f601'">&#x1f601</a> 
@@ -101,7 +102,7 @@
                                       
                                     
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="clothes">
+                                    <div role="tabpanel" class="tab-pane tab-pane-reply zeroRadius clothesReply" id="clothesReply">
                                         <!--emoji: clothes-->
                                         <ul class="emojiMenu">
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F43D'">&#x1F43D</a> 
@@ -213,7 +214,7 @@
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F4AC'">&#x1F4AC</a> 
                                         </ul>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="flower">
+                                    <div role="tabpanel" class="tab-pane tab-pane-reply zeroRadius flowerReply" id="flowerReply">
                                       <ul class="emojiMenu">
                                         <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F300'">&#x1F300</a> 
                                         <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F301'">&#x1F301</a> 
@@ -302,7 +303,7 @@
                                       
                                       
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="food">
+                                    <div role="tabpanel" class="tab-pane tab-pane-reply zeroRadius foodReply" id="foodReply">
                                       <ul class="emojiMenu">
                                         <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F345'">&#x1F345</a> 
                                         <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F346'">&#x1F346</a> 
@@ -359,7 +360,7 @@
                                         <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F37B'">&#x1F37B</a> 
                                     </ul>             
                                     </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="transport">
+                                    <div role="tabpanel" class="tab-pane tab-pane-reply zeroRadius transportReply" id="transportReply">
                                         <ul class="emojiMenu">
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F680'">&#x1F680</a> 
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F683'">&#x1F683</a> 
@@ -397,7 +398,7 @@
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x1F6C0'">&#x1F6C0</a> 
                                         </ul>
                                       </div>
-                                    <div role="tabpanel" class="tab-pane zeroRadius" id="symbol">
+                                    <div role="tabpanel" class="tab-pane tab-pane-reply zeroRadius symbolReply" id="symbolReply">
                                         <ul class="emojiMenu">
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x2702'">&#x2702</a> 
                                             <a ng-click="$parent.reply.msg=$parent.reply.msg+'&#x2705'">&#x2705</a> 
