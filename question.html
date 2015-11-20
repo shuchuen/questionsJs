@@ -15,7 +15,7 @@
     
     <link rel="icon" href="img/logo.png">
 	<title>InstaQuest | ChatRoom</title>
-
+    
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     
     <!--font-awesome icons library-->
@@ -44,7 +44,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.html" style="font-size: x-large;">InstaQuest</a>
+                    <a class="navbar-brand" href="index.html" style="font-size: x-large;display: inline-flex;">
+                        <img src="img/logo.png" style="height:20px;"/><span>InstaQuest</span>
+                    </a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,7 +85,7 @@
                 <a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
             -->
 
-            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>
+<!--            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>-->
             <!-- after login -->   
               
                 
