@@ -287,7 +287,11 @@
     <footer class="footer col-xs-12">    
             <div class="pull-left" ng-controller="onlineUserCtrl">
                 <!--shows the number of online users -->
-                <span class="onlineUser">No. of online user: {{totalViewers}} </span>	
+                <span class="onlineUser">No. of online user: {{totalViewers}} </span>
+                <input class="form-control" type="text" ng-model="validateCode" placeholder="Enter the token code" class="validateText" ng-show="isStaff" aria-hidden="true"/>
+<!--                <input class="form-control" type="text" ng-model="validateCode" placeholder="Enter the token code" class="validateText"/>-->
+                <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click=""><i class="fa fa-check-circle-o"></i> validate</button>
+<!--                <button class="btn btn-danger" ng-click=""><i class="fa fa-check-circle-o"></i> validate</button>-->
             </div>
             <div class="pull-right">
                 
