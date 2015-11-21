@@ -509,6 +509,25 @@ $scope.rewardStudent = function(todo){
               {"sender":$scope.$authData.password.email, "receiver":todo.questioner, "receiverName":"Student", "type":"1"});
     }
 }
+
+$scope.validateCode = "";
+
+$scope.validate = function(){
+    if($scope.isStaff){
+        alert("Entered token code: " +$scope.validateCode);
+       $.get("http://ec2-52-27-32-65.us-west-2.compute.amazonaws.com/fileservice/auth/"+$scope.validateCode,
+            function(data, status){
+           var obj = JSON.parse(data);
+           if(obj.auth =='1'){
+               alert('authenticated');
+           }
+            else if (obj.auth == '0')
+                alert("not authenticated");
+//           alert(obj.auth);
+            }
+            );
+    }
+}
     
     
 $scope.toTop =function() {
