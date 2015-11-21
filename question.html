@@ -165,10 +165,9 @@
     <div class="container col-md-9 col-sm-12 col-xs-12 pull-left">
         <div class="container col-xs-12"> 
                 
-                
             <form ng-if="isStaff" id="validateCodeForm" name="validateCodeForm" ng-submit="validate()" class="form-inline col-xs-6">
                 <div class="form-group" style="display: inline-flex;">
-                    <input class="form-control zeroRadius validateText" type="text" ng-model="$parent.validateCode" placeholder="Enter the token code" aria-hidden="true" required="required" style="width:170px"/>
+                    <input class="form-control zeroRadius validateText" type="number" ng-model="$parent.validateCode" placeholder="Enter the token code" aria-hidden="true" required="required" style="width:170px"/>
     <!--                <input class="form-control" type="text" ng-model="validateCode" placeholder="Enter the token code" class="validateText"/>-->
                     <button type="submit" class="btn btn-danger zeroRadius" aria-hidden="true"><i class="fa fa-check-circle-o"></i></button>
                 </div>
