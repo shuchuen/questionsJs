@@ -557,7 +557,13 @@ describe('TodoCtrl', function() {
         });
             var element = {};
             element.files = [];
-            element.files[0] = "aefjeijfpo";        
+            element.files[0] = {size:52428801};       
+            scope.doPhotoAttach(element);
+          
+            element.files[0] = {size:0};
+            scope.doPhotoAttach(element);
+          
+            element.files[0] = {size:1};
             scope.doPhotoAttach(element);
       });
         
@@ -597,7 +603,6 @@ describe('TodoCtrl', function() {
         scope.addComment(replyForms, scope.todos[0]);
         var replyForms = false;
         scope.addComment(replyForms, scope.todos[0]);
-           
            
       });       
         
@@ -796,10 +801,17 @@ describe('TodoCtrl', function() {
             like: 1,
             dislike:0,
             order: 1,
-            highlight: 1
+            highlight: 1,
+            questioner: "abc"
           }];
         
         scope.isStaff = false;
+        scope.rewardStudent(scope.todos[0]);
+        
+        scope.isStaff = true;
+        scope.$authData = {};
+        scope.$authData.password = {};
+        scope.$authData.password.email = "abc.hotmail.com";        
         scope.rewardStudent(scope.todos[0]);
         
           
@@ -820,7 +832,7 @@ describe('TodoCtrl', function() {
           
       });        
         
-          it('getStaffRight Testing', function() {
+        it('getStaffRight Testing', function() {
 
         var ctrl = controller('TodoCtrl', {
           $scope: scope,
@@ -836,9 +848,103 @@ describe('TodoCtrl', function() {
           
       });        
         
+        it('validate Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+              
+        scope.isStaff = false;
+        scope.validate();
+            
+        scope.isStaff = true;
+        scope.validateCode = 124;
+        scope.validate();
+          
+      });
         
+        it('getStaffRight Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+              
+        scope.$authData = false;
+        scope.$storage = {};
+        scope.$storage.authData = true;
+        scope.getStaffRight();
+            
+        scope.$authData = true;
+        scope.getStaffRight();
+          
+      });        
         
+        it('getFav Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+            
+            scope.$authData={};
+            scope.getFav();
+            
+            scope.$authData=false;
+            scope.getFav();
+          
+      });
         
+        it('addFav Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+            
+            scope.$authData=false;
+            scope.addFav();
+            
+            scope.$authData={};
+            scope.addFav();
+          
+      });
+     
+        it('removeFav Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+            
+            scope.$authData=false;
+            scope.removeFav();
+            
+            scope.$authData={};
+            scope.removeFav();
+          
+      });
         
     });
   });
