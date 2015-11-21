@@ -77,34 +77,6 @@
         <div class="jumbotron">
             <div class="container">
                     <center><font size="10"><span class="roomName">{{roomId}}</span></font></center>
-                                    <!--
-
-                <a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
-                <a ng-class="{selected: location.path() == '/tags'}" class="btn btn-success" href="#/tags">Tags</a>
-                <a ng-class="{selected: location.path() == '/users'}" class="btn btn-info" href="#/users">Users</a>
-                <a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
-            -->
-
-<!--            <p class="shareUrl"><small>Share room: {{absurl}}</small></p>-->
-            <!-- after login -->   
-              
-                
-				<!--ON OFF function for bad word filter-->
-
-				<!--	For milestone 2
-				
-				<input type="checkbox" name="filter" value="TRUE">Bad Words Filter ON<br> 
-				-->
-				
-            <!--Refresh button-->
-            <!-- button for refreshing the page to show the latest message -->    
-<!--            <button class="btn btn-success pull-right refreshBtn" type="button" ng-click="refresh()" title="Refresh the content"><i class="fa fa-retweet"></i> Refresh</button>-->
-                
-            <!--get the right of staff-->
-<!--            <button ng-show="$authData&&$storage[$authData.uid]!='isStaff'" class="btn btn-danger pull-right staffBtn" type="button" ng-click="getStaffRight()" title="Get the right of staff"><i class="fa fa-unlock"></i><span> Get the right of staff</span></button>-->
-                
-               <!-- <a href="uniondraw.html"><button class="btn btn-danger pull-right " type="button" ng-click="refresh()"><span class="glyphicon glyphicon-pencil"></span><span>Share Canvas</span></button></a> hide--> 
-            
             <br/>
                 
             <form id="todo-form" class="col-xs-12 iqButtonGp" method="post" enctype="multipart/form-data" ng-submit="addTodo()">
@@ -141,10 +113,10 @@
                         <label for="photoAttach" class="btn btn-default zeroBorder askBtn fixBtnWidth" style="max-width: none;" ng-modal="picLoadig" ng-init="picLoadig=false">
                             <i class="fa fa-picture-o"></i>
                         </label>
-<!--                              <input type="file" name="fileToUpload" id="images"/>-->
+
                     </div>
                 </div>
-                </form>
+            </form>
                 <!-- /form-group -->
         </div>
 
@@ -192,7 +164,17 @@
         
     <div class="container col-md-9 col-sm-12 col-xs-12 pull-left">
         <div class="container col-xs-12"> 
-            <div class="container col-xs-12">
+                
+                
+            <form ng-if="isStaff" id="validateCodeForm" name="validateCodeForm" ng-submit="validate()" class="form-inline col-xs-6">
+                <div class="form-group" style="display: inline-flex;">
+                    <input class="form-control zeroRadius validateText" type="text" ng-model="$parent.validateCode" placeholder="Enter the token code" aria-hidden="true" required="required" style="width:170px"/>
+    <!--                <input class="form-control" type="text" ng-model="validateCode" placeholder="Enter the token code" class="validateText"/>-->
+                    <button type="submit" class="btn btn-danger zeroRadius" aria-hidden="true"><i class="fa fa-check-circle-o"></i></button>
+                </div>
+            </form>
+                
+                
                 <label class="pull-right newrefreshBtn" ng-click="refresh()"><i class="fa fa-retweet" class="refreshBtn" style="color:green"></i></label>
                 
                 <label class="pull-right filterSwitchLabel" ng-if="enableFilter" for="filterSwitch" style="color:green; margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_on.png"/></label>
@@ -204,7 +186,7 @@
 -->
     <!--            <button class="pull-right newrefreshBtn" type="button" ng-click="refresh()" title="Refresh the content">-->
                     
-            </div>
+            
         </div>
         <div class="">    
             <div class="list-group col-xs-12" id="todo-list">
@@ -288,13 +270,8 @@
             <div class="pull-left" ng-controller="onlineUserCtrl">
                 <!--shows the number of online users -->
                 <span class="onlineUser">No. of online user: {{totalViewers}} </span>
-                <input class="form-control" type="text" ng-model="validateCode" placeholder="Enter the token code" class="validateText" ng-if="isStaff" aria-hidden="true"/>
-<!--                <input class="form-control" type="text" ng-model="validateCode" placeholder="Enter the token code" class="validateText"/>-->
-                <button ng-if="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="validate()"><i class="fa fa-check-circle-o"></i> validate</button>
-<!--                <button class="btn btn-danger" ng-click=""><i class="fa fa-check-circle-o"></i> validate</button>-->
             </div>
             <div class="pull-right">
-                
                 <div class="g-plus" data-action="share" data-annotation="bubble" data-height="20"></div>
                 <div class="fb-share-button" data-href="{{absurl}}" data-layout="button_count"></div>
             </div>    

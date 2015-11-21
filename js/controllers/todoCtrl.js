@@ -510,9 +510,10 @@ $scope.rewardStudent = function(todo){
     }
 }
 
-$scope.validateCode = "";
+//$scope.validateCode = "";
 
 $scope.validate = function(){
+    
     if($scope.isStaff){
         alert("Entered token code: " +$scope.validateCode);
        $.get("http://ec2-52-27-32-65.us-west-2.compute.amazonaws.com/fileservice/auth/"+$scope.validateCode,
@@ -525,7 +526,7 @@ $scope.validate = function(){
                 alert("not authenticated");
 //           alert(obj.auth);
             }
-            );
+        );
     }
 }
     
