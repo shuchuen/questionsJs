@@ -145,10 +145,11 @@ $scope.getFav = function(){
         favRef = new Firebase(favUrl);
         $scope.favList = $firebaseArray(favRef);
         $scope.favList.$loaded().then(function(favList){
-            favList.forEach(function(fav){
-                if(fav.$value == roomId)
-                    $scope.roomAdded = true;
-            });
+            if(favList)
+                favList.forEach(function(fav){
+                    if(fav.$value == roomId)
+                        $scope.roomAdded = true;
+                });
         });
     }else{
         return;
@@ -158,16 +159,18 @@ $scope.getFav = function(){
 $scope.addFav = function(){
     if($scope.$authData){
         var exist = false;
-        $scope.favList.forEach(function(fav){
-            if(fav.$value == roomId)
-                exist = true;
-        });
+        if($scope.favList)
+            $scope.favList.forEach(function(fav){
+                if(fav.$value == roomId)
+                    exist = true;
+            });
         
         if(exist)
             $scope.roomAdded = true;
         
         if(!exist){
-            favRef.push(roomId);
+            var pushRef = favRef.push();
+            pushRef.set(roomId);
             $scope.roomAdded = true;
         }
         
@@ -177,10 +180,11 @@ $scope.addFav = function(){
 $scope.removeFav = function(){
    if($scope.$authData){
        var key = null;
-        $scope.favList.forEach(function(fav){
-            if(fav.$value == roomId)
-                key = fav;
-        });
+       if($scope.favList)
+            $scope.favList.forEach(function(fav){
+                if(fav.$value == roomId)
+                    key = fav;
+            });
         
         if(key){
             $scope.favList.$remove(key);
