@@ -74,6 +74,20 @@
         </nav>
         
     <div class="mainBody">
+        <div class="favBar" ng-show="$authData" ng-model="showFavList" ng-init="showFavList=false">
+            <div>
+                <i class="fa fa-angle-double-left" ng-click="showFavList = !showFavList" ng-show="!showFavList"></i>
+                <i class="fa fa-angle-double-right" ng-click="showFavList = !showFavList" ng-show="showFavList"></i>
+                <img src="img/1448121458_icon-19-bookmark-add.png" ng-if="!roomAdded" ng-click="addFav()"/>
+                <img src="img/1448121416_icon-20-bookmark-remove.png" ng-if="roomAdded" ng-click="removeFav()"/>
+            </div>
+            <div ng-show="showFavList">
+                <ul class="list-inline" style="margin-top: 12px; color:white">
+                  <li class="favList" ng-repeat="fav in favList"><a ng-href="#/{{fav.$value}}" ng-click="goFav(fav.$value)">{{fav.$value}}</a></li>
+                </ul>
+                
+            </div>    
+        </div>
         <div class="jumbotron">
             <div class="container">
                     <center><font size="10"><span class="roomName">{{roomId}}</span></font></center>
@@ -121,7 +135,9 @@
         </div>
 
     </div>
+    
     <div class="container col-md-3 col-sm-12 col-xs-12 pull-right" ng-controller="mainCtrl">
+        
 <!--        <div class="container">-->
             <div class="selectPoll">
                 <h3><i class="fa fa-bar-chart"></i> Polling list <span class="badge">{{polls.length}}</span></h3>
@@ -176,8 +192,8 @@
                 
                 <label class="pull-right newrefreshBtn" ng-click="refresh()"><i class="fa fa-retweet" class="refreshBtn" style="color:green"></i></label>
                 
-                <label class="pull-right filterSwitchLabel" ng-if="enableFilter" for="filterSwitch" style="color:green; margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_on.png"/></label>
-                <label class="pull-right filterSwitchLabel" ng-if="!enableFilter" for="filterSwitch" style="margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_off.png"/></label>
+                <label class="pull-right filterSwitchLabel" ng-if="enableFilter&&$authData" for="filterSwitch" style="color:green; margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_on.png"/></label>
+                <label class="pull-right filterSwitchLabel" ng-if="!enableFilter&&$authData" for="filterSwitch" style="margin-left: 5px"><img class="badwordfilter" src="img/badwordfilter_off.png"/></label>
                 <input id="filterSwitch" class="pull-right hidden" type="checkbox" ng-modal="enableFilter" ng-init="enableFilter=true" ng-click="enableFilter=!enableFilter" checked/>
 <!--
             </div>
@@ -222,8 +238,8 @@
 
 <!--                    <button ng-show="!isStaff" class="btn btn-danger glyphicon glyphicon-check" ng-click="toggleCompleted(todo)"> Completed</button>-->
                     <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="removeTodo(todo)"><i class="fa fa-trash-o"></i> Del</button>
-                    <button ng-show="isStaff" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best</button>
-                     <button ng-show="isStaff && todo.questioner != 'Anonymous'" class="btn btn-danger" aria-hidden="true" ng-click="rewardStudent(todo)"><i class="fa fa-trophy"></i> Reward</button>
+                    <button ng-show="isStaff && todo.highlight!=2" class="btn btn-danger" aria-hidden="true" ng-click="bestTodo(todo)"><i class="fa fa-star"></i> Best</button>
+                     <button ng-show="isStaff && todo.questioner != 'Anonymous' && todo.highlight!=2" class="btn btn-danger" aria-hidden="true" ng-click="rewardStudent(todo)"><i class="fa fa-trophy"></i> Reward</button>
 
                     <i ng-show="todo.highlight==1" class="fa fa-star bestQuestion"></i>
                     
@@ -298,11 +314,11 @@
         <h4 class="modal-title"><i class="fa fa-sign-in"></i> Sign up/Login</h4>
       </div>
       <div class="modal-body">
-          <p class="bg-success" ng-model="showSignUp" ng-init="showSignUp = false">
+          <p class="bg-success" ng-model="showSignUp" ng-init="showSignUp = false" ng-click="showSignUp = !showSignUp" >
               <span>Sign up:</span>
               <span>
-                  <i class="fa fa-chevron-down pull-right" ng-show="!showSignUp" ng-click="showSignUp = !showSignUp" ></i>
-                  <i class="fa fa-chevron-up pull-right" ng-show="showSignUp" ng-click="showSignUp = !showSignUp" ></i>
+                  <i class="fa fa-chevron-down pull-right" ng-show="!showSignUp" ></i>
+                  <i class="fa fa-chevron-up pull-right" ng-show="showSignUp"></i>
               </span>
           </p>
           <p class="bg-warning" ng-show="createFail"><span class="text-danger">{{createError.toString()}}</span></p>
@@ -321,11 +337,11 @@
           
         <hr/>
           <p class="bg-info"><span class="text-info">For staffs, please login with the form below.</span></p>
-          <p class="bg-success" ng-model="showSignUp" ng-init="showLogin = true">
+          <p class="bg-success" ng-model="showSignUp" ng-init="showLogin = true" ng-click="showLogin = !showLogin">
               <span>Login:</span>
               <span>
-                  <i class="fa fa-chevron-down pull-right" ng-show="!showLogin" ng-click="showLogin = !showLogin"></i>
-                  <i class="fa fa-chevron-up pull-right" ng-show="showLogin" ng-click="showLogin = !showLogin"></i>
+                  <i class="fa fa-chevron-down pull-right" ng-show="!showLogin" ></i>
+                  <i class="fa fa-chevron-up pull-right" ng-show="showLogin"></i>
               </span>
           </p>
           <p class="bg-warning" ng-show="authFail"><span class="text-danger">{{authError.toString()}}</span></p>

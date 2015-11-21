@@ -52,6 +52,10 @@ var query = echoRef.orderByChild("timestamp");
 var commentQuery = commentRef;
 $scope.comments = [];
 $scope.replyCounter = [];  
+
+var favUrl= null;   
+var favRef = null;
+$scope.favList = null;    
     
 $scope.todos = $firebaseArray(query);
 $firebaseArray(commentQuery).$loaded().then(function(comments){
@@ -60,7 +64,7 @@ $firebaseArray(commentQuery).$loaded().then(function(comments){
     });
     
 });
-
+    
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
     
@@ -130,6 +134,64 @@ $scope.$watchCollection('todos', function () {
 //	return [head, desc];
 //};
 
+$scope.goFav = function(url){
+    $window.location.href = 'question.html#/'+url;
+    location.reload();
+}    
+    
+$scope.getFav = function(){
+    if($scope.$authData){
+        favUrl = firebaseURL+"/userRecord/"+$scope.$authData.uid+"/favorite/";
+        favRef = new Firebase(favUrl);
+        $scope.favList = $firebaseArray(favRef);
+        $scope.favList.$loaded().then(function(favList){
+            favList.forEach(function(fav){
+                if(fav.$value == roomId)
+                    $scope.roomAdded = true;
+            });
+        });
+    }else{
+        return;
+    }
+}    
+    
+$scope.addFav = function(){
+    if($scope.$authData){
+        var exist = false;
+        $scope.favList.forEach(function(fav){
+            if(fav.$value == roomId)
+                exist = true;
+        });
+        
+        if(exist)
+            $scope.roomAdded = true;
+        
+        if(!exist){
+            favRef.push(roomId);
+            $scope.roomAdded = true;
+        }
+        
+    }
+}
+
+$scope.removeFav = function(){
+   if($scope.$authData){
+       var key = null;
+        $scope.favList.forEach(function(fav){
+            if(fav.$value == roomId)
+                key = fav;
+        });
+        
+        if(key){
+            $scope.favList.$remove(key);
+            $scope.roomAdded = false;
+        }else{
+           $scope.roomAdded = false; 
+        }
+       
+   }
+}
+    
     
 $scope.getUser = function(){
     
@@ -429,7 +491,8 @@ $scope.loginForm = function(){
           }
         });
         
-        $scope.normalLogin = true;
+//        $scope.normalLogin = true;
+        $scope.getFav();
     }
 }
     
@@ -451,7 +514,8 @@ $scope.FBLogin = function () {
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	}, { scope: "email" });
-    $scope.FbLogin = true;
+//    $scope.FbLogin = true;
+    $scope.getFav();
 };
 
 $scope.GoogleLogin = function () {
@@ -472,8 +536,8 @@ $scope.GoogleLogin = function () {
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	}, {scope: "email"});
-    $scope.googleLogin = true;
-    
+//    $scope.googleLogin = true;
+    $scope.getFav();
 };    
     
 $scope.Logout = function() {
@@ -482,9 +546,9 @@ $scope.Logout = function() {
 	ref.unauth();
 	delete $scope.$authData;
     delete $scope.$storage.authData
-    $scope.googleLogin = false;
-    $scope.FbLogin = false;
-    $scope.normalLogin = false;
+//    $scope.googleLogin = false;
+//    $scope.FbLogin = false;
+//    $scope.normalLogin = false;
 };
 
 $scope.increaseMax = function () {
@@ -562,6 +626,7 @@ if($scope.$storage.authData){
     $scope.$authData = $scope.$storage.authData;
     if($scope.$authData.password)
         $scope.getStaffRight();
+    $scope.getFav();
 } 
 
 //// Not sure what is this code. Todel

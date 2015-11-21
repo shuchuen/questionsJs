@@ -29,10 +29,6 @@ todomvc.controller('onlineUserCtrl', ['$scope', 'onlineUserCountService','$locat
       var userRef = listRef.push(); // This creates a unique reference for each user
       var presenceRef = new Firebase(fireBaseUrl+'.info/connected');
     
-//      $cookies.put(roomId,true);
-//      if($cookies.getObject(roomId)==true){
-//          alert("Added cookies");
-//      }
       // Add ourselves to presence list when online.
       presenceRef.on('value', function(snap) {
         if (snap.val()) {
@@ -42,15 +38,6 @@ todomvc.controller('onlineUserCtrl', ['$scope', 'onlineUserCountService','$locat
         
         }
       });
-        
-//      presenceRef.on('child_removed', function(oldChildSnapshot) {
-//          // code to handle child removal.
-//          $cookies.remove(roomId);
-//      });
-//        
-//      if($cookies.getObject(roomId)==null){
-//          alert("deleted cookies");
-//      }
 
       // Get the user count and notify the application
       listRef.on('value', function(snap) {
