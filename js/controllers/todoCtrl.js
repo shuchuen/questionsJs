@@ -496,7 +496,7 @@ $scope.increaseMax = function () {
 $scope.bestTodo = function (todo) {
     if(todo.highlight === 1){
       todo.highlight = 0; 
-    }else if(todo.highlight === 0){
+    }else if(todo.highlight === 0 || !todo.highlight){
         todo.highlight = 1;
     }
     $scope.todos.$save(todo);
