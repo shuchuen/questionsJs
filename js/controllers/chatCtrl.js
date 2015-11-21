@@ -169,7 +169,9 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         // check for empty options
         for (i=0; i<$scope.pollForm.options.length; i++){
             // make sure no empty options
-            if (angular.isUndefined($scope.pollForm.options[i][0]) || $scope.pollForm.options[i][0]=='') {$scope.pollForm.options.splice(i,1)}
+            if (angular.isUndefined($scope.pollForm.options[i][0]) || $scope.pollForm.options[i][0]=='') {$scope.pollForm.options.splice(i,1);
+                                                                                                          alert("Option cannot be null");
+                                                                                                            return;}
         }
         if ($scope.pollForm.name && ($scope.pollForm.options.length>0))
         {
