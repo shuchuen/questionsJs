@@ -801,3 +801,20 @@ body {
     opacity: 0.8;
     border-radius: 0px;
 }
+
+.suggestList{
+    background-color: white;
+    color: black;
+    font-size:18px;
+    text-align: left;
+    max-height: 130px;
+    min-height: 0px !important;
+    margin-bottom: 0px !important;
+    display: inline-flex;
+    overflow-y: auto;
+}
+
+.suggestList > li{
+/*    height: 25px;*/
+    line-height: 25px;
+}

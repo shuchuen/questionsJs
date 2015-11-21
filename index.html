@@ -89,12 +89,17 @@
 <!--                    Welcome To Our Studio!-->
                     <img class="iqicon wow slideInDown" src="img/logos/logo.png" data-wow-duration="0.5s" data-wow-delay="0.6s"> 
                 </div>
-                <div class="intro-heading">
+                <div class="intro-heading" ng-model="showList" ng-init="showList=false">
 <!--                    It's Nice To Meet You-->
-                  <form name="joinForm" ng-submit="join()" class="joinForm inner cover wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s"> 
-                    <input name="input" class="input-iqJoin input-lg col-sm-10 col-xs-9" ng-model="example.text" ng-pattern="example.word" required="" ng-trim="false" autofocus="" aria-describedby="sizing-addon1" placeholder="Room name" capitalize="" type="text">
-                    <button class="btn input-lg col-sm-2 col-xs-3 btn-iqJoin" ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern" >Join</button>
-                    </form>                   
+                  <form name="joinForm" ng-submit="join()" class="joinForm inner cover wow fadeIn" data-wow-duration="1s" data-wow-delay="0.6s" ng-mouseleave="showList=false" ng-mouseenter="showList=true"> 
+                    <input name="input" class="input-iqJoin input-lg col-sm-10 col-xs-9" ng-model="example.text" ng-pattern="example.word" required="" ng-trim="true" ng-focus="showList=true" aria-describedby="sizing-addon1" placeholder="Room name" capitalize="" type="text" autocomplete="off" >
+                    <button class="btn input-lg col-sm-2 col-xs-3 btn-iqJoin" ng-disabled="joinForm.input.$error.required || joinForm.input.$error.pattern">Join</button>
+                    <ul ng-show="example.text&&showList" ng-mouseover="showList=true" class="suggestList list-unstyled col-sm-10 col-xs-9">
+                      <li  ng-repeat="room in suggestList | filter: example.text | orderBy: room" class="btn" ng-click="example.text=room ;  $parent.showList=false">{{room}}</li>
+                    </ul>  
+                      
+                    </form>
+                    
                 </div>
                 <a href="#recentChatRoom" class="page-scroll btn btn-xl btn-opt" onclick="showRecentChatRoom()">Recent ChatRoom</a>
             </div>
@@ -215,6 +220,17 @@
     <script>
         angular.module('app', ['firebase'])
         .controller('controller', ['$scope', '$location', '$firebaseArray','$window', '$filter', function($scope, $location, $firebaseArray, $window, $filter) {
+                    $scope.suggestList =[];
+                    var firebaseURL = "https://instaquest.firebaseio.com/rooms/";
+                    var listRef = new Firebase(firebaseURL);
+                    $firebaseArray(listRef).$loaded().then(function(result){
+                        if(result)
+                            result.forEach(function(e){
+                                $scope.suggestList.push(e.$id)
+                            });
+                        
+                    });
+            
             $scope.example = {
                 text: '',
                 word: /^\s*\w*\s*$/

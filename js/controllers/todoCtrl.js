@@ -8,7 +8,7 @@
 */
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
-function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, Upload) {
+function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	// set local storage
 	$scope.$storage = $localStorage;
 
@@ -225,6 +225,16 @@ $scope.getHighlight = function(){
         }
     }
     return 0;
+}
+
+$scope.resetElement = function(e) {
+  $scope.photoAttach=null;
+  $('#'+e).wrap('<form>').closest('form').get(0).reset();
+  $('#'+e).unwrap();
+  
+  // Prevent form submission
+//  $('#'+e).stopPropagation();
+//  $('#'+e).preventDefault();
 }
 
 $scope.doPhotoAttach = function(element) {

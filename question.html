@@ -53,11 +53,13 @@
                 <div class="collapse navbar-collapse" id="iqMenu">
                                         
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a class="btn">
-                                <img ng-if="$authData.facebook" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" width="20px" height="20px"/><span>{{$authData.facebook.displayName}}</span>
+                        <li ng-show="$authData">
+                            <a ng-if="$authData.password" class="btn" data-toggle="modal" data-target="#changePasswordModal">
+                                <img ng-if="$authData.password" ng-src="{{$authData.password.profileImageURL}}" width="20px" height="20px"/><span>{{$authData.password.email}}</span>  
+                            </a>    
+                             <a ng-if="!$authData.password" class="btn">   
                                 <img ng-if="$authData.google" ng-src="{{$authData.google.profileImageURL}}" width="20px" height="20px"/> <span>{{$authData.google.displayName}}</span>
-                                <img ng-if="$authData.password" ng-src="{{$authData.password.profileImageURL}}" width="20px" height="20px"/><span>{{$authData.password.email}}</span>
+                                  <img  src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" width="20px" height="20px"/><span>{{$authData.facebook.displayName}}</span>
                             </a>
                         </li>
                         <li ng-hide="$authData">
@@ -106,7 +108,9 @@
                         </select>
                     </div>
                     <div class="col-xs-6">
-                        <img ng-if="photoAttach" class="pull-right imgPreview" ng-src="{{photoAttach}}">
+                        <li  ng-if="photoAttach && !picLoading" class="fa fa-times-circle pull-right" ng-click="resetElement('photoAttach');" style="font-size: xx-large;position: relative;"></li>
+                        
+                        <img ng-if="photoAttach" class="pull-right imgPreview" ng-src="{{photoAttach}}" />
                     </div>
                     
                     <div class="col-sm-11 col-xs-12 iqTextArea">
@@ -117,7 +121,7 @@
                         <ng-include src="'emojiInput.html'"></ng-include>	
                     </div>
                     <div class="col-sm-1 col-xs-12 iqButtonGp">
-                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="submit" ng-disabled="picLoadig">
+                        <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="submit" ng-disabled="picLoading">
                             <i class="fa fa-commenting"></i>
                         </button>
                         <button class="btn btn-default zeroBorder askBtn fixBtnWidth" type="button" data-toggle="modal" data-target="#pollingModal">
@@ -332,7 +336,7 @@
                   <label for="signupPassword">Password:</label>
                   <input class="form-control zeroRadius" type="password" id="signupPassword" ng-model="signup.password" placeholder="Password" required />
               </div> 
-              <input class="btn btn-warning pull-right" type="submit" value="Sign Up">
+              <input class="btn btn-warning pull-right" type="submit" value="Sign Up"/>
           </form>
           
         <hr/>
@@ -354,7 +358,8 @@
                   <label for="loginPassword">Password:</label>
                   <input class="form-control zeroRadius" type="password" id="loginPassword" ng-model="login.password" placeholder="Password" required />
               </div>      
-              <input class="btn btn-warning pull-right" type="submit" value="Login">
+              <input class="btn btn-warning pull-right" type="submit" value="Login"/>
+              <button class="btn btn-warning pull-right" style="margin-right:5px;" onclick="showResetModal()" data-dismiss="modal">Forgot Password</button>
           </form>  
           
             <button class="btn btn-primary left csl-xs-12" type="button" ng-click="FBLogin()"><i class="fa fa-facebook-official"></i>  Facebook</button>
@@ -408,7 +413,80 @@
     </div>
 
   </div>
-</div>        
+</div>
+
+<!-- Modal for change password-->   
+<div id="changePasswordModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content zeroBorderRadius">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"></button>
+        <h3 class="modal-title"><i class="fa fa-bar-chart"></i>Change Password</h3>
+      </div>
+      <div class="modal-body" ng-controller="PWCtrl">
+          <p class="bg-warning" ng-show="changePWError"><span class="text-danger">{{changePWError.toString()}}</span></p>
+          <p class="bg-success" ng-show="changeSuccess">
+            <span class="text-success">Change Success</span>
+          </p>
+          <form id="changePWForm" class="csl-xs-12" ng-submit = "changePassword()">
+              <div class="form-group">
+                  <label for="oldPassword">Old Password:</label>
+                  <input class="form-control zeroRadius" type="password"  id="oldPassword" ng-model="change.oldpassword" placeholder="Old Password" required/>
+              </div>
+              <div class="form-group">
+                  <label for="newPassword">New Password:</label>
+                  <input class="form-control zeroRadius" type="password" id="newPassword" ng-model="change.newpassword" placeholder="New Password" required />
+              </div>
+              <div class="form-group">
+                <input class="btn btn-warning" type="submit" value="Submit"/>
+              </div>
+          </form>     
+      </div>
+          
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+    
+<!-- Modal for reset password-->   
+<div id="resetPasswordModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content zeroBorderRadius">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"></button>
+        <h3 class="modal-title"><i class="fa fa-bar-chart"></i>Reset Password</h3>
+      </div>
+      <div class="modal-body" ng-controller="PWCtrl">
+          <p class="bg-warning" ng-show="resetPWError"><span class="text-danger">{{resetPWError.toString()}}</span></p>
+          <p class="bg-success" ng-show="resetSent">
+            <span class="text-success">Reset Email sent</span>
+          </p>
+          <form id="restPWForm" class="csl-xs-12" ng-submit = "resetPassword()">
+              <div class="form-group">
+                  <label for="resetPWEmail">Email:</label>
+                  <input class="form-control zeroRadius" type="email"  id="resetPWEmail" ng-model="reset.email" placeholder="Email" required/>
+              </div>
+              <div class="form-group">
+                <input class="btn btn-warning" type="submit" value="Submit" />
+              </div>
+          </form>     
+      </div>
+          
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>     
+    
 <!-- jQuery -->
 <script src="js/agency/jquery.js"></script>
 
@@ -433,7 +511,8 @@
 <script src="js/app.js"></script>
 <script src="js/filters/questionFilter.js"></script>
 <script src="js/controllers/todoCtrl.js"></script>
-<script src="js/controllers/userCounterCtrl.js"></script>        
+<script src="js/controllers/userCounterCtrl.js"></script>
+<script src="js/controllers/pwCtrl.js"></script> 
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
@@ -458,6 +537,14 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
 <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'en-GB'}</script>
+    
+<script>
+    function showResetModal(){
+        setTimeout(function(){
+          $('#resetPasswordModal').modal('show');
+        }, 500); 
+    }
+</script>    
 
 <!--
 <script>
