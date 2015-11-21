@@ -384,13 +384,13 @@
             <form>
                 <h4>Define poll's question</h4>
 
-                <input class="form-control" type="text" ng-model="pollForm.name" placeholder="Poll's title" class="w200"><br>
+                <input class="form-control" type="text" ng-model="pollForm.name" placeholder="Poll's title" class="w200" required="required"><br>
 
                 <h4>Set Poll's answers</h4>
 
                 <div ng-repeat="option in pollForm.options track by $index">
                     Option {{ $index+1 }} <input type="text" placeholder="option"
-                                                  ng-model="pollForm.options[$index][0]">
+                                                  ng-model="pollForm.options[$index][0]" required="required">
                     <button class="btn btn-danger" ng-click="removeOption($index)"> - </button>
                 </div>
                 <button class="btn btn-info" ng-click="addPollOption()">+ Add answer</button>
