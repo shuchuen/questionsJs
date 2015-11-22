@@ -923,6 +923,7 @@ describe('TodoCtrl', function() {
             scope.addFav();
             
             scope.$authData={};
+            scope.favList = false;
             scope.addFav();
           
       });
@@ -942,6 +943,11 @@ describe('TodoCtrl', function() {
             scope.removeFav();
             
             scope.$authData={};
+            scope.favList = false;
+            scope.removeFav();
+            
+            scope.$authData={};
+            scope.favList = true;
             scope.removeFav();
           
       });
