@@ -180,17 +180,20 @@ $scope.addFav = function(){
 $scope.removeFav = function(){
    if($scope.$authData){
        var key = null;
-       if($scope.favList)
+       if($scope.favList){
             $scope.favList.forEach(function(fav){
                 if(fav.$value == roomId)
                     key = fav;
             });
         
-        if(key){
-            $scope.favList.$remove(key);
-            $scope.roomAdded = false;
+            if(key){
+                $scope.favList.$remove(key);
+                $scope.roomAdded = false;
+            }else{
+               $scope.roomAdded = false; 
+            }
         }else{
-           $scope.roomAdded = false; 
+            $scope.roomAdded = false;
         }
        
    }
