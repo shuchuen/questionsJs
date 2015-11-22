@@ -84,8 +84,8 @@
                 <img src="img/1448121416_icon-20-bookmark-remove.png" ng-if="roomAdded" ng-click="removeFav()"/>
             </div>
             <div ng-show="showFavList">
-                <ul class="list-inline" style="margin-top: 12px; color:white">
-                  <li class="favList" ng-repeat="fav in favList"><a ng-href="#/{{fav.$value}}" ng-click="goFav(fav.$value)">{{fav.$value}}</a></li>
+                <ul class="list-inline" style="margin-top: 5px">
+                  <li class="favList btn" ng-repeat="fav in favList"><a ng-href="#/{{fav.$value}}" ng-click="goFav(fav.$value)">{{fav.$value}}</a></li>
                 </ul>
                 
             </div>    

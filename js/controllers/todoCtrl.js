@@ -135,8 +135,10 @@ $scope.$watchCollection('todos', function () {
 //};
 
 $scope.goFav = function(url){
-    $window.location.href = 'question.html#/'+url;
-    location.reload();
+    if(url!=roomId){
+        $window.location.href = 'question.html#/'+url;
+        location.reload();
+    }    
 }    
     
 $scope.getFav = function(){
@@ -502,6 +504,7 @@ $scope.loginForm = function(){
                 $scope.$storage.authData = authData;
                 $scope.login = "";
                 $scope.getStaffRight();
+                $scope.getFav();
                 $('#loginModal').modal('hide');
             });  
             console.log("Authenticated successfully with payload:", authData);
@@ -509,7 +512,7 @@ $scope.loginForm = function(){
         });
         
 //        $scope.normalLogin = true;
-        $scope.getFav();
+//        $scope.getFav();
     }
 }
     
@@ -526,13 +529,14 @@ $scope.FBLogin = function () {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
                 $scope.$storage.authData = authData;
+                $scope.getFav();
                 $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	}, { scope: "email" });
 //    $scope.FbLogin = true;
-    $scope.getFav();
+    
 };
 
 $scope.GoogleLogin = function () {
@@ -548,13 +552,14 @@ $scope.GoogleLogin = function () {
 			$scope.$apply(function() {
 				$scope.$authData = authData;
                 $scope.$storage.authData = authData;
+                $scope.getFav();
                 $('#loginModal').modal('hide');
 			});
 			console.log("Authenticated successfully with payload:", authData);
 		}
 	}, {scope: "email"});
 //    $scope.googleLogin = true;
-    $scope.getFav();
+//    $scope.getFav();
 };    
     
 $scope.Logout = function() {

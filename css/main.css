@@ -490,8 +490,13 @@ textarea#new-todo {
     display: inline-flex;
 }
 
+.favList > a{
+    font-weight: bolder;
+    color:rgba(255,255,255, 1) !important;
+}
+
 .favList>a:hover, .favList>a:visited{
-    color:rgba(0,149,255, 1) !important;
+    color:rgba(255,255,255, 1) !important;
 }
 
 
