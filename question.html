@@ -209,8 +209,8 @@
             
         </div>
         <div class="">    
-            <div class="list-group col-xs-12" id="todo-list" ng-model="Meaningless" ng-init="Meaningless=true">
-                <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30}" ng-init="showReply=false">
+            <div class="list-group col-xs-12" id="todo-list" ng-model="Meaningless" ng-model="highZindex" ng-init="Meaningless=true" ng-init="highZindex=false">
+                <div class="zeroBorderRadius list-group-item" ng-repeat="todo in todos | filter:input.wholeMsg | orderBy:['-highlight','-timestamp']" ng-class="{completed: todo.completed, editing: todo == editedTodo, bestQ: todo.highlight== 1, staffQ: todo.highlight== 2, transparent02: todo.dislike - todo.like > 70, transparent04: todo.dislike - todo.like > 50  &&  todo.dislike - todo.like <= 70, transparent06: todo.dislike - todo.like > 30  &&  todo.dislike - todo.like <= 50, transparent08: todo.dislike - todo.like >10  &&  todo.dislike - todo.like <= 30, highZindex:highZindex}" ng-init="showReply=false">
                 <p ng-show="todo.dislike-todo.like>80 && Meaningless"><a ng-click="Meaningless = !Meaningless">Show meaningless post</a></p>
                 <p ng-show="(todo.dislike-todo.like)>80 && !Meaningless"><a style="opacity:1;"ng-click="Meaningless = !Meaningless">Hide meaningless post</a></p>     
                 <div ng-hide="(todo.dislike-todo.like)>80 && Meaningless">    
@@ -221,7 +221,7 @@
                     <h4 class="list-group-item-heading">
                         <p ng-if="enableFilter" class="questionContent">{{filter(todo.wholeMsg)}}</p>
                         <p ng-if="!enableFilter" class="questionContent">{{todo.wholeMsg}}</p>
-                        <img class="imgAttachment" ng-src="{{todo.attachment}}"/>
+                        <img ng-show="todo.attachment" class="imgAttachment" ng-src="{{todo.attachment}}" ng-mouseenter="highZindex = true;" ng-mouseleave="highZindex=false"/>
                     </h4>
             <!--		<p class="list-group-item-text"><span ng-bind="todos.trustedDesc"></span></p>-->
                     <p>

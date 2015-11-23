@@ -503,6 +503,9 @@ textarea#new-todo {
     color:#5cb85c !important;
 }
 
+.highZindex{
+    z-index: 100;
+}
 
 
 
