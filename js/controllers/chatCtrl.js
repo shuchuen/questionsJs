@@ -70,6 +70,11 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
         }
     };
 
+    $scope.removePoll = function(id){
+//        alert(id);
+        ref.child(id).remove();
+    };
+    
     // deep watch for the firebase object, to have the chart update in real time, when the object updates
     // needed to handle the object separation
     $scope.$watch('polls', function(){

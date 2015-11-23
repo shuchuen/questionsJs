@@ -429,6 +429,7 @@ $scope.revertEditing = function (todo) {
 
 $scope.removeTodo = function (todo) {
 	$scope.todos.$remove(todo);
+    commentRef.child(todo.$id).remove();
 };
 
 $scope.clearCompletedTodos = function () {

@@ -152,9 +152,10 @@
 
                 <div ng-show="!load" class="pollList">
                     <div class="list-group">
-                        <button type="button" class="list-group-item" ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
+                        <button type="button" class="list-group-item zeroRadius" ng-repeat="(key, value) in polls track by $index" ng-click="selectPoll(key)"
                                 class="pollSelectBtn btn btn-default">{{ value.name }}
                             <br><span am-time-ago="value.timestamp" class = "time-color"></span>
+                        <li ng-show="$parent.isStaff" class="fa fa-times-circle pull-right" ng-click="removePoll(value.$id);" style="color:red; font-size: xx-large;position: relative;"></li>    
                         </button>
                     </div>
                 </div>

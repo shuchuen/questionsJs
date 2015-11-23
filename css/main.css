@@ -426,8 +426,12 @@ textarea#new-todo {
 }
 
 .imgAttachment{
-    max-width: 300px;
-    
+    max-width: 300px;  
+}
+
+.imgAttachment:hover{
+    transform:scale(2,2);
+    transform-origin: 0 0;
 }
 
 .emojiPickerReply{
